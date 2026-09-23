@@ -4,3 +4,14 @@
 .cornerCue:before{content:"";position:absolute;right:0;top:0;width:34px;height:34px;background:linear-gradient(135deg,#fffdf5 0%,#f8efd9 48%,#e1cfaa 76%,#c4ad82 100%);clip-path:polygon(0 0,100% 0,100% 100%);filter:drop-shadow(-2px 3px 2px rgba(49,37,23,.42));}
 .cornerCue:after{content:"";position:absolute;right:3px;top:27px;width:39px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(72,54,33,.42) 20%,rgba(72,54,33,.62) 52%,transparent);transform-origin:100% 50%;transform:rotate(45deg);opacity:.75}
 .cornerCue.right{right:2.2%}.cornerCue.left{left:2.2%;transform:scaleX(-1)}.cornerCue.hidden{opacity:0}.cornerCue:not(.hidden){animation:cuePulse 2.4s ease-in-out infinite}@keyframes cuePulse{0%,74%,100%{translate:0 0}86%{translate:-1px 1px}94%{translate:0 0}}
+
+/* SVG page-corner affordance. It sits above the intact page and never captures touch,
+   so StPageFlip remains responsible for the actual drag/curl interaction. */
+.cornerFold{position:absolute;top:2.15%;width:42px;height:54px;z-index:25;pointer-events:none;opacity:1;transition:opacity .16s ease;filter:drop-shadow(-1px 2px 1.5px rgba(45,33,20,.18))}
+.cornerFold svg{display:block;width:100%;height:100%;overflow:visible}
+.cornerFold--right{right:2.15%}
+.cornerFold--left{left:2.15%}
+.cornerFold.is-hidden,.cornerFold.is-flipping{opacity:0}
+.cornerFold:not(.is-hidden):not(.is-flipping){animation:foldHint 2.8s ease-in-out infinite}
+@keyframes foldHint{0%,72%,100%{translate:0 0}84%{translate:-1.5px 1.5px}92%{translate:0 0}}
+@media (max-width:380px){.cornerFold{width:36px;height:47px}}
