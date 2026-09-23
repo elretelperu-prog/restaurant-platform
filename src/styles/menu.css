@@ -75,3 +75,20 @@
 .page .nm{font-size:8.3px}
 .page .ds{font-size:5.1px}
 .page .price{font-size:7.2px}
+
+
+/* V6.3: make the 10 real dish rows consume the remaining page height down to the dock */
+.page{padding:10px 9px 34px!important}
+.page h2{margin:0 0 1px!important}
+.page .sub{margin-bottom:2px!important}
+.page .item{
+ flex:1 1 0!important;
+ height:auto!important;
+ min-height:0!important;
+ padding:0!important;
+ margin:0!important;
+}
+.page .thumb{width:34px!important;height:34px!important}
+.page .nm{font-size:8.8px!important;line-height:1.05!important}
+.page .ds{font-size:5.3px!important;line-height:1.12!important}
+.page .price{font-size:7.4px!important}
