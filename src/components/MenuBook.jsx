@@ -12,9 +12,10 @@ export default function MenuBook({onDish}){
   const h=Math.max(480,Math.floor(wrap.clientHeight));
   const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:true});
 
-  let hintTimer;
+  let hintTimer, growTimer;
   const showNativeCorner=()=>{
    clearTimeout(hintTimer);
+   clearTimeout(growTimer);
    hintTimer=setTimeout(()=>{
     if(pf.getState()!=='read') return;
     const rect=pf.getBoundsRect();
@@ -26,7 +27,17 @@ export default function MenuBook({onDish}){
     const atLastSpread=current>=last-1;
     const x=atLastSpread ? rect.left+2 : rect.left+(rect.pageWidth*2)-2;
     const y=rect.top+2;
-    pf.getFlipController().showCorner({x,y});
+    const controller=pf.getFlipController();
+    controller.showCorner({x,y});
+    // V2: keep StPageFlip's native fold, then pull it only a little farther inward.
+    // This preserves the exact renderer/shadow/reverse-page effect from V1.
+    growTimer=setTimeout(()=>{
+     if(controller.getState()!=='fold_corner') return;
+     const inset=Math.min(64,rect.pageWidth*.24);
+     const gx=atLastSpread ? rect.left+inset : rect.left+(rect.pageWidth*2)-inset;
+     const gy=rect.top+inset;
+     controller.showCorner({x:gx,y:gy});
+    },120);
    },180);
   };
 
@@ -34,11 +45,11 @@ export default function MenuBook({onDish}){
   pf.on('flip',showNativeCorner);
   pf.on('changeState',e=>{
    if(e.data==='read') showNativeCorner();
-   else clearTimeout(hintTimer);
+   else {clearTimeout(hintTimer);clearTimeout(growTimer);}
   });
 
   pf.loadFromHTML(book.querySelectorAll('.page'));
-  return()=>{clearTimeout(hintTimer);pf.destroy();};
+  return()=>{clearTimeout(hintTimer);clearTimeout(growTimer);pf.destroy();};
  },[]);
 
  return <section className="stage">
