@@ -348,3 +348,12 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 }
 .bubble-close:active{transform:scale(.92)}
 .dish-orbit.closing{pointer-events:none!important}
+
+
+/* V8.2.3 — definitive click-through fix.
+   While Circle + Thread is open, the underlying menu receives no touch/pointer events.
+   This prevents MenuBook's captured touchend from re-firing a stale dish selection. */
+.app.dish-open .stage{
+ pointer-events:none!important;
+ touch-action:none!important;
+}
