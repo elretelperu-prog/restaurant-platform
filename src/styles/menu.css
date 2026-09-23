@@ -4,3 +4,13 @@
 .cornerCue:before{content:"";position:absolute;right:0;top:0;width:34px;height:34px;background:linear-gradient(135deg,#fffdf5 0%,#f8efd9 48%,#e1cfaa 76%,#c4ad82 100%);clip-path:polygon(0 0,100% 0,100% 100%);filter:drop-shadow(-2px 3px 2px rgba(49,37,23,.42));}
 .cornerCue:after{content:"";position:absolute;right:3px;top:27px;width:39px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(72,54,33,.42) 20%,rgba(72,54,33,.62) 52%,transparent);transform-origin:100% 50%;transform:rotate(45deg);opacity:.75}
 .cornerCue.right{right:2.2%}.cornerCue.left{left:2.2%;transform:scaleX(-1)}.cornerCue.hidden{opacity:0}.cornerCue:not(.hidden){animation:cuePulse 2.4s ease-in-out infinite}@keyframes cuePulse{0%,74%,100%{translate:0 0}86%{translate:-1px 1px}94%{translate:0 0}}
+
+/* Subtle affordance only: the real fold/curl remains entirely StPageFlip's animation. */
+.curlHint{position:absolute;top:2.2%;width:28px;height:36px;z-index:24;pointer-events:none;opacity:.82;transition:opacity .12s ease}
+.curlHint--right{right:2.15%}
+.curlHint--left{left:2.15%;transform:scaleX(-1)}
+.curlHint::before{content:"";position:absolute;inset:0;background:linear-gradient(142deg,rgba(255,253,246,.98) 0 43%,rgba(238,224,193,.92) 58%,rgba(177,151,108,.28) 72%,transparent 73%);clip-path:polygon(16% 0,100% 0,100% 100%,79% 71%,55% 43%);filter:drop-shadow(-1px 1.5px 1px rgba(58,43,25,.28));border-radius:0 0 1px 0}
+.curlHint::after{content:"";position:absolute;right:1px;top:0;width:24px;height:32px;border-left:1px solid rgba(103,82,52,.28);border-radius:52% 0 0 0;transform:rotate(-9deg);transform-origin:100% 0}
+.curlHint.is-hidden,.curlHint.is-active{opacity:0}
+.curlHint:not(.is-hidden):not(.is-active){animation:curlHintBreath 2.6s ease-in-out infinite}
+@keyframes curlHintBreath{0%,70%,100%{scale:1}84%{scale:1.045}92%{scale:1}}
