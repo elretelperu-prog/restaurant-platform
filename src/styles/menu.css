@@ -22,3 +22,14 @@
 .ds{font-size:4.8px;line-height:1.08;margin-top:1px;display:block}
 .price{font-size:6.7px}
 .pg{bottom:5px}
+
+
+/* V5.9: use more of the real phone viewport without changing interactions */
+.app{max-width:560px;padding-left:4px;padding-right:4px}
+.stage{width:100%;height:76vh;min-height:565px}
+.bookWrap{width:100%;height:100%}
+@media (max-width:600px){
+ .app{padding-left:2px;padding-right:2px}
+ .stage{width:100%}
+ .bookWrap{width:100%}
+}
