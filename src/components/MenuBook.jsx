@@ -33,6 +33,14 @@ export default function MenuBook({onDish}){
   const exitReading=()=>{mode='normal';scale=1;panX=0;panY=0;transform();startIdle()};
 
   const down=e=>{
+   if(e.touches.length===1&&scale<=1.05){
+    const dish=e.target.closest('.item');
+    if(dish){
+     tappedDish=dish;moved=false;panStartX=e.touches[0].clientX;panStartY=e.touches[0].clientY;
+     // Capture the dish tap before StPageFlip can consume it at normal scale.
+     e.stopImmediatePropagation();return;
+    }
+   }
    if(e.touches.length===2){
     enterReading();mode='pinch';pinchDist=distance(e.touches);baseScale=scale;moved=true;
     e.preventDefault();e.stopImmediatePropagation();return;
@@ -42,6 +50,11 @@ export default function MenuBook({onDish}){
    }
   };
   const move=e=>{
+   if(tappedDish&&mode==='normal'&&e.touches.length===1){
+    const dx=e.touches[0].clientX-panStartX,dy=e.touches[0].clientY-panStartY;
+    if(Math.hypot(dx,dy)>8){moved=true;tappedDish=null;}
+    e.stopImmediatePropagation();return;
+   }
    if(mode==='pinch'&&e.touches.length===2){
     scale=Math.max(1,Math.min(3,baseScale*distance(e.touches)/pinchDist));transform();e.preventDefault();e.stopImmediatePropagation();return;
    }
@@ -52,6 +65,12 @@ export default function MenuBook({onDish}){
    }
   };
   const end=e=>{
+   if(tappedDish&&mode==='normal'&&e.touches.length===0){
+    const dish=tappedDish;tappedDish=null;
+    e.preventDefault();e.stopImmediatePropagation();
+    if(!moved)dish.click();
+    return;
+   }
    if(mode==='pinch'&&e.touches.length<2){
     if(scale<=1.05)exitReading();else mode='reading';
     e.preventDefault();e.stopImmediatePropagation();return;
