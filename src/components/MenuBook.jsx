@@ -12,7 +12,7 @@ export default function MenuBook({onDish}){
   const w=Math.max(150,Math.floor(wrap.clientWidth/2)),h=Math.max(480,Math.floor(wrap.clientHeight));
   const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:false});
 
-  let timers=[],raf=0,token=0,scale=1,baseScale=1,pinchDist=0,panX=0,panY=0,panStartX=0,panStartY=0,basePanX=0,basePanY=0,mode='normal',moved=false,tappedDish=null;
+  let timers=[],raf=0,token=0,scale=1,baseScale=1,pinchDist=0,panX=0,panY=0,panStartX=0,panStartY=0,basePanX=0,basePanY=0,mode='normal',moved=false,tappedDish=null,gestureShield=false;
   const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf)};
   const isBack=()=>pf.getCurrentPageIndex()>=2;
   const foldPos=(depth,drop=0)=>{const r=pf.getBoundsRect(),back=isBack();return{x:back?r.left+depth:r.left+r.pageWidth*2-depth,y:r.top+depth+drop}};
@@ -46,10 +46,10 @@ export default function MenuBook({onDish}){
     }
    }
    if(e.touches.length===2){
-    enterReading();mode='pinch';pinchDist=distance(e.touches);baseScale=scale;moved=true;
+    gestureShield=true;enterReading();mode='pinch';pinchDist=distance(e.touches);baseScale=scale;moved=true;
     e.preventDefault();e.stopImmediatePropagation();return;
    }
-   if(scale>1.05&&e.touches.length===1){
+   if((gestureShield||scale>1.05)&&e.touches.length===1){
     mode='pan';moved=false;tappedDish=e.target.closest('.item');panStartX=e.touches[0].clientX;panStartY=e.touches[0].clientY;basePanX=panX;basePanY=panY;
    }
   };
@@ -76,7 +76,12 @@ export default function MenuBook({onDish}){
     return;
    }
    if(mode==='pinch'&&e.touches.length<2){
-    if(scale<=1.05)exitReading();else mode='reading';
+    mode=e.touches.length===1?'pan':'reading';
+    if(e.touches.length===1){
+     panStartX=e.touches[0].clientX;panStartY=e.touches[0].clientY;basePanX=panX;basePanY=panY;moved=true;
+    }else if(scale<=1.05){
+     gestureShield=false;exitReading();
+    }
     e.preventDefault();e.stopImmediatePropagation();return;
    }
    if(mode==='pan'&&e.touches.length===0){
