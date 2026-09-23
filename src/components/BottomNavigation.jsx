@@ -1,0 +1,1 @@
+import React from 'react'; export default function BottomNavigation({count}){return <nav className="dock"><div><b>⌑</b>Carta</div><div><b>◯</b>Mi pedido <span>{count}</span></div><div><b>♙</b>Mi nombre</div></nav>}
