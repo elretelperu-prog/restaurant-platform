@@ -13,7 +13,7 @@ export default function MenuBook({onDish}){
   const h=Math.max(480,Math.floor(wrap.clientHeight));
   const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:false});
 
-  let timers=[],raf=0,token=0,idle=false,scale=1,lastScale=1,startDistance=0,startX=0,startY=0,panX=0,panY=0,lastPanX=0,lastPanY=0,panning=false,pinching=false;
+  let timers=[],raf=0,token=0,idle=false,scale=1,lastScale=1,startDistance=0,startX=0,startY=0,panX=0,panY=0,lastPanX=0,lastPanY=0,panning=false,pinching=false,readingMode=false;
   const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf)};
   const isBack=()=>pf.getCurrentPageIndex()>=2;
   const pos=(depth,drop=0)=>{const r=pf.getBoundsRect(),back=isBack();return{x:back?r.left+depth:r.left+r.pageWidth*2-depth,y:r.top+depth+drop}};
@@ -23,7 +23,14 @@ export default function MenuBook({onDish}){
   const startIdle=()=>{token++;clearTimers();const my=token;timers.push(setTimeout(()=>{if(my!==token||scale>1.01)return;hold(48);pulse()},180));timers.push(setTimeout(()=>{if(my!==token||scale>1.01)return;pulse()},3180))};
   const stopIdle=()=>{token++;clearTimers();idle=false;try{pf.getFlipController().stopMove()}catch(e){}};
 
+  const setReadingMode=on=>{
+   if(readingMode===on)return;
+   readingMode=on;
+   // Hard separation: while zoomed, PageFlip receives no pointer/touch input.
+   book.style.pointerEvents=on?'none':'auto';
+  };
   const applyTransform=()=>{
+   setReadingMode(scale>1.05);
    const maxX=Math.max(0,(viewport.clientWidth*(scale-1))/2+80);
    const maxY=Math.max(0,(viewport.clientHeight*(scale-1))/2+120);
    panX=Math.max(-maxX,Math.min(maxX,panX));panY=Math.max(-maxY,Math.min(maxY,panY));
@@ -33,17 +40,17 @@ export default function MenuBook({onDish}){
   const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
 
   const onTouchStart=e=>{
-   if(e.touches.length===2){pinching=true;panning=false;stopIdle();startDistance=dist(e.touches);lastScale=scale;e.preventDefault();return}
-   if(scale>1.01&&e.touches.length===1){panning=true;startX=e.touches[0].clientX;startY=e.touches[0].clientY;lastPanX=panX;lastPanY=panY;e.preventDefault()}
+   if(e.touches.length===2){pinching=true;panning=false;stopIdle();setReadingMode(true);startDistance=dist(e.touches);lastScale=scale;e.preventDefault();e.stopPropagation();return}
+   if(readingMode&&e.touches.length===1){panning=true;startX=e.touches[0].clientX;startY=e.touches[0].clientY;lastPanX=panX;lastPanY=panY;e.preventDefault()}
   };
   const onTouchMove=e=>{
-   if(pinching&&e.touches.length===2){scale=Math.max(1,Math.min(3,lastScale*dist(e.touches)/startDistance));applyTransform();e.preventDefault();return}
-   if(panning&&e.touches.length===1){panX=lastPanX+e.touches[0].clientX-startX;panY=lastPanY+e.touches[0].clientY-startY;applyTransform();e.preventDefault()}
+   if(pinching&&e.touches.length===2){scale=Math.max(1,Math.min(3,lastScale*dist(e.touches)/startDistance));applyTransform();e.preventDefault();e.stopPropagation();return}
+   if(panning&&e.touches.length===1){e.stopPropagation();panX=lastPanX+e.touches[0].clientX-startX;panY=lastPanY+e.touches[0].clientY-startY;applyTransform();e.preventDefault()}
   };
   const onTouchEnd=e=>{
    if(e.touches.length<2)pinching=false;
    if(e.touches.length===0)panning=false;
-   if(scale<=1.03){scale=1;panX=0;panY=0;applyTransform();startIdle()}
+   if(scale<=1.05){scale=1;panX=0;panY=0;setReadingMode(false);applyTransform();startIdle()}else{setReadingMode(true)}
   };
 
   pf.on('init',startIdle);pf.on('flip',startIdle);
