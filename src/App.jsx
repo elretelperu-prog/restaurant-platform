@@ -20,7 +20,7 @@ export default function App(){
   setBubblePos({x,y});
  };
  const endDrag=e=>{if(drag?.id===e.pointerId)setDrag(null)};
- return <><main className="app"><div className="top"><div className="pill">Mesa 1</div><div className="brand"><b>LA TERRAZA</b><small>DEMO · PAGE CURL ENGINE</small></div><div className="pill">ES | EN</div></div><MenuBook onDish={choose}/><div className="hint">Toma una esquina de la hoja y arrástrala lentamente. El pliegue sigue tu dedo en ambos sentidos.</div></main><BottomNavigation count={count}/>
+ return <><main className={'app '+(selected?'dish-open':'')}><div className="top"><div className="pill">Mesa 1</div><div className="brand"><b>LA TERRAZA</b><small>DEMO · PAGE CURL ENGINE</small></div><div className="pill">ES | EN</div></div><MenuBook onDish={choose}/><div className="hint">Toma una esquina de la hoja y arrástrala lentamente. El pliegue sigue tu dedo en ambos sentidos.</div></main><BottomNavigation count={count}/>
  {selected&&<div className={'dish-orbit '+(closing?'closing':'')} onPointerDownCapture={e=>{if(e.target===e.currentTarget){e.preventDefault();e.stopPropagation();cancel()}}} onClickCapture={e=>{if(e.target===e.currentTarget){e.preventDefault();e.stopPropagation()}}} style={{'--anchor-x':selected.x+'px','--anchor-y':selected.y+'px','--bubble-x':bubblePos.x+'px','--bubble-y':bubblePos.y+'px'}}>
    <svg className="dish-thread" aria-hidden="true"><line x1={selected.x} y1={selected.y} x2={bubblePos.x} y2={bubblePos.y}/></svg>
    <div className={'dish-bubble '+(drag?'dragging':'')} style={{left:bubblePos.x,top:bubblePos.y}} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
