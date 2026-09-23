@@ -4,12 +4,3 @@
 .cornerCue:before{content:"";position:absolute;right:0;top:0;width:34px;height:34px;background:linear-gradient(135deg,#fffdf5 0%,#f8efd9 48%,#e1cfaa 76%,#c4ad82 100%);clip-path:polygon(0 0,100% 0,100% 100%);filter:drop-shadow(-2px 3px 2px rgba(49,37,23,.42));}
 .cornerCue:after{content:"";position:absolute;right:3px;top:27px;width:39px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(72,54,33,.42) 20%,rgba(72,54,33,.62) 52%,transparent);transform-origin:100% 50%;transform:rotate(45deg);opacity:.75}
 .cornerCue.right{right:2.2%}.cornerCue.left{left:2.2%;transform:scaleX(-1)}.cornerCue.hidden{opacity:0}.cornerCue:not(.hidden){animation:cuePulse 2.4s ease-in-out infinite}@keyframes cuePulse{0%,74%,100%{translate:0 0}86%{translate:-1px 1px}94%{translate:0 0}}
-
-/* Small static corner invitation. The actual moving curl is still 100% StPageFlip. */
-.curlHint{position:absolute;top:2.2%;width:36px;height:36px;z-index:24;pointer-events:none;opacity:.9;transition:opacity .1s ease}
-.curlHint--right{right:2.15%}
-.curlHint--left{left:2.15%;transform:scaleX(-1)}
-.curlHint::before{content:"";position:absolute;top:0;right:0;width:36px;height:36px;background:linear-gradient(225deg,#cbb78f 0%,#eadbbd 34%,#fffaf0 36%,#f6ecd5 72%,#ddc9a5 100%);clip-path:polygon(0 0,100% 0,100% 100%);filter:drop-shadow(-1.5px 2px 1.5px rgba(61,45,26,.3))}
-.curlHint::after{content:"";position:absolute;top:0;right:0;width:36px;height:36px;border-left:1px solid rgba(103,82,52,.38);transform:skew(-12deg);transform-origin:100% 0;clip-path:polygon(0 0,100% 0,100% 100%)}
-.curlHint.is-hidden,.curlHint.is-active{opacity:0}
-@media(max-width:380px){.curlHint,.curlHint::before,.curlHint::after{width:32px;height:32px}}
