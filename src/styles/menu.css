@@ -122,3 +122,16 @@
 .page .price{font-size:7.3px!important}
 .page .pg{position:static!important;align-self:end!important;padding-top:2px!important}
 .dock{bottom:5px!important}
+
+
+/* V6.5: stop the tenth row exactly above the fixed bottom dock */
+.page{
+ padding-bottom:108px!important;
+}
+.page .pg{
+ position:absolute!important;
+ bottom:88px!important;
+ left:0!important;
+ right:0!important;
+ padding:0!important;
+}
