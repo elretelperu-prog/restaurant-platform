@@ -404,3 +404,12 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .dish-bubble h2{
  margin-top:22px!important;
 }
+
+
+/* V8.7 — iPhone Safari keyboard/input zoom fix.
+   Keep effective input font at 16px so iOS does not auto-zoom the viewport.
+   Circle/PageFlip custom zoom behavior remains untouched. */
+.dish-bubble input{
+ font-size:16px!important;
+ -webkit-text-size-adjust:100%;
+}
