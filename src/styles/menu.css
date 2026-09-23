@@ -187,3 +187,18 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 @supports not (height:100dvh){
  .app{height:100vh!important}
 }
+
+
+/* V6.7: slimmer bottom dock + larger readable menu/navigation text */
+:root{--dock-h:46px}
+.dock{
+ height:var(--dock-h)!important;
+ padding:3px 9px!important;
+ border-radius:15px!important;
+ font-size:11px!important;
+ align-items:center!important;
+}
+.dock b{font-size:14px!important;line-height:1!important}
+.page .nm{font-size:clamp(8.2px,1.18dvh,10px)!important;line-height:1.04!important}
+.page .ds{font-size:clamp(4.8px,.72dvh,6px)!important;line-height:1.08!important}
+.page .price{font-size:clamp(7px,.96dvh,8.3px)!important}
