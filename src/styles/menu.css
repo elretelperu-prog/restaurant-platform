@@ -303,3 +303,31 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 }
 @keyframes threadOut{0%{opacity:1}75%{opacity:.7}100%{opacity:0}}
 @media(max-width:430px){.dish-bubble{width:min(52vw,230px);padding:22px 18px 18px}}
+
+
+/* V8.1 — Circle 15% larger + free drag in any direction. */
+.dish-bubble{
+ width:min(55.2vw,287px)!important;
+ touch-action:none;
+ user-select:none;
+ cursor:grab;
+}
+.dish-bubble.dragging{cursor:grabbing}
+.drag-hint{
+ font-size:9px;
+ line-height:1;
+ letter-spacing:.08em;
+ color:#806b4d;
+ margin-bottom:5px;
+ opacity:.72;
+ pointer-events:none;
+}
+.dish-orbit.closing .dish-bubble{
+ animation:bubbleToDishV81 .62s cubic-bezier(.55,.02,.85,.45) forwards!important;
+}
+@keyframes bubbleToDishV81{
+ 0%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+ 65%{opacity:.92;transform:translate(calc(-50% + (var(--anchor-x) - var(--bubble-x))*.72),calc(-50% + (var(--anchor-y) - var(--bubble-y))*.72)) scale(.38)}
+ 100%{opacity:0;transform:translate(calc(-50% + (var(--anchor-x) - var(--bubble-x))),calc(-50% + (var(--anchor-y) - var(--bubble-y)))) scale(.04)}
+}
+@media(max-width:430px){.dish-bubble{width:min(59.8vw,264px)!important}}
