@@ -13,7 +13,7 @@ export default function MenuBook({onDish}){
   const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:true});
 
   const timers=[];
-  let sequence=0;
+  let sequence=0, keepAlive=null;
   const later=()=>pf.getCurrentPageIndex()>=2;
   const point=(depth=2)=>{
    const r=pf.getBoundsRect();
@@ -26,6 +26,14 @@ export default function MenuBook({onDish}){
   const nativeCorner=(depth=2)=>{
    const c=pf.getFlipController();
    c.showCorner(point(depth));
+  };
+  const startKeepAlive=()=>{
+   clearInterval(keepAlive);
+   keepAlive=setInterval(()=>{
+    const c=pf.getFlipController();
+    const state=c.getState();
+    if(state==='read'||state==='fold_corner') nativeCorner(2);
+   },700);
   };
   const pulse=()=>{
    const c=pf.getFlipController();
@@ -43,7 +51,7 @@ export default function MenuBook({onDish}){
    timers.splice(0).forEach(clearTimeout);
    // Native curl appears first. A tiny downward/inward nudge happens once,
    // then exactly one reminder pulse 3 seconds later.
-   timers.push(setTimeout(()=>{if(my!==sequence)return;nativeCorner(2);},180));
+   timers.push(setTimeout(()=>{if(my!==sequence)return;nativeCorner(2);startKeepAlive();},180));
    timers.push(setTimeout(()=>{if(my!==sequence)return;pulse();},420));
    timers.push(setTimeout(()=>{if(my!==sequence)return;pulse();},3420));
    timers.push(setTimeout(()=>{if(my!==sequence)return;nativeCorner(2);},3900));
@@ -57,13 +65,15 @@ export default function MenuBook({onDish}){
     return;
    }
    if(e.data==='user_fold'||e.data==='flipping'){
+    clearInterval(keepAlive);
+    keepAlive=null;
     sequence++;
     timers.splice(0).forEach(clearTimeout);
    }
   });
 
   pf.loadFromHTML(book.querySelectorAll('.page'));
-  return()=>{sequence++;timers.splice(0).forEach(clearTimeout);pf.destroy();};
+  return()=>{sequence++;clearInterval(keepAlive);timers.splice(0).forEach(clearTimeout);pf.destroy();};
  },[]);
 
  return <section className="stage">
