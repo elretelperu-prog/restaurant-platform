@@ -12,7 +12,7 @@ export default function MenuBook({onDish}){
   const w=Math.max(150,Math.floor(wrap.clientWidth/2)),h=Math.max(480,Math.floor(wrap.clientHeight));
   const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:false});
 
-  let timers=[],raf=0,token=0,scale=1,baseScale=1,pinchDist=0,panX=0,panY=0,panStartX=0,panStartY=0,basePanX=0,basePanY=0,mode='normal',moved=false;
+  let timers=[],raf=0,token=0,scale=1,baseScale=1,pinchDist=0,panX=0,panY=0,panStartX=0,panStartY=0,basePanX=0,basePanY=0,mode='normal',moved=false,tappedDish=null;
   const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf)};
   const isBack=()=>pf.getCurrentPageIndex()>=2;
   const foldPos=(depth,drop=0)=>{const r=pf.getBoundsRect(),back=isBack();return{x:back?r.left+depth:r.left+r.pageWidth*2-depth,y:r.top+depth+drop}};
@@ -38,9 +38,7 @@ export default function MenuBook({onDish}){
     e.preventDefault();e.stopImmediatePropagation();return;
    }
    if(scale>1.05&&e.touches.length===1){
-    mode='pan';moved=false;panStartX=e.touches[0].clientX;panStartY=e.touches[0].clientY;basePanX=panX;basePanY=panY;
-    // Do not stop touchstart: remember the row so a stationary touch can still select it.
-    e.__dish=e.target.closest('.item');
+    mode='pan';moved=false;tappedDish=e.target.closest('.item');panStartX=e.touches[0].clientX;panStartY=e.touches[0].clientY;basePanX=panX;basePanY=panY;
    }
   };
   const move=e=>{
@@ -59,10 +57,13 @@ export default function MenuBook({onDish}){
     e.preventDefault();e.stopImmediatePropagation();return;
    }
    if(mode==='pan'&&e.touches.length===0){
-    const wasMoved=moved;
-    mode='reading';
-    // If it was a tap rather than a drag, let the normal button click fire.
+    const wasMoved=moved,dish=tappedDish;
+    mode='reading';tappedDish=null;
     if(wasMoved){e.preventDefault();e.stopImmediatePropagation();}
+    else if(dish){
+     // StPageFlip can swallow the synthetic click while zoomed, so trigger the row explicitly.
+     e.preventDefault();e.stopImmediatePropagation();dish.click();
+    }
    }
   };
 
