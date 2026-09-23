@@ -269,3 +269,37 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 }
 .page .ds{color:#5b4935!important}
 .page .price{color:#24180e!important}
+
+
+/* V8.0 — Circle + Thread dish interaction. V7.0 visual base preserved. */
+.dish-orbit{position:fixed;inset:0;z-index:48;pointer-events:none}
+.dish-thread{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.dish-thread line{stroke:#b78b4b;stroke-width:1.5;stroke-dasharray:3 3;opacity:.9;vector-effect:non-scaling-stroke}
+.dish-bubble{
+ position:absolute;left:50%;top:47%;transform:translate(-50%,-50%) scale(1);
+ width:min(48vw,250px);aspect-ratio:1/1;border-radius:50%;
+ padding:28px 24px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ background:radial-gradient(circle at 35% 25%,#fff8e8,#ead9b8 72%,#c7a36a);
+ color:#241b12;border:1.5px solid #b78b4b;
+ box-shadow:0 12px 34px #0008,inset 0 0 18px #fff7;
+ pointer-events:auto;transform-origin:center;animation:bubbleIn .28s cubic-bezier(.2,.8,.2,1)
+}
+.dish-bubble h2{font:700 clamp(15px,4vw,21px) Georgia,serif;text-align:center;margin:0 0 2px;line-height:1.05}
+.bubble-price{font:700 13px Georgia,serif;margin-bottom:8px}
+.dish-bubble .qty{display:flex;align-items:center;gap:12px;font-size:18px;margin:2px 0 7px}
+.dish-bubble .qty button{width:31px;height:31px;border-radius:50%;border:1px solid #9d7d4e;background:#fff8e8;font-size:20px;line-height:1}
+.dish-bubble input{width:78%;padding:7px 9px;border:1px solid #b89d72;border-radius:10px;background:#fffaf0;font-size:12px;margin-bottom:7px}
+.dish-bubble .confirm{width:78%;padding:8px;border-radius:12px;font-size:11px}
+.dish-orbit.closing .dish-bubble{
+ pointer-events:none;
+ animation:bubbleToDish .62s cubic-bezier(.55,.02,.85,.45) forwards
+}
+.dish-orbit.closing .dish-thread{animation:threadOut .52s ease forwards}
+@keyframes bubbleIn{from{opacity:0;transform:translate(-50%,-50%) scale(.15)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes bubbleToDish{
+ 0%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+ 65%{opacity:.92;transform:translate(calc(-50% + (var(--anchor-x) - 50vw)*.72),calc(-50% + (var(--anchor-y) - 47vh)*.72)) scale(.38)}
+ 100%{opacity:0;transform:translate(calc(-50% + (var(--anchor-x) - 50vw)),calc(-50% + (var(--anchor-y) - 47vh))) scale(.04)}
+}
+@keyframes threadOut{0%{opacity:1}75%{opacity:.7}100%{opacity:0}}
+@media(max-width:430px){.dish-bubble{width:min(52vw,230px);padding:22px 18px 18px}}
