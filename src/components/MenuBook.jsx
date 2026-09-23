@@ -27,7 +27,8 @@ export default function MenuBook({onDish}){
    if(readingMode===on)return;
    readingMode=on;
    // Hard separation: while zoomed, PageFlip receives no pointer/touch input.
-   book.style.pointerEvents=on?'none':'auto';
+   book.style.pointerEvents='auto';
+   book.classList.toggle('reading-mode',on);
   };
   const applyTransform=()=>{
    setReadingMode(scale>1.05);
@@ -40,6 +41,7 @@ export default function MenuBook({onDish}){
   const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
 
   const onTouchStart=e=>{
+   if(readingMode&&e.touches.length===1&&e.target.closest('.item')) return;
    if(e.touches.length===2){pinching=true;panning=false;stopIdle();setReadingMode(true);startDistance=dist(e.touches);lastScale=scale;e.preventDefault();e.stopPropagation();return}
    if(readingMode&&e.touches.length===1){panning=true;startX=e.touches[0].clientX;startY=e.touches[0].clientY;lastPanX=panX;lastPanY=panY;e.preventDefault()}
   };
