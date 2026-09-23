@@ -23,8 +23,12 @@ export default function MenuBook({onDish}){
   const stopIdle=()=>{token++;clearTimers();try{pf.getFlipController().stopMove()}catch(e){}};
   const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
   const transform=()=>{
-   const maxX=Math.max(0,(viewport.clientWidth*(scale-1))/2+viewport.clientWidth*.45);
-   const maxY=Math.max(0,(viewport.clientHeight*(scale-1))/2+viewport.clientHeight*.45);
+   /* V8.8: clamp pan to the scaled book itself, so dragging can never reveal
+      the dark stage behind the menu. */
+   const baseW=Math.min(wrap.offsetWidth,viewport.clientWidth);
+   const baseH=Math.min(wrap.offsetHeight,viewport.clientHeight);
+   const maxX=Math.max(0,(baseW*scale-viewport.clientWidth)/2);
+   const maxY=Math.max(0,(baseH*scale-viewport.clientHeight)/2);
    panX=Math.max(-maxX,Math.min(maxX,panX));panY=Math.max(-maxY,Math.min(maxY,panY));
    wrap.style.transform=`translate3d(${panX}px,${panY}px,0) scale(${scale})`;
    const z=scale>1.05;setZoomed(z);book.classList.toggle('reading-mode',z);
