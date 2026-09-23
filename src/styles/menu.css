@@ -397,3 +397,58 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  border-top-right-radius:24px!important;
  border-bottom-right-radius:24px!important;
 }
+
+
+/* V7.5 — visible concave book-frame corners.
+   Uses page pseudo-elements, not border-radius. No overlay is placed on the centre seam,
+   so the PageFlip fold/curl remains completely free. */
+.bookWrap{
+ border-radius:0!important;
+ clip-path:none!important;
+ padding:5px!important;
+ background:#171815!important;
+}
+.page{border-radius:0!important;overflow:hidden!important}
+
+/* dark frame pieces that sweep inward from ONLY the four outside corners */
+.page:nth-child(odd)::before,
+.page:nth-child(even)::before{
+ content:""!important;
+ position:absolute!important;
+ z-index:4!important;
+ pointer-events:none!important;
+ width:38px!important;
+ height:38px!important;
+ background:#171815!important;
+}
+
+/* left sheet: top-left concave sweep */
+.page:nth-child(odd)::before{
+ left:-1px!important;
+ top:-1px!important;
+ border-bottom-right-radius:38px!important;
+ box-shadow:inset -2px -2px 0 rgba(184,138,67,.85)!important;
+}
+
+/* right sheet: top-right concave sweep */
+.page:nth-child(even)::before{
+ right:-1px!important;
+ top:-1px!important;
+ border-bottom-left-radius:38px!important;
+ box-shadow:inset 2px -2px 0 rgba(184,138,67,.85)!important;
+}
+
+/* bottom outside corners use an extra radial layer on the page background.
+   It stays below content and never enters the centre fold. */
+.page:nth-child(odd){
+ background:
+  radial-gradient(circle at 0 100%,#171815 0 20px,transparent 21px),
+  radial-gradient(circle at 28% 15%,rgba(255,252,240,.94),transparent 42%),
+  linear-gradient(90deg,#e8dcc1 0%,#fff7e4 14%,#f8ecd2 84%,#dfcfad 100%)!important;
+}
+.page:nth-child(even){
+ background:
+  radial-gradient(circle at 100% 100%,#171815 0 20px,transparent 21px),
+  radial-gradient(circle at 28% 15%,rgba(255,252,240,.94),transparent 42%),
+  linear-gradient(90deg,#e8dcc1 0%,#fff7e4 14%,#f8ecd2 84%,#dfcfad 100%)!important;
+}
