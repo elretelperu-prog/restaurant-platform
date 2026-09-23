@@ -378,3 +378,20 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  transform:scale(.88)!important;
  opacity:.65;
 }
+
+
+/* V8.5 — move minimal X to the top-center of the movable circle,
+   keeping it clear of long dish names. */
+.bubble-close{
+ top:6%!important;
+ right:auto!important;
+ left:50%!important;
+ transform:translateX(-50%)!important;
+}
+.bubble-close:active{
+ transform:translateX(-50%) scale(.88)!important;
+}
+.dish-bubble h2{
+ max-width:82%;
+ margin-top:18px!important;
+}
