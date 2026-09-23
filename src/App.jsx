@@ -4,7 +4,9 @@ export default function App(){
  const [bubblePos,setBubblePos]=useState({x:0,y:0});
  const [drag,setDrag]=useState(null);
  const choose=d=>{setClosing(false);setSelected(d);setQty(1);setBubblePos({x:window.innerWidth/2,y:window.innerHeight*.47})};
- const finishClose=()=>{setClosing(true);setTimeout(()=>{setSelected(null);setClosing(false)},620)};\n const add=()=>{setCount(c=>c+qty);finishClose()};\n const cancel=()=>{if(!closing)finishClose()};
+ const finishClose=()=>{setClosing(true);setTimeout(()=>{setSelected(null);setClosing(false)},620)};
+ const add=()=>{setCount(c=>c+qty);finishClose()};
+ const cancel=()=>{if(!closing)finishClose()};
  const startDrag=e=>{
   if(e.target.closest('button,input'))return;
   e.preventDefault();e.currentTarget.setPointerCapture?.(e.pointerId);
