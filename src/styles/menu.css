@@ -395,3 +395,12 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  max-width:82%;
  margin-top:18px!important;
 }
+
+
+/* V8.6 — raise the close X to create more breathing room above long dish names. */
+.bubble-close{
+ top:2.5%!important;
+}
+.dish-bubble h2{
+ margin-top:22px!important;
+}
