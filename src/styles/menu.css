@@ -5,12 +5,11 @@
 .cornerCue:after{content:"";position:absolute;right:3px;top:27px;width:39px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(72,54,33,.42) 20%,rgba(72,54,33,.62) 52%,transparent);transform-origin:100% 50%;transform:rotate(45deg);opacity:.75}
 .cornerCue.right{right:2.2%}.cornerCue.left{left:2.2%;transform:scaleX(-1)}.cornerCue.hidden{opacity:0}.cornerCue:not(.hidden){animation:cuePulse 2.4s ease-in-out infinite}@keyframes cuePulse{0%,74%,100%{translate:0 0}86%{translate:-1px 1px}94%{translate:0 0}}
 
-/* Subtle affordance only: the real fold/curl remains entirely StPageFlip's animation. */
-.curlHint{position:absolute;top:2.2%;width:28px;height:36px;z-index:24;pointer-events:none;opacity:.82;transition:opacity .12s ease}
+/* Small static corner invitation. The actual moving curl is still 100% StPageFlip. */
+.curlHint{position:absolute;top:2.2%;width:36px;height:36px;z-index:24;pointer-events:none;opacity:.9;transition:opacity .1s ease}
 .curlHint--right{right:2.15%}
 .curlHint--left{left:2.15%;transform:scaleX(-1)}
-.curlHint::before{content:"";position:absolute;inset:0;background:linear-gradient(142deg,rgba(255,253,246,.98) 0 43%,rgba(238,224,193,.92) 58%,rgba(177,151,108,.28) 72%,transparent 73%);clip-path:polygon(16% 0,100% 0,100% 100%,79% 71%,55% 43%);filter:drop-shadow(-1px 1.5px 1px rgba(58,43,25,.28));border-radius:0 0 1px 0}
-.curlHint::after{content:"";position:absolute;right:1px;top:0;width:24px;height:32px;border-left:1px solid rgba(103,82,52,.28);border-radius:52% 0 0 0;transform:rotate(-9deg);transform-origin:100% 0}
+.curlHint::before{content:"";position:absolute;top:0;right:0;width:36px;height:36px;background:linear-gradient(225deg,#cbb78f 0%,#eadbbd 34%,#fffaf0 36%,#f6ecd5 72%,#ddc9a5 100%);clip-path:polygon(0 0,100% 0,100% 100%);filter:drop-shadow(-1.5px 2px 1.5px rgba(61,45,26,.3))}
+.curlHint::after{content:"";position:absolute;top:0;right:0;width:36px;height:36px;border-left:1px solid rgba(103,82,52,.38);transform:skew(-12deg);transform-origin:100% 0;clip-path:polygon(0 0,100% 0,100% 100%)}
 .curlHint.is-hidden,.curlHint.is-active{opacity:0}
-.curlHint:not(.is-hidden):not(.is-active){animation:curlHintBreath 2.6s ease-in-out infinite}
-@keyframes curlHintBreath{0%,70%,100%{scale:1}84%{scale:1.045}92%{scale:1}}
+@media(max-width:380px){.curlHint,.curlHint::before,.curlHint::after{width:32px;height:32px}}
