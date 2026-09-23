@@ -135,3 +135,55 @@
  right:0!important;
  padding:0!important;
 }
+
+
+/* V6.6: responsive viewport system — same 10-row layout on iPhone/Android */
+:root{
+ --top-h:30px;
+ --dock-h:58px;
+ --dock-gap:8px;
+ --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+html,body,#root{height:100%;min-height:100%;overflow:hidden}
+.app{
+ height:100dvh!important;
+ min-height:100svh!important;
+ padding-top:0!important;
+ padding-bottom:0!important;
+ display:grid!important;
+ grid-template-rows:var(--top-h) minmax(0,1fr)!important;
+}
+.top{height:var(--top-h)!important;min-height:var(--top-h)!important}
+.stage{
+ height:auto!important;
+ min-height:0!important;
+ width:100%!important;
+ padding:0 0 calc(var(--dock-h) + var(--dock-gap) + var(--safe-bottom))!important;
+ margin:0!important;
+ overflow:visible;
+}
+.bookWrap{height:100%!important;min-height:0!important}
+.page{
+ height:100%!important;
+ min-height:0!important;
+ display:grid!important;
+ grid-template-rows:auto auto repeat(10,minmax(0,1fr)) auto!important;
+ padding:8px 9px 18px!important;
+}
+.page .item{height:100%!important;min-height:0!important;padding:0!important}
+.page .thumb{
+ width:clamp(24px,3.5dvh,30px)!important;
+ height:clamp(24px,3.5dvh,30px)!important;
+}
+.page .nm{font-size:clamp(7px,1.02dvh,8.6px)!important}
+.page .ds{font-size:clamp(4.3px,.63dvh,5.2px)!important}
+.page .price{font-size:clamp(6.2px,.86dvh,7.3px)!important}
+.page .pg{position:static!important;align-self:end!important}
+.dock{
+ height:var(--dock-h)!important;
+ bottom:calc(5px + var(--safe-bottom))!important;
+ padding:5px 9px!important;
+}
+@supports not (height:100dvh){
+ .app{height:100vh!important}
+}
