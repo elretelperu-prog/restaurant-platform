@@ -81,6 +81,9 @@ export default function MenuBook({onDish}){
      panStartX=e.touches[0].clientX;panStartY=e.touches[0].clientY;basePanX=panX;basePanY=panY;moved=true;
     }else if(scale<=1.05){
      gestureShield=false;exitReading();
+    }else{
+     /* Keep the page-turn gesture locked, but restore the V4 resting curl. */
+     requestAnimationFrame(()=>hold());
     }
     e.preventDefault();e.stopImmediatePropagation();return;
    }
