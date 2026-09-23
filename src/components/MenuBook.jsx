@@ -12,44 +12,55 @@ export default function MenuBook({onDish}){
   const h=Math.max(480,Math.floor(wrap.clientHeight));
   const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:true});
 
-  let hintTimer, growTimer;
-  const showNativeCorner=()=>{
-   clearTimeout(hintTimer);
-   clearTimeout(growTimer);
-   hintTimer=setTimeout(()=>{
-    if(pf.getState()!=='read') return;
-    const rect=pf.getBoundsRect();
-    const current=pf.getCurrentPageIndex();
-    const last=pf.getPageCount()-1;
-    // Use StPageFlip's own fold renderer — never a CSS/SVG imitation.
-    // First/intermediate spreads hint forward on the upper-right.
-    // On the final spread hint backward on the upper-left.
-    const atLastSpread=current>=last-1;
-    const x=atLastSpread ? rect.left+2 : rect.left+(rect.pageWidth*2)-2;
-    const y=rect.top+2;
-    const controller=pf.getFlipController();
-    controller.showCorner({x,y});
-    // V2: keep StPageFlip's native fold, then pull it only a little farther inward.
-    // This preserves the exact renderer/shadow/reverse-page effect from V1.
-    growTimer=setTimeout(()=>{
-     if(controller.getState()!=='fold_corner') return;
-     const inset=Math.min(64,rect.pageWidth*.24);
-     const gx=atLastSpread ? rect.left+inset : rect.left+(rect.pageWidth*2)-inset;
-     const gy=rect.top+inset;
-     controller.showCorner({x:gx,y:gy});
-    },120);
-   },180);
+  const timers=[];
+  let sequence=0;
+  const later=()=>pf.getCurrentPageIndex()>=2;
+  const point=(depth=2)=>{
+   const r=pf.getBoundsRect();
+   const back=later();
+   return {
+    x:back ? r.left+depth : r.left+(r.pageWidth*2)-depth,
+    y:r.top+depth
+   };
+  };
+  const nativeCorner=(depth=2)=>{
+   const c=pf.getFlipController();
+   c.showCorner(point(depth));
+  };
+  const pulse=()=>{
+   const c=pf.getFlipController();
+   if(c.getState()!=='fold_corner'&&c.getState()!=='read') return;
+   const r=pf.getBoundsRect();
+   const depth=Math.min(72,r.pageWidth*.27);
+   nativeCorner(depth);
+   timers.push(setTimeout(()=>nativeCorner(2),260));
+  };
+  const scheduleHints=()=>{
+   sequence++;
+   const my=sequence;
+   timers.splice(0).forEach(clearTimeout);
+   // Native curl appears first. A tiny downward/inward nudge happens once,
+   // then exactly one reminder pulse 3 seconds later.
+   timers.push(setTimeout(()=>{if(my!==sequence)return;nativeCorner(2);},180));
+   timers.push(setTimeout(()=>{if(my!==sequence)return;pulse();},420));
+   timers.push(setTimeout(()=>{if(my!==sequence)return;pulse();},3420));
   };
 
-  pf.on('init',showNativeCorner);
-  pf.on('flip',showNativeCorner);
+  pf.on('init',scheduleHints);
+  pf.on('flip',scheduleHints);
   pf.on('changeState',e=>{
-   if(e.data==='read') showNativeCorner();
-   else {clearTimeout(hintTimer);clearTimeout(growTimer);}
+   if(e.data==='read'){
+    // Do not restart the 3-second reminder after our own fold-corner animation.
+    return;
+   }
+   if(e.data==='user_fold'||e.data==='flipping'){
+    sequence++;
+    timers.splice(0).forEach(clearTimeout);
+   }
   });
 
   pf.loadFromHTML(book.querySelectorAll('.page'));
-  return()=>{clearTimeout(hintTimer);clearTimeout(growTimer);pf.destroy();};
+  return()=>{sequence++;timers.splice(0).forEach(clearTimeout);pf.destroy();};
  },[]);
 
  return <section className="stage">
