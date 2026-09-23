@@ -230,3 +230,11 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  line-height:1!important;
  font-weight:700!important;
 }
+
+
+/* V6.9: real food thumbnails only; no layout or interaction changes */
+.page .thumb{
+ background-size:cover!important;
+ background-position:center!important;
+ background-repeat:no-repeat!important;
+}
