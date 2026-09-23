@@ -33,3 +33,15 @@
  .stage{width:100%}
  .bookWrap{width:100%}
 }
+
+
+/* V6.0: compact top chrome and bottom dock; give the book more usable screen area */
+.top{height:42px;padding:0 6px;background:transparent}
+.brand b{font-size:15px;letter-spacing:.12em}
+.brand small{font-size:5.5px;letter-spacing:.16em}
+.pill{font-size:9px;padding:6px 8px}
+.stage{height:calc(100vh - 112px);min-height:590px;align-items:flex-start}
+.bookWrap{height:100%}
+.dock{bottom:7px;padding:7px 10px;border-radius:18px;font-size:9px}
+.dock b{font-size:13px}
+.hint{font-size:8px;margin-top:0}
