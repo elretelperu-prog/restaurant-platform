@@ -10,70 +10,60 @@ export default function MenuBook({onDish}){
   const book=bookRef.current,wrap=wrapRef.current;
   const w=Math.max(150,Math.floor(wrap.clientWidth/2));
   const h=Math.max(480,Math.floor(wrap.clientHeight));
-  const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:true});
+  const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:false});
 
-  const timers=[];
-  let sequence=0, keepAlive=null;
-  const later=()=>pf.getCurrentPageIndex()>=2;
-  const point=(depth=2)=>{
-   const r=pf.getBoundsRect();
-   const back=later();
-   return {
-    x:back ? r.left+depth : r.left+(r.pageWidth*2)-depth,
-    y:r.top+depth
-   };
+  let timers=[], raf=0, token=0, idle=false;
+  const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf)};
+  const isBack=()=>pf.getCurrentPageIndex()>=2;
+  const pos=(depth,drop=0)=>{
+   const r=pf.getBoundsRect(), back=isBack();
+   return {x:back?r.left+depth:r.left+r.pageWidth*2-depth,y:r.top+depth+drop};
   };
-  const nativeCorner=(depth=2)=>{
+  const hold=(depth=48,drop=0)=>{
    const c=pf.getFlipController();
-   c.showCorner(point(depth));
+   try{
+    c.fold(pos(depth,drop));
+    idle=true;
+   }catch(e){}
   };
-  const startKeepAlive=()=>{
-   clearInterval(keepAlive);
-   keepAlive=setInterval(()=>{
-    const c=pf.getFlipController();
-    const state=c.getState();
-    if(state==='read'||state==='fold_corner') nativeCorner(2);
-   },700);
+  const animate=(fromDepth,toDepth,fromDrop,toDrop,duration,done)=>{
+   const started=performance.now(), my=token;
+   const tick=now=>{
+    if(my!==token)return;
+    const t=Math.min(1,(now-started)/duration);
+    const ease=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+    hold(fromDepth+(toDepth-fromDepth)*ease,fromDrop+(toDrop-fromDrop)*ease);
+    if(t<1)raf=requestAnimationFrame(tick); else done?.();
+   };
+   raf=requestAnimationFrame(tick);
   };
   const pulse=()=>{
-   const c=pf.getFlipController();
-   if(c.getState()!=='fold_corner'&&c.getState()!=='read') return;
-   const r=pf.getBoundsRect();
-   const depth=Math.min(72,r.pageWidth*.27);
-   nativeCorner(depth);
-   // Return to the persistent resting curl; never let the hint disappear.
-   timers.push(setTimeout(()=>nativeCorner(2),260));
-   timers.push(setTimeout(()=>nativeCorner(2),360));
+   const my=token;
+   animate(48,68,0,20,210,()=>{
+    if(my!==token)return;
+    animate(68,48,20,0,240,()=>hold(48,0));
+   });
   };
-  const scheduleHints=()=>{
-   sequence++;
-   const my=sequence;
-   timers.splice(0).forEach(clearTimeout);
-   // Native curl appears first. A tiny downward/inward nudge happens once,
-   // then exactly one reminder pulse 3 seconds later.
-   timers.push(setTimeout(()=>{if(my!==sequence)return;nativeCorner(2);startKeepAlive();},180));
-   timers.push(setTimeout(()=>{if(my!==sequence)return;pulse();},420));
-   timers.push(setTimeout(()=>{if(my!==sequence)return;pulse();},3420));
-   timers.push(setTimeout(()=>{if(my!==sequence)return;nativeCorner(2);},3900));
+  const startIdle=()=>{
+   token++; clearTimers();
+   const my=token;
+   timers.push(setTimeout(()=>{if(my!==token)return;hold(48,0);pulse();},180));
+   timers.push(setTimeout(()=>{if(my!==token)return;pulse();},3180));
   };
 
-  pf.on('init',scheduleHints);
-  pf.on('flip',scheduleHints);
-  pf.on('changeState',e=>{
-   if(e.data==='read'){
-    // Do not restart the 3-second reminder after our own fold-corner animation.
-    return;
-   }
-   if(e.data==='user_fold'||e.data==='flipping'){
-    clearInterval(keepAlive);
-    keepAlive=null;
-    sequence++;
-    timers.splice(0).forEach(clearTimeout);
-   }
-  });
+  pf.on('init',startIdle);
+  pf.on('flip',startIdle);
+
+  const interrupt=()=>{
+   if(!idle)return;
+   token++; clearTimers(); idle=false;
+   try{pf.getFlipController().stopMove()}catch(e){}
+  };
+  book.addEventListener('pointerdown',interrupt,{passive:true});
+  book.addEventListener('touchstart',interrupt,{passive:true});
 
   pf.loadFromHTML(book.querySelectorAll('.page'));
-  return()=>{sequence++;clearInterval(keepAlive);timers.splice(0).forEach(clearTimeout);pf.destroy();};
+  return()=>{token++;clearTimers();book.removeEventListener('pointerdown',interrupt);book.removeEventListener('touchstart',interrupt);pf.destroy()};
  },[]);
 
  return <section className="stage">
