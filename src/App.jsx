@@ -24,7 +24,7 @@ export default function App(){
  {selected&&<div className={'dish-orbit '+(closing?'closing':'')} onPointerDownCapture={e=>{if(e.target===e.currentTarget){e.preventDefault();e.stopPropagation();cancel()}}} onClickCapture={e=>{if(e.target===e.currentTarget){e.preventDefault();e.stopPropagation()}}} style={{'--anchor-x':selected.x+'px','--anchor-y':selected.y+'px','--bubble-x':bubblePos.x+'px','--bubble-y':bubblePos.y+'px'}}>
    <svg className="dish-thread" aria-hidden="true"><line x1={selected.x} y1={selected.y} x2={bubblePos.x} y2={bubblePos.y}/></svg>
    <div className={'dish-bubble '+(drag?'dragging':'')} style={{left:bubblePos.x,top:bubblePos.y}} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
-    <button className="bubble-close" aria-label="Cerrar" onPointerDown={e=>e.stopPropagation()} onClick={e=>{e.stopPropagation();cancel()}}>×</button><div className="drag-hint">↕ arrastra ↔</div>
+    <button className="bubble-close" aria-label="Cerrar" onPointerDown={e=>e.stopPropagation()} onClick={e=>{e.stopPropagation();cancel()}}>×</button>
     <h2>{selected.name}</h2><div className="bubble-price">€{selected.price}</div>
     <div className="qty"><button onClick={()=>setQty(Math.max(1,qty-1))}>−</button><b>{qty}</b><button onClick={()=>setQty(q=>q+1)}>+</button></div>
     <input placeholder="Tu nombre"/>
