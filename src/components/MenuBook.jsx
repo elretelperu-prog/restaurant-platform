@@ -33,7 +33,9 @@ export default function MenuBook({onDish}){
    const r=pf.getBoundsRect();
    const depth=Math.min(72,r.pageWidth*.27);
    nativeCorner(depth);
+   // Return to the persistent resting curl; never let the hint disappear.
    timers.push(setTimeout(()=>nativeCorner(2),260));
+   timers.push(setTimeout(()=>nativeCorner(2),360));
   };
   const scheduleHints=()=>{
    sequence++;
@@ -44,6 +46,7 @@ export default function MenuBook({onDish}){
    timers.push(setTimeout(()=>{if(my!==sequence)return;nativeCorner(2);},180));
    timers.push(setTimeout(()=>{if(my!==sequence)return;pulse();},420));
    timers.push(setTimeout(()=>{if(my!==sequence)return;pulse();},3420));
+   timers.push(setTimeout(()=>{if(my!==sequence)return;nativeCorner(2);},3900));
   };
 
   pf.on('init',scheduleHints);
