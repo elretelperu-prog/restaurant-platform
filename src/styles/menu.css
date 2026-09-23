@@ -300,3 +300,45 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
   inset 7px 0 10px rgba(32,12,7,.16),
   inset 0 0 22px rgba(92,58,20,.13)!important;
 }
+
+
+/* V7.2 — minimalist modern visual skin only. Interaction/PageFlip logic untouched. */
+.bookWrap{
+ background:linear-gradient(90deg,#161713,#25231d 48%,#151612)!important;
+ padding:4px!important;
+ border-radius:10px!important;
+ box-shadow:0 5px 18px rgba(0,0,0,.42),inset 0 0 0 1px rgba(201,166,102,.30)!important;
+}
+.book{background:#171713!important}
+.page{
+ background:
+  radial-gradient(circle at 28% 15%,rgba(255,252,240,.94),transparent 42%),
+  linear-gradient(90deg,#e8dcc1 0%,#fff7e4 14%,#f8ecd2 84%,#dfcfad 100%)!important;
+ border-top:2px solid #b88a43!important;
+ border-bottom:2px solid #b88a43!important;
+ color:#241b12!important;
+ box-shadow:inset 0 0 18px rgba(85,61,31,.10)!important;
+}
+.page:nth-child(odd){
+ border-left:3px solid #25231d!important;
+ border-right:1px solid #9c743b!important;
+ box-shadow:inset -9px 0 12px rgba(46,34,20,.14),inset 0 0 18px rgba(85,61,31,.08)!important;
+}
+.page:nth-child(even){
+ border-right:3px solid #25231d!important;
+ border-left:1px solid #9c743b!important;
+ box-shadow:inset 9px 0 12px rgba(46,34,20,.14),inset 0 0 18px rgba(85,61,31,.08)!important;
+}
+.page .item{border-bottom:1px solid rgba(91,70,44,.20)!important}
+.page .thumb{
+ border:1.5px solid rgba(244,228,191,.96)!important;
+ box-shadow:0 2px 5px rgba(38,27,14,.30),0 0 0 1px rgba(164,125,65,.45)!important;
+}
+.page h2,.page .nm,.page .price{color:#21180f!important}
+.page .sub{color:#806b4d!important}
+.page .ds{color:#665541!important}
+.dock{
+ background:rgba(18,20,18,.96)!important;
+ border:1px solid rgba(190,151,83,.42)!important;
+ box-shadow:0 3px 12px rgba(0,0,0,.32)!important;
+}
