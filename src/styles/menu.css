@@ -452,3 +452,36 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
   radial-gradient(circle at 28% 15%,rgba(255,252,240,.94),transparent 42%),
   linear-gradient(90deg,#e8dcc1 0%,#fff7e4 14%,#f8ecd2 84%,#dfcfad 100%)!important;
 }
+
+
+/* V7.6 — CLEAN MENU: remove every experimental frame/corner treatment from V7.1–V7.5.
+   Preserve responsive layout, photos, typography and PageFlip behavior. */
+.bookWrap{
+ background:transparent!important;
+ padding:0!important;
+ border:0!important;
+ border-radius:0!important;
+ clip-path:none!important;
+ box-shadow:none!important;
+}
+.book{
+ background:transparent!important;
+ box-shadow:none!important;
+ border:0!important;
+}
+.page,
+.page:nth-child(odd),
+.page:nth-child(even){
+ border:1px solid #a9936c!important;
+ border-radius:0!important;
+ clip-path:none!important;
+ box-shadow:inset 0 0 18px rgba(110,91,61,.11)!important;
+ background:
+  radial-gradient(circle at 28% 15%,rgba(255,252,240,.94),transparent 42%),
+  linear-gradient(90deg,#e8dcc1 0%,#fff7e4 14%,#f8ecd2 84%,#dfcfad 100%)!important;
+}
+.page:nth-child(odd)::before,
+.page:nth-child(even)::before{
+ content:none!important;
+ display:none!important;
+}
