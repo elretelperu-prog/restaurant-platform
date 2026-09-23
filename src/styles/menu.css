@@ -357,3 +357,24 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  pointer-events:none!important;
  touch-action:none!important;
 }
+
+
+/* V8.3 — minimal close control: black X only, no inner circle/background. */
+.bubble-close{
+ background:transparent!important;
+ border:0!important;
+ box-shadow:none!important;
+ color:#17130f!important;
+ width:32px!important;
+ height:32px!important;
+ padding:0!important;
+ font:300 30px/30px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+ display:flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ border-radius:0!important;
+}
+.bubble-close:active{
+ transform:scale(.88)!important;
+ opacity:.65;
+}
