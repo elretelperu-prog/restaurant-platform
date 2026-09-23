@@ -45,3 +45,23 @@
 .dock{bottom:7px;padding:7px 10px;border-radius:18px;font-size:9px}
 .dock b{font-size:13px}
 .hint{font-size:8px;margin-top:0}
+
+
+/* V6.1: visibly smaller restaurant header + taller/larger 10-row menu up to the dock */
+.top{height:30px;margin:0;padding:0 5px}
+.brand b{font-size:12px;line-height:1;letter-spacing:.10em}
+.brand small{font-size:4px;line-height:1;margin-top:1px}
+.pill{font-size:8px;line-height:1;padding:5px 7px}
+.stage{height:calc(100vh - 76px);min-height:620px;margin:0;padding:0;align-items:flex-start}
+.bookWrap{height:100%;width:100%}
+.page{padding:12px 9px 48px}
+.page h2{font-size:18px;line-height:1.02;margin-bottom:1px}
+.sub{font-size:5.5px;margin-bottom:6px}
+.item{grid-template-columns:30px 1fr auto;gap:5px;padding:5px 0}
+.thumb{width:29px;height:29px}
+.nm{font-size:8px;line-height:1.03}
+.ds{font-size:5px;line-height:1.1;margin-top:1px}
+.price{font-size:7px}
+.dock{bottom:5px;padding:5px 9px;border-radius:16px;font-size:8.5px}
+.dock b{font-size:12px}
+.hint{font-size:7px;line-height:1.1;margin:0}
