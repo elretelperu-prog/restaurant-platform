@@ -38,10 +38,9 @@ export default function MenuBook({onDish}){
     e.preventDefault();e.stopImmediatePropagation();return;
    }
    if(scale>1.05&&e.touches.length===1){
-    // A dish row must remain tappable everywhere (photo, name, description and price).
-    if(e.target.closest('.item')) return;
     mode='pan';moved=false;panStartX=e.touches[0].clientX;panStartY=e.touches[0].clientY;basePanX=panX;basePanY=panY;
-    e.stopImmediatePropagation();
+    // Do not stop touchstart: remember the row so a stationary touch can still select it.
+    e.__dish=e.target.closest('.item');
    }
   };
   const move=e=>{
@@ -60,7 +59,10 @@ export default function MenuBook({onDish}){
     e.preventDefault();e.stopImmediatePropagation();return;
    }
    if(mode==='pan'&&e.touches.length===0){
-    mode='reading';e.stopImmediatePropagation();
+    const wasMoved=moved;
+    mode='reading';
+    // If it was a tap rather than a drag, let the normal button click fire.
+    if(wasMoved){e.preventDefault();e.stopImmediatePropagation();}
    }
   };
 
