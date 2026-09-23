@@ -10,3 +10,15 @@
 .bookWrap{transform-origin:center center;will-change:transform}
 .stage.isZoomed{overflow:hidden}
 .stage.isZoomed .bookWrap{cursor:grab}
+
+
+/* V5.8: fit all 10 dish rows per page. Layout/functionality otherwise unchanged. */
+.page{padding-top:14px;padding-bottom:22px}
+.page h2{font-size:17px;line-height:1.05}
+.sub{margin-bottom:5px}
+.item{grid-template-columns:27px 1fr auto;gap:4px;padding:3px 0}
+.thumb{width:25px;height:25px}
+.nm{font-size:7.4px;line-height:1;display:block}
+.ds{font-size:4.8px;line-height:1.08;margin-top:1px;display:block}
+.price{font-size:6.7px}
+.pg{bottom:5px}
