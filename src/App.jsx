@@ -3,9 +3,11 @@ export default function App(){
  const [selected,setSelected]=useState(null),[qty,setQty]=useState(1),[count,setCount]=useState(0),[closing,setClosing]=useState(false);
  const [bubblePos,setBubblePos]=useState({x:0,y:0});
  const [drag,setDrag]=useState(null);
- const choose=d=>{setClosing(false);setSelected(d);setQty(1);setBubblePos({x:window.innerWidth/2,y:window.innerHeight*.47})};
+ const [customerName,setCustomerName]=useState('');
+ const [nameError,setNameError]=useState(false);
+ const choose=d=>{setClosing(false);setSelected(d);setQty(1);setCustomerName('');setNameError(false);setBubblePos({x:window.innerWidth/2,y:window.innerHeight*.47})};
  const finishClose=()=>{setClosing(true);setTimeout(()=>{setSelected(null);setClosing(false)},620)};
- const add=()=>{setCount(c=>c+qty);finishClose()};
+ const add=()=>{if(closing)return;if(!customerName.trim()){setNameError(true);return;}setNameError(false);setCount(c=>c+qty);finishClose()};
  const cancel=()=>{if(!closing)finishClose()};
  const startDrag=e=>{
   if(e.target.closest('button,input'))return;
@@ -27,7 +29,8 @@ export default function App(){
     <button className="bubble-close" aria-label="Cerrar" onPointerDown={e=>e.stopPropagation()} onClick={e=>{e.stopPropagation();cancel()}}>×</button>
     <h2>{selected.name}</h2><div className="bubble-price">€{selected.price}</div>
     <div className="qty"><button onClick={()=>setQty(Math.max(1,qty-1))}>−</button><b>{qty}</b><button onClick={()=>setQty(q=>q+1)}>+</button></div>
-    <input placeholder="Tu nombre"/>
+    <input placeholder="Tu nombre" aria-label="Tu nombre" aria-invalid={nameError} value={customerName} onChange={e=>{setCustomerName(e.target.value);if(nameError&&e.target.value.trim())setNameError(false)}}/>
+    {nameError&&<span className="name-error" role="alert">Escribe tu nombre para añadir el plato</span>}
     <button className="confirm" onClick={add}>Añadir al pedido</button>
    </div>
   </div>}
