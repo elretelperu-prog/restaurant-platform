@@ -430,3 +430,9 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .dish-bubble .surname-hint{position:absolute;inset:0 9px;display:flex;align-items:center;overflow:hidden;white-space:pre;pointer-events:none;font:400 16px Arial,sans-serif}
 .dish-bubble .surname-mirror{visibility:hidden;flex:0 0 auto}
 .dish-bubble .surname-suggestion{color:#a9a39a;flex:0 0 auto}
+
+/* V8.18 — keep the surname hint visibly above the input on mobile Safari. */
+.dish-bubble .name-field input{position:relative;z-index:1;font-family:Arial,sans-serif!important}
+.dish-bubble .surname-hint{z-index:3;font-family:Arial,sans-serif!important;overflow:hidden}
+.dish-bubble .surname-mirror{max-width:calc(100% - 67px);overflow:hidden;white-space:nowrap}
+.dish-bubble .surname-suggestion{color:#8c8378!important;opacity:1!important;white-space:nowrap}
