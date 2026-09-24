@@ -475,3 +475,43 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  0%,12%{text-indent:0}
  88%,100%{text-indent:-92px}
 }
+
+/* V9.0 — order orbit: connected organic shape, expanding with order size. */
+.dock .dock-order{border:0;background:transparent;color:inherit;font:inherit;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:0 5px;min-width:90px;cursor:pointer}
+.dock .dock-order b{display:block;font-size:13px;line-height:.9;margin-bottom:1px}
+.dock .dock-order span{display:inline;font-size:inherit}
+.order-orbit{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;pointer-events:auto}
+.order-thread{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.order-thread line{stroke:#b78b4b;stroke-width:2;stroke-dasharray:3 8;stroke-linecap:round;vector-effect:non-scaling-stroke;animation:orderThreadIn .5s ease both}
+.order-shape{position:relative;width:min(91vw,440px);height:var(--order-height);max-height:calc(100dvh - 100px);min-height:340px;display:flex;flex-direction:column;padding:32px 27px 28px;background:radial-gradient(circle at 30% 18%,#fff9e9,#f0e0bd 75%,#d3b17b);border:1.5px solid #b78b4b;box-shadow:0 16px 42px #0008,inset 0 0 22px #fff8;color:#241b12;border-radius:43% 51% 45% 49% / 22% 24% 21% 23%;overflow:hidden;transform-origin:50% 100%;animation:orderGrow .54s cubic-bezier(.2,.8,.2,1) both}
+.order-close{position:absolute;top:13px;left:50%;transform:translateX(-50%);border:0;background:transparent;color:#241b12;font-size:31px;line-height:1;z-index:2;cursor:pointer}
+.order-heading{text-align:center;flex-shrink:0;padding:9px 0 11px;border-bottom:1px solid #bfa67d}
+.order-heading small{font-size:9px;letter-spacing:.12em}
+.order-heading h2{font:700 26px Georgia,serif;margin:4px 0}
+.order-heading p{font-size:12px;margin:0}
+.order-scroll{overflow-y:auto;min-height:0;flex:1;padding:8px 1px;overscroll-behavior:contain}
+.order-empty{text-align:center;font-size:14px;line-height:1.5;margin:22px 4px}
+.order-line{border-bottom:1px solid #bfa67d;padding:10px 2px}
+.order-line-top{display:flex;justify-content:space-between;align-items:start;gap:9px;font-size:13px}
+.order-line-top strong:first-child{flex:1}
+.order-line-top strong:last-child{white-space:nowrap}
+.order-line>small{display:block;margin-top:4px;font-size:11px;color:#625039}
+.order-line-actions{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.order-qty{display:flex;align-items:center;gap:11px}
+.order-qty button{width:28px;height:28px;border:1px solid #b78b4b;background:#fff8e8;border-radius:50%;font-size:18px}
+.order-remove{background:transparent;border:0;text-decoration:underline;font-size:11px;color:#694b33}
+.order-notes-label{display:block;font-size:12px;font-weight:700;margin:13px 0 5px}
+.order-scroll textarea{width:100%;box-sizing:border-box;resize:vertical;border:1px solid #b89d72;background:#fffaf0;border-radius:10px;padding:8px;font-size:16px;min-height:60px}
+.order-footer{flex-shrink:0;border-top:1px solid #bfa67d;padding-top:10px}
+.order-footer>div{display:flex;justify-content:space-between;font-size:13px;margin:5px 0}
+.order-footer>div:nth-child(2){font-weight:700;font-size:16px}
+.order-footer>small{display:block;font-size:10px;line-height:1.3;margin-top:5px;color:#66543c}
+.order-notice{font-size:10px;text-align:center;margin:7px 0 0;color:#66543c}
+.order-closing{pointer-events:none}
+.order-closing .order-shape{animation:orderShrink .54s cubic-bezier(.55,.02,.85,.45) both}
+.order-closing .order-thread line{animation:orderThreadOut .5s ease both}
+@keyframes orderGrow{from{opacity:.3;transform:translateY(35vh) scale(.06)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes orderShrink{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(35vh) scale(.06)}}
+@keyframes orderThreadIn{from{opacity:0;stroke-dashoffset:70}to{opacity:1;stroke-dashoffset:0}}
+@keyframes orderThreadOut{from{opacity:1}to{opacity:0}}
+@media(max-width:380px){.order-shape{width:94vw;padding-left:22px;padding-right:22px}.order-line-top{font-size:12px}}
