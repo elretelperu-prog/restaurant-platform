@@ -417,3 +417,11 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 /* V8.14 — blink the name field twice when name and surname are missing. */
 .dish-bubble input.name-input-blink{animation:nameInputBlinkTwice 1s ease-in-out 1!important}
 @keyframes nameInputBlinkTwice{0%,25%,50%,75%,100%{opacity:1}12.5%,37.5%,62.5%,87.5%{opacity:.18}}
+
+/* V8.15 — reveal the entire full-name hint by sliding it left inside the field on validation. */
+.dish-bubble .name-field{position:relative;width:78%;margin-bottom:7px;flex-shrink:0}
+.dish-bubble .name-field input{width:100%;margin-bottom:0;box-sizing:border-box}
+.dish-bubble .name-placeholder-scroll{position:absolute;left:10px;right:10px;top:0;bottom:0;overflow:hidden;display:flex;align-items:center;pointer-events:none;color:#777;white-space:nowrap;font-size:16px;animation:nameInputBlinkTwice 1s ease-in-out 1!important}
+.dish-bubble .name-placeholder-scroll>span{display:inline-block;min-width:max-content;animation:nameHintTravel 3s ease-in-out infinite alternate}
+.dish-bubble .name-field:focus-within .name-placeholder-scroll{display:none}
+@keyframes nameHintTravel{0%,12%{transform:translateX(0)}88%,100%{transform:translateX(calc(-100% + 100px))}}
