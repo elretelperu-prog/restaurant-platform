@@ -444,3 +444,8 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .dish-bubble .surname-mirror{visibility:visible!important;max-width:none!important;overflow:visible!important;flex:0 0 auto!important;color:#241b12!important}
 .dish-bubble .surname-suggestion{flex:0 0 auto!important;color:#938b80!important;white-space:nowrap!important}
 .dish-bubble .name-field:focus-within .surname-hint{display:none!important}
+
+/* V8.20 — fit the complete surname prompt on narrow Android fields.
+   The real input remains 16px to prevent iOS keyboard zoom. */
+.dish-bubble .surname-hint{font-size:13px!important;gap:7px!important;letter-spacing:-.15px!important}
+.dish-bubble .surname-mirror,.dish-bubble .surname-suggestion{font-size:inherit!important;line-height:1.2!important}
