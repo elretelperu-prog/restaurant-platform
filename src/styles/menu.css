@@ -515,3 +515,11 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 @keyframes orderThreadIn{from{opacity:0;stroke-dashoffset:70}to{opacity:1;stroke-dashoffset:0}}
 @keyframes orderThreadOut{from{opacity:1}to{opacity:0}}
 @media(max-width:380px){.order-shape{width:94vw;padding-left:22px;padding-right:22px}.order-line-top{font-size:12px}}
+
+/* V9.2 — the order connection must remain unmistakable on OPEN and CLOSE. */
+.order-orbit .order-thread{z-index:2!important;opacity:1!important;overflow:visible!important}
+.order-orbit .order-shape{z-index:3}
+.order-orbit .order-thread line{animation:none!important;opacity:1!important;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.order-orbit .order-thread .order-thread-halo{stroke:#fff5df;stroke-width:7;stroke-dasharray:none;opacity:.95!important}
+.order-orbit .order-thread .order-thread-dots{stroke:#9b682b;stroke-width:4.5;stroke-dasharray:1 9;opacity:1!important;filter:drop-shadow(0 0 1px #fff9e7)}
+.order-orbit.order-closing .order-thread{animation:orderThreadOut .54s ease forwards}
