@@ -454,3 +454,9 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .dish-bubble .name-field input{font-size:17px!important}
 .dish-bubble .surname-hint{font-size:15px!important;gap:7px!important;letter-spacing:-.2px!important}
 .dish-bubble .confirm{font-size:13px!important}
+
+/* V8.22 — one native text field; no animated overlay while it is empty.
+   Prevents blank field and extra autofill-looking rows on iOS. */
+.dish-bubble .name-placeholder-scroll{display:none!important}
+.dish-bubble .name-field{isolation:isolate}
+.dish-bubble .name-field input::placeholder{color:#777!important;opacity:1!important}
