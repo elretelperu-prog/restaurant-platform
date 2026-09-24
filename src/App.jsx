@@ -31,7 +31,7 @@ export default function App(){
     <h2>{selected.name}</h2><div className="bubble-price">€{selected.price}</div>
     <div className="qty"><button onClick={()=>setQty(Math.max(1,qty-1))}>−</button><b>{qty}</b><button onClick={()=>setQty(q=>q+1)}>+</button></div>
     <input placeholder="Escriba nombre y apellido" aria-label="Nombre y apellido" aria-invalid={nameError} value={customerName} onChange={e=>{setCustomerName(e.target.value);if(nameError&&e.target.value.trim().split(/\s+/).length>=2)setNameError(false)}}/>
-    {nameError&&<span className="name-error" role="alert">Escriba nombre y apellido para añadir el plato</span>}
+    {nameError&&<span className="name-error" role="alert">Escriba nombre y apellido</span>}
     <button key={blinkKey} className={"confirm "+(nameError?"confirm-blink":"")} onClick={add}>Añadir al pedido</button>
    </div>
   </div>}
