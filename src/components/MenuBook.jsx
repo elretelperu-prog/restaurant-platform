@@ -3,8 +3,8 @@ import {PageFlip} from 'page-flip';
 import MenuPage from './MenuPage.jsx';
 import {pages} from '../data/la-terraza.js';
 
-export default function MenuBook({onDish}){
- const bookRef=useRef(null),wrapRef=useRef(null),viewportRef=useRef(null);
+export default function MenuBook({onDish,popupOpen=false}){
+ const bookRef=useRef(null),wrapRef=useRef(null),viewportRef=useRef(null),restoreFoldRef=useRef(null),hadPopupRef=useRef(false);
  const [zoomed,setZoomed]=useState(false);
 
  useEffect(()=>{
@@ -21,6 +21,8 @@ export default function MenuBook({onDish}){
   const pulse=()=>{const my=token;animate(48,68,0,20,210,()=>{if(my!==token)return;animate(68,48,20,0,240,()=>hold())})};
   const startIdle=()=>{if(mode!=='normal')return;token++;clearTimers();const my=token;timers.push(setTimeout(()=>{if(my!==token)return;hold();pulse()},180));timers.push(setTimeout(()=>{if(my!==token)return;pulse()},3180))};
   const stopIdle=()=>{token++;clearTimers();try{pf.getFlipController().stopMove()}catch(e){}};
+  const restoreFold=()=>{if(mode==='normal')startIdle();else if(mode==='reading')requestAnimationFrame(()=>hold());};
+  restoreFoldRef.current=restoreFold;
   const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
   const transform=()=>{
    /* V8.8: clamp pan to the scaled book itself, so dragging can never reveal
@@ -82,14 +84,15 @@ export default function MenuBook({onDish}){
     }else if(scale<=1.05){
      gestureShield=false;exitReading();
     }else{
-     /* Keep the page-turn gesture locked, but restore the V4 resting curl. */
-     requestAnimationFrame(()=>hold());
+     restoreFold();
     }
     e.preventDefault();e.stopImmediatePropagation();return;
    }
    if(mode==='pan'&&e.touches.length===0){
     const wasMoved=moved,dish=tappedDish;
     mode='reading';tappedDish=null;
+    if(scale<=1.05&&gestureShield){gestureShield=false;exitReading();}
+    else restoreFold();
     if(wasMoved){e.preventDefault();e.stopImmediatePropagation();}
     else if(dish){
      // StPageFlip can swallow the synthetic click while zoomed, so trigger the row explicitly.
@@ -106,8 +109,18 @@ export default function MenuBook({onDish}){
   pf.on('init',startIdle);pf.on('flip',startIdle);
   pf.loadFromHTML(book.querySelectorAll('.page'));
 
-  return()=>{token++;clearTimers();viewport.removeEventListener('touchstart',down,true);viewport.removeEventListener('touchmove',move,true);viewport.removeEventListener('touchend',end,true);viewport.removeEventListener('touchcancel',end,true);pf.destroy()};
+  return()=>{restoreFoldRef.current=null;token++;clearTimers();viewport.removeEventListener('touchstart',down,true);viewport.removeEventListener('touchmove',move,true);viewport.removeEventListener('touchend',end,true);viewport.removeEventListener('touchcancel',end,true);pf.destroy()};
  },[]);
+
+ // Repaint the resting curl after Circle + Thread finishes closing.
+ // The PageFlip instance is intentionally not recreated when the popup changes.
+ useEffect(()=>{
+  if(popupOpen){hadPopupRef.current=true;return;}
+  if(!hadPopupRef.current)return;
+  hadPopupRef.current=false;
+  const frame=requestAnimationFrame(()=>restoreFoldRef.current?.());
+  return()=>cancelAnimationFrame(frame);
+ },[popupOpen]);
 
  const selectDish=d=>onDish(d);
  return <section className={'stage '+(zoomed?'isZoomed':'')} ref={viewportRef}>
