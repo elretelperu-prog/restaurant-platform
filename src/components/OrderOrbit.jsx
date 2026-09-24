@@ -1,11 +1,31 @@
-import React from 'react';
+import React,{useLayoutEffect,useRef,useState} from 'react';
 const money=n=>'S/ '+Number(n).toFixed(2);
 export default function OrderOrbit({open,closing,onClose,items,onChangeQty,onRemove,notes,onNotes}){
  if(!open)return null;
  const count=items.reduce((n,i)=>n+i.qty,0),total=items.reduce((n,i)=>n+i.qty*i.price,0);
+ const shapeRef=useRef(null);
+ const [thread,setThread]=useState(null);
+ useLayoutEffect(()=>{
+  if(!open)return;
+  let frame=0;
+  const measure=()=>{
+   const button=document.querySelector('.dock-order');
+   const shape=shapeRef.current;
+   if(!button||!shape)return;
+   const a=button.getBoundingClientRect(),b=shape.getBoundingClientRect();
+   setThread({x1:a.left+a.width/2,y1:a.top+a.height/2,x2:b.left+b.width/2,y2:b.bottom-12});
+  };
+  const refresh=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(measure)};
+  refresh();
+  const observer=typeof ResizeObserver!=='undefined'?new ResizeObserver(refresh):null;
+  if(observer&&shapeRef.current)observer.observe(shapeRef.current);
+  window.addEventListener('resize',refresh);
+  window.addEventListener('scroll',refresh,true);
+  return()=>{cancelAnimationFrame(frame);observer?.disconnect();window.removeEventListener('resize',refresh);window.removeEventListener('scroll',refresh,true)};
+ },[open,items.length]);
  return <div className={'order-orbit '+(closing?'order-closing':'')} onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
-  <svg className="order-thread" aria-hidden="true"><line x1="50%" y1="92%" x2="50%" y2="47%"/></svg>
-  <section className="order-shape" role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--order-height':Math.min(76,Math.max(48,48+items.length*6))+'dvh'}}>
+  <svg className="order-thread" aria-hidden="true">{thread&&<line x1={thread.x1} y1={thread.y1} x2={thread.x2} y2={thread.y2}/>}</svg>
+  <section ref={shapeRef} className="order-shape" role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--order-height':Math.min(76,Math.max(48,48+items.length*6))+'dvh'}}>
    <button type="button" className="order-close" aria-label="Cerrar pedido" onClick={onClose}>×</button>
    <header className="order-heading"><small>LA TERRAZA · MESA 1</small><h2>Mi pedido</h2><p>{count} {count===1?'producto':'productos'} · Borrador</p></header>
    <div className="order-scroll">
