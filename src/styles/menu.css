@@ -414,6 +414,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  -webkit-text-size-adjust:100%;
 }
 
-/* V8.12 — blink the order button twice when name and surname are missing. */
-.dish-bubble .confirm.confirm-blink{animation:confirmBlinkTwice 1s ease-in-out 1!important}
-@keyframes confirmBlinkTwice{0%,25%,50%,75%,100%{opacity:1}12.5%,37.5%,62.5%,87.5%{opacity:.18}}
+/* V8.14 — blink the name field twice when name and surname are missing. */
+.dish-bubble input.name-input-blink{animation:nameInputBlinkTwice 1s ease-in-out 1!important}
+@keyframes nameInputBlinkTwice{0%,25%,50%,75%,100%{opacity:1}12.5%,37.5%,62.5%,87.5%{opacity:.18}}
