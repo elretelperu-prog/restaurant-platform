@@ -30,7 +30,7 @@ export default function App(){
     <button className="bubble-close" aria-label="Cerrar" onPointerDown={e=>e.stopPropagation()} onClick={e=>{e.stopPropagation();cancel()}}>×</button>
     <h2>{selected.name}</h2><div className="bubble-price">€{selected.price}</div>
     <div className="qty"><button onClick={()=>setQty(Math.max(1,qty-1))}>−</button><b>{qty}</b><button onClick={()=>setQty(q=>q+1)}>+</button></div>
-    <input key={blinkKey} className={nameError?"name-input-blink":""} placeholder="Escriba nombre y apellido" aria-label="Nombre y apellido" aria-invalid={nameError} value={customerName} onChange={e=>{setCustomerName(e.target.value);if(nameError&&e.target.value.trim().split(/\s+/).length>=2)setNameError(false)}}/>
+    <div className="name-field"><input key={blinkKey} className={nameError?"name-input-blink":""} placeholder={nameError&&!customerName?"":"Escriba nombre y apellido"} aria-label="Nombre y apellido" aria-invalid={nameError} value={customerName} onChange={e=>{setCustomerName(e.target.value);if(nameError&&e.target.value.trim().split(/\s+/).length>=2)setNameError(false)}}/>{nameError&&!customerName&&<span key={blinkKey} className="name-placeholder-scroll" aria-hidden="true"><span>Escriba nombre y apellido</span></span>}</div>
     {nameError&&<span className="name-error" role="alert">Escriba nombre y apellido</span>}
     <button className="confirm" onClick={add}>Añadir al pedido</button>
    </div>
