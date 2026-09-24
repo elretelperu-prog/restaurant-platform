@@ -436,3 +436,11 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .dish-bubble .surname-hint{z-index:3;font-family:Arial,sans-serif!important;overflow:hidden}
 .dish-bubble .surname-mirror{max-width:calc(100% - 67px);overflow:hidden;white-space:nowrap}
 .dish-bubble .surname-suggestion{color:#8c8378!important;opacity:1!important;white-space:nowrap}
+
+/* V8.19 — render a single visual text line instead of estimating input glyph widths.
+   Prevents overlapping on iPhone and wrapping on Android. */
+.dish-bubble .name-field input.has-surname-hint:not(:focus){color:transparent!important;-webkit-text-fill-color:transparent!important}
+.dish-bubble .surname-hint{inset:0 9px!important;display:flex!important;align-items:center!important;flex-wrap:nowrap!important;white-space:nowrap!important;overflow:hidden!important;gap:9px!important;font:400 16px Arial,sans-serif!important}
+.dish-bubble .surname-mirror{visibility:visible!important;max-width:none!important;overflow:visible!important;flex:0 0 auto!important;color:#241b12!important}
+.dish-bubble .surname-suggestion{flex:0 0 auto!important;color:#938b80!important;white-space:nowrap!important}
+.dish-bubble .name-field:focus-within .surname-hint{display:none!important}
