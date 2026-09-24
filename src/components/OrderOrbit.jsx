@@ -1,7 +1,6 @@
 import React,{useLayoutEffect,useRef,useState} from 'react';
 const money=n=>'S/ '+Number(n).toFixed(2);
 export default function OrderOrbit({open,closing,onClose,items,onChangeQty,onRemove,notes,onNotes}){
- if(!open)return null;
  const count=items.reduce((n,i)=>n+i.qty,0),total=items.reduce((n,i)=>n+i.qty*i.price,0);
  const shapeRef=useRef(null);
  const [thread,setThread]=useState(null);
@@ -13,7 +12,7 @@ export default function OrderOrbit({open,closing,onClose,items,onChangeQty,onRem
    const shape=shapeRef.current;
    if(!button||!shape)return;
    const a=button.getBoundingClientRect(),b=shape.getBoundingClientRect();
-   setThread({x1:a.left+a.width/2,y1:a.top+a.height/2,x2:b.left+b.width/2,y2:b.bottom-12});
+   setThread({x1:a.left+a.width/2,y1:a.top+a.height/2,x2:b.left+b.width/2,y2:b.bottom-4});
   };
   const refresh=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(measure)};
   refresh();
@@ -27,8 +26,9 @@ export default function OrderOrbit({open,closing,onClose,items,onChangeQty,onRem
   window.addEventListener('scroll',refresh,true);
   return()=>{cancelAnimationFrame(frame);observer?.disconnect();window.removeEventListener('resize',refresh);window.removeEventListener('scroll',refresh,true)};
  },[open,closing,items.length]);
+ if(!open)return null;
  return <div className={'order-orbit '+(closing?'order-closing':'')} onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
-  <svg className="order-thread" aria-hidden="true">{thread&&<line x1={thread.x1} y1={thread.y1} x2={thread.x2} y2={thread.y2}/>}</svg>
+  <svg className="order-thread" aria-hidden="true">{thread&&<><line className="order-thread-halo" x1={thread.x1} y1={thread.y1} x2={thread.x2} y2={thread.y2}/><line className="order-thread-dots" x1={thread.x1} y1={thread.y1} x2={thread.x2} y2={thread.y2}/></>}</svg>
   <section ref={shapeRef} className="order-shape" role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--order-height':Math.min(76,Math.max(48,48+items.length*6))+'dvh'}}>
    <button type="button" className="order-close" aria-label="Cerrar pedido" onClick={onClose}>×</button>
    <header className="order-heading"><small>LA TERRAZA · MESA 1</small><h2>Mi pedido</h2><p>{count} {count===1?'producto':'productos'} · Borrador</p></header>
