@@ -17,12 +17,16 @@ export default function OrderOrbit({open,closing,onClose,items,onChangeQty,onRem
   };
   const refresh=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(measure)};
   refresh();
+  // Track the expanding/shrinking edge for the full transition, not just its final position.
+  const started=performance.now();
+  const track=now=>{measure();if(now-started<650)frame=requestAnimationFrame(track)};
+  frame=requestAnimationFrame(track);
   const observer=typeof ResizeObserver!=='undefined'?new ResizeObserver(refresh):null;
   if(observer&&shapeRef.current)observer.observe(shapeRef.current);
   window.addEventListener('resize',refresh);
   window.addEventListener('scroll',refresh,true);
   return()=>{cancelAnimationFrame(frame);observer?.disconnect();window.removeEventListener('resize',refresh);window.removeEventListener('scroll',refresh,true)};
- },[open,items.length]);
+ },[open,closing,items.length]);
  return <div className={'order-orbit '+(closing?'order-closing':'')} onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
   <svg className="order-thread" aria-hidden="true">{thread&&<line x1={thread.x1} y1={thread.y1} x2={thread.x2} y2={thread.y2}/>}</svg>
   <section ref={shapeRef} className="order-shape" role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--order-height':Math.min(76,Math.max(48,48+items.length*6))+'dvh'}}>
