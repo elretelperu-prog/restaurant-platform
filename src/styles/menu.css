@@ -523,3 +523,41 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .order-orbit .order-thread .order-thread-halo{stroke:#fff5df;stroke-width:7;stroke-dasharray:none;opacity:.95!important}
 .order-orbit .order-thread .order-thread-dots{stroke:#9b682b;stroke-width:4.5;stroke-dasharray:1 9;opacity:1!important;filter:drop-shadow(0 0 1px #fff9e7)}
 .order-orbit.order-closing .order-thread{animation:orderThreadOut .54s ease forwards}
+
+/* V9.3 — approved neon order concept; scoped to Mi pedido only. */
+.order-orbit.order-neon{background:rgba(5,8,17,.46);isolation:isolate}
+.order-neon .order-thread{z-index:2!important}
+.order-neon .order-neon-thread path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.order-neon .order-neon-thread .order-neon-glow{stroke:#3d8fff;stroke-width:5;opacity:.65;filter:url(#orderNeonGlow)}
+.order-neon .order-neon-thread .order-neon-filament{stroke:url(#orderNeonGradient);stroke-width:1.05;opacity:.98;stroke-dasharray:5 4;animation:orderNeonFlow 2.3s linear infinite!important}
+.order-neon .order-neon-origin{fill:#d8faff;filter:drop-shadow(0 0 5px #36dfff)}
+.order-neon .order-neon-dock-light{position:fixed;z-index:4;transform:translate(-50%,-50%);width:116px;height:70px;border:1.5px solid #2bdbff;border-radius:20px;background:linear-gradient(120deg,rgba(0,196,255,.17),rgba(109,33,255,.28));box-shadow:0 0 9px #13ceff,0 0 21px #633aff,inset 0 0 12px #3a8fff;pointer-events:none;display:flex;align-items:flex-start;justify-content:center}
+.order-neon .order-neon-dock-light span{color:#b5fbff;font-size:19px;text-shadow:0 0 9px #20dfff}
+.order-neon .order-shape{z-index:3!important;width:min(89vw,440px);height:var(--order-height);min-height:350px;max-height:calc(100dvh - 135px);padding:35px 22px 23px;box-sizing:border-box;background:linear-gradient(155deg,#111e38 0%,#091326 52%,#10122d 100%)!important;color:#f5f7ff!important;border:1.5px solid #438dff!important;border-radius:25% 27% 24% 23% / 11% 12% 10% 11%!important;box-shadow:0 0 0 1px #aa4dff99,0 0 17px #268dffb5,0 0 27px #8c42ff77,inset 0 0 30px #233f8150,0 18px 35px #000a!important;overflow:hidden}
+.order-neon .order-shape:before{content:"";position:absolute;inset:2px;border-radius:inherit;border:1px solid #a94cff88;pointer-events:none}
+.order-neon .order-close{top:12px;color:#fff;border:1px solid #559dff;border-radius:50%;width:40px;height:40px;font-size:28px;box-shadow:0 0 9px #338cff,inset 0 0 9px #3d67d8;background:#0b1731;display:flex;align-items:center;justify-content:center}
+.order-neon .order-heading{padding:20px 0 12px;border-bottom:1px solid #617aa5a6}
+.order-neon .order-heading small{color:#9ec4f7}
+.order-neon .order-heading h2{color:#fff;font-size:28px;text-shadow:0 0 9px #a768ff}
+.order-neon .order-heading p{color:#b8c8e5}
+.order-neon .order-scroll{padding:7px 2px;scrollbar-color:#4966a0 transparent}
+.order-neon .order-line{border-bottom:1px solid #6382b05e;padding:11px 0}
+.order-neon .order-line-top{font-size:13px}
+.order-neon .order-line>small{color:#b5c5df}
+.order-neon .order-qty button{color:#f2f7ff;border:1px solid #658bd0;background:#101d38;box-shadow:0 0 4px #5685ff66}
+.order-neon .order-remove{color:#c4d4ff}
+.order-neon .order-notes-label{color:#c5d9fa}
+.order-neon .order-scroll textarea{background:#101c36;color:#f7f9ff;border:1px solid #647cdb;box-shadow:0 0 8px #466eff55}
+.order-neon .order-scroll textarea::placeholder{color:#a5b8d4}
+.order-neon .order-footer{border-top:1px solid #6582b1}
+.order-neon .order-footer>div{color:#fff}
+.order-neon .order-footer-actions{display:flex!important;gap:9px;justify-content:space-between;margin-top:11px!important}
+.order-neon .order-footer-actions button{min-width:0;flex:1;border-radius:25px;padding:10px 5px;font-size:12px;color:#fff;cursor:pointer}
+.order-neon .order-clear{background:transparent;border:1px solid #7196df}
+.order-neon .order-send{background:linear-gradient(100deg,#07a8ed,#5746e8,#b72ce9);border:1px solid #a9caff;box-shadow:0 0 10px #238fff88,0 0 12px #ae39ff66}
+.order-neon .order-footer-actions button:disabled{opacity:.4;cursor:default}
+.order-neon .order-notice{color:#c6d7fa}
+.order-neon.order-closing .order-thread{animation:orderThreadOut .54s ease forwards}
+@keyframes orderNeonFlow{from{stroke-dashoffset:0}to{stroke-dashoffset:-72}}
+@media(max-width:380px){.order-neon .order-shape{width:93vw;padding-left:17px;padding-right:17px}.order-neon .order-heading h2{font-size:25px}.order-neon .order-footer-actions button{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.order-neon .order-neon-thread .order-neon-filament{animation:none!important}}
