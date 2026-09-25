@@ -7,32 +7,30 @@ export default function OrderOrbit({open,closing,onClose,items,onChangeQty,onRem
  const count=items.reduce((n,i)=>n+i.qty,0),total=items.reduce((n,i)=>n+i.qty*i.price,0);
  useLayoutEffect(()=>{
   if(!open)return;
-  let frame=0;
+  let raf=0;
   const measure=()=>{
    const button=document.querySelector('.dock-order'),shape=shapeRef.current;
    if(!button||!shape)return;
    const a=button.getBoundingClientRect(),b=shape.getBoundingClientRect();
-   setThread({x:a.left+a.width/2,y:a.top+7,top:b.bottom-4,w:window.innerWidth,h:window.innerHeight});
+   const next={x:a.left+a.width/2,y:a.top+8,top:b.bottom-12,w:window.innerWidth,h:window.innerHeight};
+   setThread(prev=>prev&&Object.keys(next).every(k=>Math.abs(prev[k]-next[k])<.5)?prev:next);
   };
-  const refresh=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(measure)};
-  const started=performance.now();
-  const track=now=>{measure();if(now-started<700)frame=requestAnimationFrame(track)};
-  frame=requestAnimationFrame(track);
-  const observer=typeof ResizeObserver!=='undefined'?new ResizeObserver(refresh):null;
-  if(observer&&shapeRef.current)observer.observe(shapeRef.current);
-  window.addEventListener('resize',refresh);
-  window.addEventListener('scroll',refresh,true);
-  return()=>{cancelAnimationFrame(frame);observer?.disconnect();window.removeEventListener('resize',refresh);window.removeEventListener('scroll',refresh,true)};
- },[open,closing,items.length]);
+  const track=()=>{measure();raf=requestAnimationFrame(track)};
+  raf=requestAnimationFrame(track);
+  return()=>cancelAnimationFrame(raf);
+ },[open]);
  if(!open)return null;
- const filament=(offset)=>{if(!thread)return '';const {x,y,top}=thread;const endX=x+offset*.25,startX=x+offset;const span=Math.max(1,y-top);return 'M '+startX+' '+y+' C '+(startX+offset*.55)+' '+(y-span*.23)+', '+(endX-offset*.8)+' '+(top+span*.31)+', '+endX+' '+top};
+ const filament=(offset)=>{if(!thread)return '';const {x,y,top}=thread;const gap=Math.max(1,y-top);return 'M '+(x+offset)+' '+y+' C '+(x+offset*1.2)+' '+(y-gap*.28)+', '+(x+offset*.65)+' '+(top+gap*.36)+', '+x+' '+top};
+ const contour='M 200 8 C 163 8 154 47 121 56 C 55 67 30 111 31 173 C 29 224 13 254 18 324 C 20 380 34 403 35 465 C 33 534 58 568 113 574 C 160 578 168 606 185 636 C 191 649 194 664 200 690 C 206 664 209 649 215 636 C 232 606 240 578 287 574 C 342 568 367 534 365 465 C 366 403 380 380 382 324 C 387 254 371 224 369 173 C 370 111 345 67 279 56 C 246 47 237 8 200 8 Z';
  return <div className={'order-orbit order-neon '+(closing?'order-closing':'')} onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
-  {thread&&<><svg className="order-thread order-neon-thread" viewBox={'0 0 '+thread.w+' '+thread.h} aria-hidden="true" preserveAspectRatio="none">
+  <svg className="order-thread order-neon-thread" viewBox={'0 0 '+window.innerWidth+' '+window.innerHeight} aria-hidden="true" preserveAspectRatio="none">
    <defs><linearGradient id="orderNeonGradient" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#20dfff"/><stop offset="52%" stopColor="#478bff"/><stop offset="100%" stopColor="#bd4dff"/></linearGradient><filter id="orderNeonGlow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3"/></filter></defs>
-   {[-17,-7,7,17].map((offset,i)=><g key={offset}><path d={filament(offset)} className="order-neon-glow"/><path d={filament(offset)} className="order-neon-filament" style={{animationDelay:i*.12+'s'}}/></g>)}
-   <circle cx={thread.x} cy={thread.y} r="6" className="order-neon-origin"/><circle cx={thread.x} cy={thread.top} r="4" className="order-neon-origin"/>
-  </svg><div className="order-neon-dock-light" style={{left:thread.x,top:thread.y+19}} aria-hidden="true"><span>◯</span></div></>}
-  <section ref={shapeRef} className="order-shape" role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--order-height':Math.min(77,Math.max(49,49+items.length*6))+'dvh'}}>
+   {thread&&[-10,-3,3,10].map((offset,i)=><g key={offset}><path d={filament(offset)} className="order-neon-glow"/><path d={filament(offset)} className="order-neon-filament" style={{animationDelay:i*.12+'s'}}/></g>)}
+   {thread&&<><circle cx={thread.x} cy={thread.y} r="5" className="order-neon-origin"/><circle cx={thread.x} cy={thread.top} r="4" className="order-neon-origin"/></>}
+  </svg>
+  <div className="order-neon-dock-light" aria-hidden="true"><span>◯</span></div>
+  <section ref={shapeRef} className="order-shape" role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--order-height':Math.min(78,Math.max(57,57+items.length*5))+'dvh'}}>
+   <svg className="order-organic-outline" viewBox="0 0 400 700" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="orderOrganicGradient" x1="0%" y1="15%" x2="100%" y2="85%"><stop offset="0%" stopColor="#00dfff"/><stop offset="46%" stopColor="#4b79ff"/><stop offset="100%" stopColor="#d448ff"/></linearGradient><filter id="orderOrganicGlow" x="-30%" y="-20%" width="160%" height="140%"><feGaussianBlur stdDeviation="4"/></filter></defs><path d={contour} fill="none" stroke="#338dff" strokeWidth="7" opacity=".7" filter="url(#orderOrganicGlow)"/><path d={contour} fill="url(#orderOrganicFill)" stroke="url(#orderOrganicGradient)" strokeWidth="1.5"/><defs><linearGradient id="orderOrganicFill" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#09162e"/><stop offset="55%" stopColor="#10152c"/><stop offset="100%" stopColor="#090f22"/></linearGradient></defs><path d={contour} fill="none" stroke="#bc5cff" strokeWidth=".6" opacity=".75" transform="translate(2 2)"/></svg>
    <button type="button" className="order-close" aria-label="Cerrar pedido" onClick={onClose}>×</button>
    <header className="order-heading"><small>LA TERRAZA · MESA 1</small><h2>Mi pedido</h2><p>{count} {count===1?'producto':'productos'} · Borrador</p></header>
    <div className="order-scroll">
