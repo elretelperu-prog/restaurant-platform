@@ -662,3 +662,92 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .dish-neon-thread .dish-neon-particle{fill:#d9faff;stroke:#46caff;stroke-width:.45;filter:drop-shadow(0 0 3px #28dfff) drop-shadow(0 0 4px #a64dff)}
 .theme-futurista .dish-neon-thread .dish-neon-origin{fill:#e2faff;filter:drop-shadow(0 0 4px #27dfff)}
 .theme-futurista .dish-orbit.closing .dish-thread{animation:none!important;opacity:1!important}
+
+/* V11.0 — Cristal Moderno: visual skin ONLY; original PageFlip, pinch, pan,
+   dish data/photos/prices and order interactions remain untouched. */
+.theme-futurista .app{
+ background:radial-gradient(ellipse at 50% 9%,#172e54 0%,#091a34 44%,#040c1d 100%)!important;
+ color:#f4f8ff;
+}
+.theme-futurista .top{position:relative;z-index:4;color:#f8faff}
+.theme-futurista .brand b{font-family:Georgia,serif;letter-spacing:.16em;text-shadow:0 0 9px #6f9aff77}
+.theme-futurista .brand small{color:#bfd6ff;letter-spacing:.26em}
+.theme-futurista .pill{border-color:#419aff!important;background:#071b39b8;color:#f1f7ff;box-shadow:0 0 8px #267bff44}
+.theme-futurista .stage{position:relative}
+.theme-futurista .bookWrap:before{
+ content:"";position:absolute;inset:1.5% .1%;z-index:0;pointer-events:none;
+ border:1px solid #3b95ff;border-radius:12px;
+ background:linear-gradient(90deg,#04122e,#153e78 49%,#05142e 51%,#04122e);
+ box-shadow:0 0 10px #2385ff,0 0 23px #1953ce88,inset 0 0 12px #4f9dff;
+}
+.theme-futurista .book{position:relative;z-index:1}
+.theme-futurista .page{
+ color:#122447!important;
+ border:1px solid #70b8ff!important;
+ background:
+  radial-gradient(ellipse at 76% 9%,#fffdf8d9,transparent 33%),
+  repeating-linear-gradient(123deg,transparent 0 36px,#4098d00b 37px 38px,transparent 39px 77px),
+  linear-gradient(100deg,#b5d6f5 0%,#e4f1ff 12%,#f5faff 49%,#e4f2ff 83%,#b0d5f6 100%)!important;
+ box-shadow:inset 0 0 11px #4e9ce266,inset 0 0 0 3px #f6fbffad,inset 0 0 0 4px #d6aa6a88,0 0 9px #2e91ff88!important;
+}
+.theme-futurista .page:before{
+ content:"";position:absolute;inset:5px 5px 8px;z-index:1;pointer-events:none;
+ border:1px solid #c69b58a8;border-radius:4px;
+ background:
+  linear-gradient(135deg,#bc8e4b 0 1px,transparent 1px) top left/23px 23px no-repeat,
+  linear-gradient(225deg,#bc8e4b 0 1px,transparent 1px) top right/23px 23px no-repeat,
+  linear-gradient(45deg,#bc8e4b 0 1px,transparent 1px) bottom left/23px 23px no-repeat,
+  linear-gradient(315deg,#bc8e4b 0 1px,transparent 1px) bottom right/23px 23px no-repeat;
+}
+.theme-futurista .page:after{
+ content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.58;
+ background:
+  radial-gradient(ellipse at 0% 4%,#3587d644,transparent 28%),
+  radial-gradient(ellipse at 100% 95%,#2d91ed36,transparent 28%),
+  repeating-linear-gradient(117deg,transparent 0 55px,#317ab916 56px,#317ab900 57px,transparent 104px);
+}
+.theme-futurista .page h2{
+ color:#10254c!important;font-style:normal!important;font-family:Georgia,serif!important;
+ letter-spacing:.055em!important;text-transform:uppercase;
+ text-shadow:0 1px 0 #fff!important;
+}
+.theme-futurista .page .sub{color:#42618c!important;letter-spacing:.17em!important}
+.theme-futurista .page .item{
+ border-bottom:1px solid #6593bb65!important;
+ color:#13294c!important;
+ border-radius:2px;
+}
+.theme-futurista .page .item:focus-visible{outline:2px solid #1378e8;outline-offset:-2px}
+.theme-futurista .page .nm{color:#13284d!important;text-shadow:0 1px 0 #ffffffa8!important}
+.theme-futurista .page .ds{color:#49627d!important}
+.theme-futurista .page .thumb{
+ border-radius:18%!important;border:1px solid #caa267!important;
+ box-shadow:0 1px 5px #071f4566,0 0 0 1px #f5fbff!important;
+ filter:saturate(1.12) contrast(1.06)!important;
+}
+.theme-futurista .page .price{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:clamp(28px,4.25dvh,38px)!important;height:clamp(28px,4.25dvh,38px)!important;
+ border-radius:50%!important;
+ padding:1px!important;
+ background:radial-gradient(circle at 35% 25%,#204d99,#06183d 72%)!important;
+ color:#fff!important;border:1px solid #8fe6ff!important;
+ font:700 clamp(7px,.98dvh,9px) Georgia,serif!important;
+ letter-spacing:-.3px!important;white-space:nowrap!important;
+ text-shadow:0 0 3px #bdeaff!important;
+ box-shadow:0 0 0 1px #287dff,0 0 7px #127cff,inset 0 0 7px #246cf5!important;
+ flex-shrink:0!important;
+}
+.theme-futurista .page .pg{color:#41658d!important}
+.theme-futurista .hint{color:#8faed5!important}
+.theme-futurista .dock{
+ background:linear-gradient(100deg,#07162de8,#102448ee,#07162de8)!important;
+ border:1px solid #3b82f4!important;color:#f6f9ff!important;
+ box-shadow:0 0 11px #167bff66,inset 0 0 8px #3975d844!important;
+}
+.theme-futurista .dock-order{border-color:#54a6ff!important;box-shadow:0 0 8px #278aff88!important}
+@media(max-width:390px){
+ .theme-futurista .page{padding-left:7px!important;padding-right:7px!important}
+ .theme-futurista .page .item{gap:3px!important}
+ .theme-futurista .page .price{width:29px!important;height:29px!important;font-size:7px!important}
+}
