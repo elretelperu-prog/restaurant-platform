@@ -760,3 +760,38 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  text-shadow:0 0 2px #bdeaffb3!important;
  box-shadow:0 0 0 1px #287dffb3,0 0 5px #127cffb3,inset 0 0 5px #246cf5b3!important;
 }
+
+/* V11.3 — Minimalista: the selected option-2 blue angular price label,
+   identical for every dish on all four physical book pages. No menu mechanics change. */
+.theme-minimalista .page .price{
+ position:relative!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:clamp(37px,5.7dvh,48px)!important;
+ min-width:37px!important;
+ height:clamp(23px,3.25dvh,29px)!important;
+ padding:0 3px!important;
+ border:0!important;border-radius:0!important;
+ clip-path:polygon(0 50%,18% 5%,81% 5%,100% 50%,81% 95%,18% 95%)!important;
+ background:linear-gradient(115deg,#62d6ff 0%,#89e5ff 17%,#297fc3 50%,#7cdfff 84%,#49b9ff 100%)!important;
+ color:#f6fbff!important;
+ font:700 clamp(7px,.98dvh,9px) Georgia,serif!important;
+ white-space:nowrap!important;letter-spacing:-.25px!important;
+ text-shadow:0 0 2px #bcefff!important;
+ box-shadow:none!important;
+ isolation:isolate!important;
+ flex-shrink:0!important;
+}
+.theme-minimalista .page .price:before{
+ content:"";position:absolute;z-index:-1;inset:1px;
+ clip-path:polygon(0 50%,18% 5%,81% 5%,100% 50%,81% 95%,18% 95%);
+ background:linear-gradient(115deg,#153c63,#0b2340 65%,#183d67);
+}
+.theme-minimalista .page .price:after{
+ content:"";position:absolute;z-index:-1;inset:3px 2px;
+ background:radial-gradient(ellipse at center,#2c7cb055,transparent 75%);
+ pointer-events:none;
+}
+@media(max-width:390px){
+ .theme-minimalista .page .price{width:37px!important;min-width:37px!important;height:23px!important;font-size:7px!important}
+ .theme-minimalista .page .item{gap:4px!important}
+}
