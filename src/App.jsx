@@ -1,5 +1,7 @@
 import React,{useState} from 'react'; import OrderOrbit from './components/OrderOrbit.jsx'; import MenuBook from './components/MenuBook.jsx'; import BottomNavigation from './components/BottomNavigation.jsx';
 export default function App(){
+ const [theme,setTheme]=useState(()=>new URLSearchParams(window.location.search).get('tema')==='minimalista'?'minimalista':'futurista');
+ const switchTheme=next=>{if(next===theme)return;setTheme(next);const url=new URL(window.location.href);url.searchParams.set('tema',next);window.history.replaceState(null,'',url.pathname+url.search+url.hash)};
  const [selected,setSelected]=useState(null),[qty,setQty]=useState(1),[items,setItems]=useState([]),[closing,setClosing]=useState(false);
  const [orderOpen,setOrderOpen]=useState(false),[orderClosing,setOrderClosing]=useState(false),[orderNotes,setOrderNotes]=useState('');
  const count=items.reduce((n,item)=>n+item.qty,0);
@@ -29,7 +31,7 @@ export default function App(){
   setBubblePos({x,y});
  };
  const endDrag=e=>{if(drag?.id===e.pointerId)setDrag(null)};
- return <><main className={'app '+(selected?'dish-open':'')}><div className="top"><div className="pill">Mesa 1</div><div className="brand"><b>LA TERRAZA</b><small>DEMO · PAGE CURL ENGINE</small></div><div className="pill">ES | EN</div></div><MenuBook onDish={choose} popupOpen={Boolean(selected)}/><div className="hint">Toma una esquina de la hoja y arrástrala lentamente. El pliegue sigue tu dedo en ambos sentidos.</div></main><BottomNavigation count={count} onOrder={openOrder} orderOpen={orderOpen}/>
+ return <div className={'restaurant-theme theme-'+theme}><main className={'app '+(selected?'dish-open':'')}><div className="top"><div className="pill">Mesa 1</div><div className="brand"><b>LA TERRAZA</b><small>DEMO · PAGE CURL ENGINE</small></div><div className="pill">ES | EN</div></div><div className="theme-picker" role="group" aria-label="Diseño de demostración"><button type="button" className={theme==='minimalista'?'active':''} aria-pressed={theme==='minimalista'} onClick={()=>switchTheme('minimalista')}>Minimalista</button><button type="button" className={theme==='futurista'?'active':''} aria-pressed={theme==='futurista'} onClick={()=>switchTheme('futurista')}>Futurista</button></div><MenuBook onDish={choose} popupOpen={Boolean(selected)}/><div className="hint">Toma una esquina de la hoja y arrástrala lentamente. El pliegue sigue tu dedo en ambos sentidos.</div></main><BottomNavigation count={count} onOrder={openOrder} orderOpen={orderOpen}/>
  {selected&&<div className={'dish-orbit '+(closing?'closing':'')} onPointerDownCapture={e=>{if(e.target===e.currentTarget){e.preventDefault();e.stopPropagation();cancel()}}} onClickCapture={e=>{if(e.target===e.currentTarget){e.preventDefault();e.stopPropagation()}}} style={{'--anchor-x':selected.x+'px','--anchor-y':selected.y+'px','--bubble-x':bubblePos.x+'px','--bubble-y':bubblePos.y+'px'}}>
    <svg className="dish-thread" aria-hidden="true"><line x1={selected.x} y1={selected.y} x2={bubblePos.x} y2={bubblePos.y}/></svg>
    <div className={'dish-bubble '+(drag?'dragging':'')} style={{left:bubblePos.x,top:bubblePos.y}} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
@@ -41,5 +43,5 @@ export default function App(){
     <button className="confirm" onClick={add}>Añadir al pedido</button>
    </div>
   </div>}
- <OrderOrbit open={orderOpen} closing={orderClosing} onClose={closeOrder} items={items} onChangeQty={changeItem} onRemove={removeItem} notes={orderNotes} onNotes={setOrderNotes}/>
- </>}
+ <OrderOrbit theme={theme} open={orderOpen} closing={orderClosing} onClose={closeOrder} items={items} onChangeQty={changeItem} onRemove={removeItem} notes={orderNotes} onNotes={setOrderNotes}/>
+ </></div>}
