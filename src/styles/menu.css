@@ -761,37 +761,36 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  box-shadow:0 0 0 1px #287dffb3,0 0 5px #127cffb3,inset 0 0 5px #246cf5b3!important;
 }
 
-/* V11.3 — Minimalista: the selected option-2 blue angular price label,
-   identical for every dish on all four physical book pages. No menu mechanics change. */
-.theme-minimalista .page .price{
+/* V11.4 — restore Minimalista exactly to its pre-V11.3 plain paper prices.
+   Apply the approved option-2 blue connector tag ONLY to Futurista. */
+.theme-futurista .page .price{
  position:relative!important;
  display:flex!important;align-items:center!important;justify-content:center!important;
- width:clamp(37px,5.7dvh,48px)!important;
- min-width:37px!important;
- height:clamp(23px,3.25dvh,29px)!important;
- padding:0 3px!important;
+ width:clamp(39px,5.9dvh,49px)!important;
+ min-width:39px!important;
+ height:clamp(24px,3.5dvh,30px)!important;
+ padding:0 2px 0 5px!important;
  border:0!important;border-radius:0!important;
- clip-path:polygon(0 50%,18% 5%,81% 5%,100% 50%,81% 95%,18% 95%)!important;
- background:linear-gradient(115deg,#62d6ff 0%,#89e5ff 17%,#297fc3 50%,#7cdfff 84%,#49b9ff 100%)!important;
- color:#f6fbff!important;
- font:700 clamp(7px,.98dvh,9px) Georgia,serif!important;
- white-space:nowrap!important;letter-spacing:-.25px!important;
- text-shadow:0 0 2px #bcefff!important;
+ clip-path:polygon(0 50%,20% 5%,80% 5%,100% 50%,80% 95%,20% 95%)!important;
+ background:linear-gradient(115deg,#6edaff 0%,#a1eaff 20%,#358bd6 50%,#91e6ff 85%,#53baff 100%)!important;
+ color:#f8fbff!important;
+ font:700 clamp(7px,1.04dvh,9.3px) Georgia,serif!important;
+ letter-spacing:-.25px!important;white-space:nowrap!important;
+ text-shadow:0 0 2px #bdeaff!important;
  box-shadow:none!important;
- isolation:isolate!important;
- flex-shrink:0!important;
+ isolation:isolate!important;flex-shrink:0!important;
 }
-.theme-minimalista .page .price:before{
+.theme-futurista .page .price:before{
  content:"";position:absolute;z-index:-1;inset:1px;
- clip-path:polygon(0 50%,18% 5%,81% 5%,100% 50%,81% 95%,18% 95%);
- background:linear-gradient(115deg,#153c63,#0b2340 65%,#183d67);
+ clip-path:polygon(0 50%,20% 5%,80% 5%,100% 50%,80% 95%,20% 95%);
+ background:linear-gradient(115deg,#183d6b,#091d3c 64%,#173e6d);
 }
-.theme-minimalista .page .price:after{
+.theme-futurista .page .price:after{
  content:"";position:absolute;z-index:-1;inset:3px 2px;
  background:radial-gradient(ellipse at center,#2c7cb055,transparent 75%);
  pointer-events:none;
 }
 @media(max-width:390px){
- .theme-minimalista .page .price{width:37px!important;min-width:37px!important;height:23px!important;font-size:7px!important}
- .theme-minimalista .page .item{gap:4px!important}
+ .theme-futurista .page .price{width:39px!important;min-width:39px!important;height:24px!important;font-size:7px!important}
+ .theme-futurista .page .item{gap:3px!important}
 }
