@@ -950,3 +950,60 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
   width:39px!important;min-width:39px!important;height:23px!important;
  }
 }
+
+/* V11.9 — ONE unbroken outline for the entire row and its price recess.
+   The SVG path owns the top, right-hand inward price shape, lower return,
+   bottom and left edges. No independent price badge or overlaid triangle. */
+.page .item-integrated-outline{display:none}
+.theme-futurista .page .item{
+ position:relative!important;
+ border:0!important;border-bottom:0!important;
+ padding:2px 3px!important;
+ isolation:isolate!important;
+ overflow:visible!important;
+}
+.theme-futurista .page .item-integrated-outline{
+ display:block!important;position:absolute!important;
+ inset:0!important;width:100%!important;height:100%!important;
+ overflow:visible!important;pointer-events:none!important;
+ z-index:-1!important;fill:none!important;
+ stroke:#5baaf0!important;stroke-width:1.6!important;
+ stroke-linecap:round!important;stroke-linejoin:round!important;
+ filter:drop-shadow(0 0 1px #62baff66)!important;
+}
+.theme-futurista .page .item-integrated-outline circle{
+ fill:#b9ecff!important;stroke:none!important;
+}
+.theme-futurista .page .price-connector{
+ position:relative!important;z-index:1!important;
+ padding:0!important;width:clamp(35px,5.2dvh,46px)!important;
+ min-width:35px!important;height:100%!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ filter:none!important;
+}
+.theme-futurista .page .price-connector:before,
+.theme-futurista .page .price-connector:after{
+ content:none!important;display:none!important;
+}
+.theme-futurista .page .price-connector .price{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-width:0!important;
+ height:clamp(20px,2.8dvh,26px)!important;
+ padding:0 0 0 5px!important;
+ border:0!important;border-radius:0!important;clip-path:none!important;
+ background:none!important;background-image:none!important;
+ background-color:transparent!important;
+ color:#17345a!important;
+ font:700 clamp(7px,1.02dvh,9px) Georgia,serif!important;
+ text-shadow:none!important;box-shadow:none!important;
+ overflow:visible!important;
+}
+.theme-futurista .page .price-connector .price:before,
+.theme-futurista .page .price-connector .price:after{content:none!important;display:none!important}
+@media(max-width:390px){
+ .theme-futurista .page .price-connector{width:35px!important;min-width:35px!important}
+ .theme-futurista .page .price-connector .price{
+  width:100%!important;min-width:0!important;height:20px!important;
+  padding-left:4px!important;font-size:7px!important;
+ }
+}
