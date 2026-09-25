@@ -794,3 +794,48 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  .theme-futurista .page .price{width:39px!important;min-width:39px!important;height:24px!important;font-size:7px!important}
  .theme-futurista .page .item{gap:3px!important}
 }
+
+/* V11.5 — approved option 2: luminous connected price tab, NOT a solid hexagon.
+   Wrapper owns the outside connector so it cannot be clipped by the badge. */
+.page .price-connector{display:inline-flex;align-items:center;justify-content:flex-end;min-width:0}
+.theme-minimalista .page .price-connector{position:static}
+.theme-futurista .page .price-connector{
+ position:relative;isolation:isolate;overflow:visible;
+ padding-left:clamp(6px,1.2dvh,10px);
+ filter:drop-shadow(0 0 2px #38aaff) drop-shadow(0 0 3px #4c8cff88);
+}
+.theme-futurista .page .price-connector:before{
+ content:"";position:absolute;z-index:2;left:0;top:50%;
+ width:clamp(2px,.48dvh,4px);height:clamp(2px,.48dvh,4px);
+ transform:translateY(-50%);border-radius:50%;background:#c4f8ff;
+ box-shadow:0 0 4px #27dfff;
+}
+.theme-futurista .page .price-connector:after{
+ content:"";position:absolute;z-index:1;
+ left:clamp(2px,.48dvh,4px);top:50%;
+ width:clamp(5px,.85dvh,8px);height:1px;
+ background:#8deaff;transform:translateY(-50%);
+ box-shadow:0 0 3px #46bfff;
+}
+.theme-futurista .page .price-connector .price{
+ position:relative!important;z-index:1;
+ width:clamp(36px,5.4dvh,48px)!important;min-width:36px!important;
+ height:clamp(22px,3.1dvh,28px)!important;
+ padding:0 3px 0 5px!important;
+ border:0!important;border-radius:0!important;
+ clip-path:polygon(0 50%,19% 5%,77% 5%,91% 12%,100% 50%,91% 88%,77% 95%,19% 95%)!important;
+ background:linear-gradient(125deg,#8de9ff,#4eb8ff 20%,#73d6ff 49%,#4aabff 79%,#a0efff)!important;
+ color:#f8fbff!important;font:700 clamp(7px,1.02dvh,9px) Georgia,serif!important;
+ text-shadow:0 0 2px #bdeaff!important;box-shadow:none!important;
+ isolation:isolate!important;
+}
+.theme-futurista .page .price-connector .price:before{
+ content:"";position:absolute;z-index:-1;inset:1px;
+ clip-path:polygon(0 50%,19% 5%,77% 5%,91% 12%,100% 50%,91% 88%,77% 95%,19% 95%);
+ background:linear-gradient(110deg,#0b284d,#071b3a 65%,#14335e);
+}
+.theme-futurista .page .price-connector .price:after{display:none!important}
+@media(max-width:390px){
+ .theme-futurista .page .price-connector{padding-left:6px}
+ .theme-futurista .page .price-connector .price{width:36px!important;min-width:36px!important;height:22px!important;font-size:7px!important}
+}
