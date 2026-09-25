@@ -598,3 +598,20 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  .order-neon .order-line-top{font-size:12px!important}
  .order-neon .order-footer-actions button{font-size:10px!important}
 }
+
+/* V9.5 — continuous, fine fibre-optic connection matching the approved reference. */
+.order-neon .order-neon-thread .order-neon-filament{
+ stroke:url(#orderNeonGradient)!important;stroke-width:.95!important;
+ stroke-dasharray:none!important;animation:none!important;opacity:1!important;
+ filter:drop-shadow(0 0 2px #488dff);
+}
+.order-neon .order-neon-thread .order-neon-glow{
+ stroke:#498dff!important;stroke-width:3!important;opacity:.45!important;
+ filter:url(#orderNeonGlow)!important;
+}
+.order-neon .order-neon-particle{
+ fill:#d9faff;stroke:#46caff;stroke-width:.45;
+ filter:drop-shadow(0 0 3px #28dfff) drop-shadow(0 0 4px #a64dff);
+}
+.order-neon .order-neon-origin{fill:#e2faff!important;filter:drop-shadow(0 0 4px #27dfff)!important}
+.order-neon.order-closing .order-thread{animation:none!important;opacity:1!important}
