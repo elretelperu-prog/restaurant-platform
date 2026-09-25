@@ -752,11 +752,11 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  .theme-futurista .page .price{width:29px!important;height:29px!important;font-size:7px!important}
 }
 
-/* V11.1 — soften ONLY the futuristic menu price badges for visual comfort. */
+/* V11.2 — price badges: original V11.0 blue, with glow reduced by ~30%. */
 .theme-futurista .page .price{
- background:radial-gradient(circle at 35% 25%,#405f91,#263d66 74%)!important;
- color:#f7f9ff!important;
- border:1px solid #8eafd5!important;
- text-shadow:none!important;
- box-shadow:0 0 0 1px #5277ad77,0 0 3px #4675b455,inset 0 0 4px #92add044!important;
+ background:radial-gradient(circle at 35% 25%,#204d99,#06183d 72%)!important;
+ color:#fff!important;
+ border:1px solid #8fe6ffb3!important;
+ text-shadow:0 0 2px #bdeaffb3!important;
+ box-shadow:0 0 0 1px #287dffb3,0 0 5px #127cffb3,inset 0 0 5px #246cf5b3!important;
 }
