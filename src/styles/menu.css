@@ -615,3 +615,41 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 }
 .order-neon .order-neon-origin{fill:#e2faff!important;filter:drop-shadow(0 0 4px #27dfff)!important}
 .order-neon.order-closing .order-thread{animation:none!important;opacity:1!important}
+
+/* V10.0 — one ordering engine, two independent presentation themes. */
+.restaurant-theme{display:contents}
+.theme-picker{position:fixed;z-index:35;top:62px;left:50%;transform:translateX(-50%);display:flex;gap:3px;padding:3px;border-radius:30px;background:#181b24d9;border:1px solid #ffffff50;box-shadow:0 3px 12px #0005;white-space:nowrap}
+.theme-picker button{font:600 11px Arial,sans-serif;border:0;border-radius:25px;padding:6px 11px;color:#ddd;background:transparent;cursor:pointer}
+.theme-picker button.active{background:#f5e9d0;color:#292017}
+.theme-futurista .theme-picker button.active{background:linear-gradient(105deg,#19c5ec,#7656e9);color:#fff}
+.theme-futurista .dish-bubble{background:radial-gradient(circle at 28% 15%,#263657,#10182f 72%)!important;color:#f7f8ff!important;border:1.5px solid #668fff!important;box-shadow:0 0 13px #2c9aff,0 0 25px #9b4bff88,inset 0 0 16px #3567cc66!important}
+.theme-futurista .dish-bubble h2,.theme-futurista .dish-bubble .bubble-price{color:#f7f8ff!important;text-shadow:0 0 7px #936cff}
+.theme-futurista .dish-bubble .bubble-close{color:#f7f8ff!important}
+.theme-futurista .dish-bubble .qty button{color:#eaf7ff;background:#172a48;border-color:#65aaff;box-shadow:0 0 6px #3b9aff77}
+.theme-futurista .dish-bubble .confirm{background:linear-gradient(100deg,#11aee6,#7444e7)!important;color:#fff!important;box-shadow:0 0 10px #448dff88}
+.theme-futurista .dish-thread line{stroke:#52aaff!important;stroke-width:1.15!important;stroke-dasharray:3 5!important;filter:drop-shadow(0 0 3px #7b5bff)}
+/* Restore the original cream dish circle in the minimal theme. */
+.theme-minimalista .dish-bubble{background:radial-gradient(circle at 30% 20%,#fffaf0,#f1dfbd)!important;color:#241b12!important;border:1px solid #b78b4b!important;box-shadow:0 10px 25px #0004!important}
+.theme-minimalista .dish-thread line{stroke:#b78b4b!important;stroke-width:1.5!important;stroke-dasharray:3 3!important;filter:none!important}
+/* The same order markup uses a classic, gently oval cream shell. */
+.order-minimal{background:rgba(20,16,10,.22);isolation:isolate}
+.order-minimal .order-organic-outline,.order-minimal .order-neon-dock-light{display:none!important}
+.order-minimal .order-thread{z-index:2!important}
+.order-minimal .order-neon-thread .order-neon-glow,.order-minimal .order-neon-thread .order-neon-particle,.order-minimal .order-neon-origin{display:none!important}
+.order-minimal .order-neon-thread .order-neon-filament{stroke:#ad8753!important;stroke-width:1.2!important;stroke-dasharray:2 6!important;animation:none!important;filter:none!important}
+.order-minimal .order-shape{z-index:3!important;width:min(91vw,440px)!important;height:var(--order-height)!important;max-height:calc(100dvh - 135px)!important;min-height:350px!important;box-sizing:border-box!important;padding:49px 29px 35px!important;border:1.5px solid #b78b4b!important;border-radius:43% 45% 42% 44% / 15% 16% 14% 15%!important;background:radial-gradient(ellipse at 30% 20%,#fffaf0,#f0dfbf 78%,#e0c599)!important;color:#241b12!important;box-shadow:0 12px 34px #0007,inset 0 0 16px #fff8!important;overflow:hidden!important}
+.order-minimal .order-close{top:12px!important;color:#241b12!important;background:transparent!important;border:0!important;box-shadow:none!important}
+.order-minimal .order-heading{border-bottom:1px solid #bfa67d!important;padding:15px 0 10px!important}
+.order-minimal .order-heading h2{color:#241b12!important;text-shadow:none!important}
+.order-minimal .order-heading small,.order-minimal .order-heading p,.order-minimal .order-line>small,.order-minimal .order-notes-label{color:#66533b!important}
+.order-minimal .order-line,.order-minimal .order-footer{border-color:#bfa67d!important}
+.order-minimal .order-qty button{background:#fff8e8!important;color:#241b12!important;border:1px solid #b78b4b!important;box-shadow:none!important}
+.order-minimal .order-remove{color:#694b33!important}
+.order-minimal .order-scroll textarea{background:#fffaf0!important;color:#241b12!important;border:1px solid #b89d72!important;box-shadow:none!important}
+.order-minimal .order-scroll textarea::placeholder{color:#777!important}
+.order-minimal .order-footer>div{color:#241b12!important}
+.order-minimal .order-footer-actions button{color:#241b12!important;box-shadow:none!important}
+.order-minimal .order-clear{border:1px solid #b78b4b!important;background:transparent!important}
+.order-minimal .order-send{background:#28231e!important;color:#fff!important;border:1px solid #28231e!important}
+.order-minimal .order-notice{color:#66533b!important}
+@media(max-width:380px){.order-minimal .order-shape{width:95vw!important;padding-left:23px!important;padding-right:23px!important}}
