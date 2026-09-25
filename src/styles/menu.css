@@ -1007,3 +1007,9 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
   padding-left:4px!important;font-size:7px!important;
  }
 }
+
+/* V12.0 — adjacent rows share ONE stroke: the preceding row's bottom.
+   Keep only the first row's upper stroke; preserve the integrated price contour. */
+.theme-futurista .page .item + .item .item-integrated-outline .row-top{
+ display:none!important;
+}
