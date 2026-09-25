@@ -44,4 +44,4 @@ export default function App(){
    </div>
   </div>}
  <OrderOrbit theme={theme} open={orderOpen} closing={orderClosing} onClose={closeOrder} items={items} onChangeQty={changeItem} onRemove={removeItem} notes={orderNotes} onNotes={setOrderNotes}/>
- </></div>}
+ </div>}
