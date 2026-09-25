@@ -653,3 +653,12 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .order-minimal .order-send{background:#28231e!important;color:#fff!important;border:1px solid #28231e!important}
 .order-minimal .order-notice{color:#66533b!important}
 @media(max-width:380px){.order-minimal .order-shape{width:95vw!important;padding-left:23px!important;padding-right:23px!important}}
+
+/* V10.1 — dish selection shares the same continuous neon fibre language as Mi pedido. */
+.theme-futurista .dish-neon-thread{overflow:visible!important;opacity:1!important}
+.theme-futurista .dish-neon-thread path{fill:none;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.theme-futurista .dish-neon-thread .dish-neon-filament{stroke:url(#dishNeonGradient);stroke-width:.95;stroke-dasharray:none;opacity:1;filter:drop-shadow(0 0 2px #488dff)}
+.theme-futurista .dish-neon-thread .dish-neon-glow{stroke:#498dff;stroke-width:3;opacity:.45;filter:url(#dishNeonGlow)}
+.theme-futurista .dish-neon-thread .dish-neon-particle{fill:#d9faff;stroke:#46caff;stroke-width:.45;filter:drop-shadow(0 0 3px #28dfff) drop-shadow(0 0 4px #a64dff)}
+.theme-futurista .dish-neon-thread .dish-neon-origin{fill:#e2faff;filter:drop-shadow(0 0 4px #27dfff)}
+.theme-futurista .dish-orbit.closing .dish-thread{animation:none!important;opacity:1!important}
