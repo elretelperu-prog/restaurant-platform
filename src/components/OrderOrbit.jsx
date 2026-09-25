@@ -12,7 +12,7 @@ export default function OrderOrbit({open,closing,onClose,items,onChangeQty,onRem
    const button=document.querySelector('.dock-order'),shape=shapeRef.current;
    if(!button||!shape)return;
    const a=button.getBoundingClientRect(),b=shape.getBoundingClientRect();
-   const next={x:a.left+a.width/2,y:a.top+8,top:b.bottom-12,w:window.innerWidth,h:window.innerHeight};
+   const next={x:a.left+a.width/2,y:a.top+8,tipX:b.left+b.width/2,top:b.top+b.height*690/700,w:window.innerWidth,h:window.innerHeight};
    setThread(prev=>prev&&Object.keys(next).every(k=>Math.abs(prev[k]-next[k])<.5)?prev:next);
   };
   const track=()=>{measure();raf=requestAnimationFrame(track)};
@@ -20,13 +20,13 @@ export default function OrderOrbit({open,closing,onClose,items,onChangeQty,onRem
   return()=>cancelAnimationFrame(raf);
  },[open]);
  if(!open)return null;
- const filament=(offset)=>{if(!thread)return '';const {x,y,top}=thread;const gap=Math.max(1,y-top);return 'M '+(x+offset)+' '+y+' C '+(x+offset*1.2)+' '+(y-gap*.28)+', '+(x+offset*.65)+' '+(top+gap*.36)+', '+x+' '+top};
+ const filament=(offset)=>{if(!thread)return '';const {x,y,tipX,top}=thread;const gap=Math.max(1,y-top);return 'M '+(x+offset)+' '+y+' C '+(x+offset*.9)+' '+(y-gap*.34)+', '+(tipX+offset*.65)+' '+(top+gap*.29)+', '+tipX+' '+top};
  const contour='M 200 8 C 163 8 154 47 121 56 C 55 67 30 111 31 173 C 29 224 13 254 18 324 C 20 380 34 403 35 465 C 33 534 58 568 113 574 C 160 578 168 606 185 636 C 191 649 194 664 200 690 C 206 664 209 649 215 636 C 232 606 240 578 287 574 C 342 568 367 534 365 465 C 366 403 380 380 382 324 C 387 254 371 224 369 173 C 370 111 345 67 279 56 C 246 47 237 8 200 8 Z';
  return <div className={'order-orbit order-neon '+(closing?'order-closing':'')} onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
   <svg className="order-thread order-neon-thread" viewBox={'0 0 '+window.innerWidth+' '+window.innerHeight} aria-hidden="true" preserveAspectRatio="none">
    <defs><linearGradient id="orderNeonGradient" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#20dfff"/><stop offset="52%" stopColor="#478bff"/><stop offset="100%" stopColor="#bd4dff"/></linearGradient><filter id="orderNeonGlow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3"/></filter></defs>
-   {thread&&[-10,-3,3,10].map((offset,i)=><g key={offset}><path d={filament(offset)} className="order-neon-glow"/><path d={filament(offset)} className="order-neon-filament" style={{animationDelay:i*.12+'s'}}/></g>)}
-   {thread&&<><circle cx={thread.x} cy={thread.y} r="5" className="order-neon-origin"/><circle cx={thread.x} cy={thread.top} r="4" className="order-neon-origin"/></>}
+   {thread&&[-5,0,5].map((offset,i)=><g key={offset}><path d={filament(offset)} className="order-neon-glow"/><path d={filament(offset)} className="order-neon-filament"/><circle r={i===1?2.1:1.35} className="order-neon-particle"><animateMotion dur={(1.7+i*.32)+'s'} begin={(i*.38)+'s'} repeatCount="indefinite" path={filament(offset)}/></circle></g>)}
+   {thread&&<><circle cx={thread.x} cy={thread.y} r="4" className="order-neon-origin"/><circle cx={thread.tipX} cy={thread.top} r="4" className="order-neon-origin"/></>}
   </svg>
   <div className="order-neon-dock-light" style={thread?{left:thread.x,top:thread.y+18}:undefined} aria-hidden="true"><span>◯</span></div>
   <section ref={shapeRef} className="order-shape" role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--order-height':Math.min(78,Math.max(57,57+items.length*5))+'dvh'}}>
