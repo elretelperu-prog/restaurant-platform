@@ -1134,3 +1134,26 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 /* V13.4 — the prices/quantity (right) edge recedes, and delete is a bin icon. */
 .order-holo-controls .order-remove{display:inline-flex!important;align-items:center!important;justify-content:center!important}
 .order-holo-controls .order-remove svg{display:block;width:16px;height:16px;flex:none;pointer-events:none}
+
+/* V13.5 — unframed holographic actions, including quantity controls. */
+.order-neon .order-holo-panel .order-holo-add-top,
+.order-neon .order-holo-panel .order-close,
+.order-neon .order-holo-panel .order-holo-footer .order-clear,
+.order-neon .order-holo-panel .order-holo-footer .order-send,
+.order-neon .order-holo-panel .order-holo-controls .order-qty button,
+.order-neon .order-holo-panel .order-holo-controls .order-remove{
+ background:transparent!important;border:0!important;border-radius:0!important;
+ box-shadow:none!important;outline-offset:3px!important;
+}
+.order-neon .order-holo-panel .order-holo-add-top,
+.order-neon .order-holo-panel .order-holo-footer .order-send{color:#b8efff!important;text-shadow:0 0 7px #4ecbff80}
+.order-neon .order-holo-panel .order-holo-footer .order-clear{color:#d9e9f5!important}
+.order-neon .order-holo-panel .order-holo-controls .order-qty button{
+ color:#b6ecff!important;text-shadow:0 0 6px #44c9ff!important;
+ font-size:20px!important;font-weight:500!important;
+}
+.order-neon .order-holo-panel .order-holo-controls .order-qty button:disabled{opacity:.35!important}
+.order-neon .order-holo-panel .order-holo-controls .order-remove,
+.order-neon .order-holo-panel .order-close{color:#d8f4ff!important}
+.order-neon .order-holo-panel .order-holo-controls .order-remove svg{filter:drop-shadow(0 0 3px #39bfff66)}
+.order-neon .order-holo-panel button:focus-visible{outline:2px solid #a6eeff!important;border-radius:4px!important}
