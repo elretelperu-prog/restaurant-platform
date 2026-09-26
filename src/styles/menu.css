@@ -1261,3 +1261,11 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .dish-holo-circle .name-field.empty-name-error:focus-within::after{display:none}
 .dish-orbit.closing .dish-holo-circle{pointer-events:none;animation:bubbleToDishV81 .62s cubic-bezier(.55,.02,.85,.45) forwards!important}
 @media(max-width:430px){.theme-futurista .dish-holo-circle{width:min(59.8vw,264px);padding:22px 18px 18px}}
+
+/* DIAGNÓSTICO TEMPORAL: desactivar solo el desenfoque de los dos cristales y del fondo de Mi pedido. */
+.theme-futurista .dish-holo-circle,
+.order-neon .order-shape.order-holo-panel,
+.order-orbit.order-neon {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
