@@ -94,7 +94,7 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
   return()=>{panel.removeEventListener('click',cancelActionClick,true);panel.removeEventListener('touchstart',start,true);panel.removeEventListener('touchmove',move,true);panel.removeEventListener('touchend',end,true);panel.removeEventListener('touchcancel',end,true);};
  },[open,theme,onClose]);
 
- const count=items.reduce((n,i)=>n+i.qty,0),total=items.reduce((n,i)=>n+i.qty*i.price,0);
+ const count=items.length,total=items.reduce((n,i)=>n+i.qty*i.price,0);
  useLayoutEffect(()=>{
   if(!open)return;
   let raf=0;
