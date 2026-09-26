@@ -1209,3 +1209,7 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  .order-neon .order-holo-panel .order-holo-controls .order-qty button{width:21px!important}
  .order-neon .order-holo-panel .order-holo-controls .order-qty span{width:13px!important;min-width:13px!important}
 }
+
+/* V13.8 — touch gestures are routed explicitly: one finger scrolls, two fingers zoom. */
+.order-neon .order-shape.order-holo-panel,
+.order-neon .order-shape.order-holo-panel .order-holo-scroll{touch-action:none!important;overscroll-behavior:contain!important}
