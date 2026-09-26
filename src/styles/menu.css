@@ -1236,3 +1236,8 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 /* V14.9 — guest name appears beside the table after the first confirmed dish. */
 .table-guest-pill{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13.2px}
 .table-guest-name{font-weight:600;overflow-wrap:anywhere;max-width:min(40vw,180px);font-size:.85em}
+
+/* V15.0 — enlarge only the three futuristic order action labels by 25%. */
+.order-neon .order-holo-panel .order-holo-add-top{font-size:10px!important}
+.order-neon .order-holo-panel .order-holo-footer .order-clear,
+.order-neon .order-holo-panel .order-holo-footer .order-send{font-size:9.75px!important}
