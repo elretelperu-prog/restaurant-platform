@@ -13,7 +13,7 @@ export default function App(){
  const validGuestName=value=>{const parts=value.trim().split(/\s+/);return parts.length>=2&&parts.every(part=>/^[\p{L}\p{M}]+$/u.test(part))};
  const choose=d=>{setClosing(false);setSelected(d);setQty(1);setCustomerName('');setNameError(false);setBubblePos({x:window.innerWidth/2,y:window.innerHeight*.47})};
  const finishClose=()=>{setClosing(true);setTimeout(()=>{setSelected(null);setClosing(false)},620)};
- const add=()=>{if(closing)return;if(!validGuestName(customerName)){setNameError(true);setBlinkKey(k=>k+1);return;}setNameError(false);setItems(current=>{const name=customerName.trim().replace(/\s+/g,' ');const key=selected.name+'|'+name;const index=current.findIndex(item=>item.key===key);if(index<0)return [...current,{key,name:selected.name,guest:name,price:Number(selected.price),qty}];return current.map((item,i)=>i===index?{...item,qty:item.qty+qty}:item)});finishClose()};
+ const add=()=>{if(closing)return;if(!validGuestName(customerName)){setNameError(true);setBlinkKey(k=>k+1);return;}setNameError(false);setItems(current=>{const name=customerName.trim().replace(/\s+/g,' ');const key=selected.name;const index=current.findIndex(item=>item.name===selected.name);if(index<0)return [...current,{key,name:selected.name,guest:name,price:Number(selected.price),qty}];return current.map((item,i)=>i===index?{...item,qty:item.qty+qty}:item)});finishClose()};
  const cancel=()=>{if(!closing)finishClose()};
  const openOrder=()=>{if(selected||orderClosing)return;setOrderOpen(true)};
  const closeOrder=()=>{if(orderClosing)return;setOrderClosing(true);setTimeout(()=>{setOrderOpen(false);setOrderClosing(false)},540)};
