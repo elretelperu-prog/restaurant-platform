@@ -8,15 +8,33 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
  const [orderZoom,setOrderZoom]=useState(1);
  const zoomRef=useRef(1);
  useEffect(()=>{if(!open){zoomRef.current=1;setOrderZoom(1);return;}if(theme!=='futurista')return;
-  const el=shapeRef.current;if(!el)return;
-  let startDistance=0,startZoom=1;
+  const panel=shapeRef.current, list=panel?.querySelector('.order-holo-scroll');if(!panel||!list)return;
+  let gesture=null;
   const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
-  const begin=e=>{if(e.touches.length===2){startDistance=distance(e.touches);startZoom=zoomRef.current;}};
-  const move=e=>{if(e.touches.length!==2)return;e.preventDefault();e.stopPropagation();if(!startDistance){startDistance=distance(e.touches);startZoom=zoomRef.current;}const next=Math.max(1,Math.min(1.65,startZoom*distance(e.touches)/startDistance));zoomRef.current=next;setOrderZoom(next);};
-  const end=e=>{if(e.touches.length<2)startDistance=0;};
-  el.addEventListener('touchstart',begin,{passive:true});el.addEventListener('touchmove',move,{passive:false});el.addEventListener('touchend',end,{passive:true});el.addEventListener('touchcancel',end,{passive:true});
-  return()=>{el.removeEventListener('touchstart',begin);el.removeEventListener('touchmove',move);el.removeEventListener('touchend',end);el.removeEventListener('touchcancel',end);};
+  const start=e=>{
+   if(e.touches.length>=2){gesture={mode:'pinch',distance:Math.max(1,distance(e.touches)),zoom:zoomRef.current};}
+   else if(e.touches.length===1){gesture={mode:'scroll',y:e.touches[0].clientY,scroll:list.scrollTop};}
+  };
+  const move=e=>{
+   if(e.touches.length>=2){
+    e.preventDefault();e.stopPropagation();
+    if(!gesture||gesture.mode!=='pinch'){gesture={mode:'pinch',distance:Math.max(1,distance(e.touches)),zoom:zoomRef.current};return;}
+    const next=Math.max(1,Math.min(1.65,gesture.zoom*distance(e.touches)/gesture.distance));
+    zoomRef.current=next;setOrderZoom(next);return;
+   }
+   if(e.touches.length===1&&gesture?.mode==='scroll'){
+    e.preventDefault();e.stopPropagation();
+    list.scrollTop=gesture.scroll+gesture.y-e.touches[0].clientY;
+   }
+  };
+  const end=e=>{if(e.touches.length===0)gesture=null;else if(e.touches.length===1)gesture={mode:'scroll',y:e.touches[0].clientY,scroll:list.scrollTop};};
+  panel.addEventListener('touchstart',start,{passive:true,capture:true});
+  panel.addEventListener('touchmove',move,{passive:false,capture:true});
+  panel.addEventListener('touchend',end,{passive:true,capture:true});
+  panel.addEventListener('touchcancel',end,{passive:true,capture:true});
+  return()=>{panel.removeEventListener('touchstart',start,true);panel.removeEventListener('touchmove',move,true);panel.removeEventListener('touchend',end,true);panel.removeEventListener('touchcancel',end,true);};
  },[open,theme]);
+
  const count=items.reduce((n,i)=>n+i.qty,0),total=items.reduce((n,i)=>n+i.qty*i.price,0);
  useLayoutEffect(()=>{
   if(!open)return;
