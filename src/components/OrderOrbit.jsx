@@ -1,10 +1,22 @@
-import React,{useLayoutEffect,useRef,useState} from 'react';
+import React,{useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {dishImages} from '../data/la-terraza.js';
 const money=n=>'S/ '+Number(n).toFixed(2);
 export default function OrderOrbit({theme='futurista',open,closing,onClose,items,onChangeQty,onRemove,notes,onNotes}){
  const shapeRef=useRef(null);
  const [thread,setThread]=useState(null);
  const [confirmNotice,setConfirmNotice]=useState(false);
+ const [orderZoom,setOrderZoom]=useState(1);
+ const zoomRef=useRef(1);
+ useEffect(()=>{if(!open){zoomRef.current=1;setOrderZoom(1);return;}if(theme!=='futurista')return;
+  const el=shapeRef.current;if(!el)return;
+  let startDistance=0,startZoom=1;
+  const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+  const begin=e=>{if(e.touches.length===2){startDistance=distance(e.touches);startZoom=zoomRef.current;}};
+  const move=e=>{if(e.touches.length!==2)return;e.preventDefault();e.stopPropagation();if(!startDistance){startDistance=distance(e.touches);startZoom=zoomRef.current;}const next=Math.max(1,Math.min(1.65,startZoom*distance(e.touches)/startDistance));zoomRef.current=next;setOrderZoom(next);};
+  const end=e=>{if(e.touches.length<2)startDistance=0;};
+  el.addEventListener('touchstart',begin,{passive:true});el.addEventListener('touchmove',move,{passive:false});el.addEventListener('touchend',end,{passive:true});el.addEventListener('touchcancel',end,{passive:true});
+  return()=>{el.removeEventListener('touchstart',begin);el.removeEventListener('touchmove',move);el.removeEventListener('touchend',end);el.removeEventListener('touchcancel',end);};
+ },[open,theme]);
  const count=items.reduce((n,i)=>n+i.qty,0),total=items.reduce((n,i)=>n+i.qty*i.price,0);
  useLayoutEffect(()=>{
   if(!open)return;
@@ -36,7 +48,7 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    <div className="order-holo-scroll">
     {items.length===0?<p className="order-empty">Aún no has añadido platos.<br/>Elige tus platos desde la carta.</p>:items.map(item=><article className="order-holo-line" key={item.key}>
      <div className="order-holo-dish">{dishImages[item.name]&&<img src={dishImages[item.name]} alt="" loading="lazy"/>}<div className="order-holo-name"><strong>{item.name}</strong><small>Para: {item.guest}</small></div></div>
-     <div className="order-holo-controls"><div className="order-qty"><button type="button" aria-label={'Reducir '+item.name} onClick={()=>onChangeQty(item.key,-1)}>−</button><span>{item.qty}</span><button type="button" aria-label={'Aumentar '+item.name} onClick={()=>onChangeQty(item.key,1)}>+</button></div><span className="order-holo-unit">{money(item.price)} c/u</span><strong className="order-holo-price">{money(item.price*item.qty)}</strong><button type="button" className="order-remove" aria-label={'Eliminar '+item.name} onClick={()=>onRemove(item.key)}><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m5 4v7m4-7v7"/></svg></button></div>
+     <div className="order-holo-controls"><div className="order-qty"><button type="button" aria-label={'Reducir '+item.name} onClick={()=>onChangeQty(item.key,-1)}>−</button><span>{item.qty}</span><button type="button" aria-label={'Aumentar '+item.name} onClick={()=>onChangeQty(item.key,1)}>+</button></div><span className="order-holo-unit">{money(item.price)}</span><strong className="order-holo-price">{money(item.price*item.qty)}</strong><button type="button" className="order-remove" aria-label={'Eliminar '+item.name} onClick={()=>onRemove(item.key)}><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2m3 0-1 14H6L5 6m5 4v7m4-7v7"/></svg></button></div>
     </article>)}
     <details className="order-holo-notes" open={undefined}><summary>Notas para el restaurante {notes.trim()? "• Añadidas" : "(opcional)"}</summary><textarea id="order-holo-notes" aria-label="Notas para el restaurante" value={notes} onChange={e=>onNotes(e.target.value)} placeholder="Ej.: sin cebolla o indicaciones para la cocina" maxLength={500} rows={2}/></details>
    </div>
