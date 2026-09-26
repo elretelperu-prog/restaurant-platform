@@ -97,7 +97,7 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    {thread&&<><circle cx={thread.x} cy={thread.y} r="4" className="order-neon-origin"/><circle cx={thread.tipX} cy={thread.top} r="4" className="order-neon-origin"/></>}
   </svg>
   <div className="order-neon-dock-light" style={thread?{left:thread.x,top:thread.y+18}:undefined} aria-hidden="true"><span>◯</span></div>
-  {theme==='futurista'?<section ref={shapeRef} className={"order-shape order-holo-panel "+(items.length===0?"order-holo-empty":"order-holo-filled")} role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--holo-zoom':view.zoom,'--holo-pan-x':view.x+'px','--holo-pan-y':view.y+'px','--holo-close-progress':view.closeProgress}}>
+  {theme==='futurista'?<section ref={shapeRef} className={"order-shape order-holo-panel "+(items.length===0?"order-holo-empty":"order-holo-filled")} role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--holo-zoom':view.zoom,'--holo-pan-x':view.x+'px','--holo-pan-y':view.y+'px','--holo-close-progress':view.closeProgress,'--holo-close-y':Math.round(view.closeProgress*window.innerHeight*.42)+'px','--holo-effective-zoom':view.zoom*(1-view.closeProgress*.87)}}>
    <button type="button" className="order-close" aria-label="Cerrar pedido" onClick={onClose}>×</button>
    <header className="order-holo-heading"><span className="order-holo-cart" aria-hidden="true">⌑</span><div><h2>MI PEDIDO</h2><p>{count} {count===1?'producto':'productos'} · Borrador</p></div><button type="button" className="order-add-dishes order-holo-add-top" onClick={onClose}>+ Añadir platos</button></header>
    <div className="order-holo-scroll">
