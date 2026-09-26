@@ -1014,217 +1014,119 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  display:none!important;
 }
 
-/* V13.0 — approved horizontal holographic order window.
-   Dark translucent glass prevents the menu behind from competing with dish text. */
-.order-orbit.order-neon{background:rgba(3,10,23,.62)!important;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);padding:0 0 45px!important}
+/* V13.3 — single-source holographic order styling (replaces conflicting V13.0–V13.2 overrides).
+   The panel is a short landscape trapezoid with a receding right edge. */
+.order-orbit.order-neon{background:rgba(3,10,23,.48)!important;backdrop-filter:blur(4px)!important;-webkit-backdrop-filter:blur(4px)!important;padding:0!important}
 .order-neon .order-shape.order-holo-panel{
  position:relative!important;isolation:isolate!important;
- width:min(96vw,1050px)!important;height:min(73dvh,640px)!important;
- min-height:0!important;max-height:calc(100dvh - 115px)!important;
- padding:clamp(16px,3.5vw,30px)!important;
- display:flex!important;flex-direction:column!important;
- border:1.5px solid #68d9ff!important;
- border-radius:24px 32px 20px 27px!important;
- background:linear-gradient(135deg,rgba(8,27,49,.94),rgba(10,37,64,.91) 48%,rgba(5,22,44,.95))!important;
- box-shadow:0 0 0 1px #3b8cff77,0 0 12px #1fbdff9c,0 0 28px #218bff66,inset 0 0 28px #31aaff21,0 22px 55px #000b!important;
- filter:none!important;overflow:hidden!important;
- color:#f5faff!important;transform-origin:50% 100%!important;
+ box-sizing:border-box!important;width:min(94vw,850px)!important;
+ height:min(42dvh,385px)!important;min-height:0!important;max-height:calc(100dvh - 155px)!important;
+ padding:clamp(12px,2vw,22px)!important;
+ display:flex!important;flex-direction:column!important;gap:0!important;
+ border:1.5px solid #7be6ff!important;border-radius:18px 24px 17px 20px!important;
+ background:linear-gradient(115deg,rgba(8,28,52,.89),rgba(9,36,62,.81) 52%,rgba(5,22,45,.87))!important;
+ backdrop-filter:blur(13px) saturate(115%)!important;-webkit-backdrop-filter:blur(13px) saturate(115%)!important;
+ box-shadow:0 0 0 1px #3b8cff77,0 0 11px #1fbdff9c,0 0 27px #218bff66,inset 0 0 22px #31aaff24,0 16px 40px #000a!important;
+ filter:none!important;overflow:hidden!important;color:#f5faff!important;
+ transform:perspective(700px) rotateY(-12deg) rotateX(2deg) rotateZ(1.1deg)!important;
+ transform-origin:45% 50%!important;
 }
-.order-neon .order-shape.order-holo-panel:before{
- content:""!important;display:block!important;position:absolute!important;
- inset:4px!important;border:1px solid #8de8ff36!important;
- border-radius:19px 27px 16px 22px!important;pointer-events:none!important;
-}
+.order-neon .order-shape.order-holo-panel:before{content:"";display:block;position:absolute;inset:5px;
+ border:1px solid #8de8ff4a;border-radius:13px 19px 12px 15px;pointer-events:none;z-index:0}
 .order-neon .order-holo-panel .order-close{
- top:11px!important;right:12px!important;left:auto!important;transform:none!important;
- width:35px!important;height:35px!important;font-size:24px!important;
- border-radius:12px!important;z-index:5!important;
- background:#0d2846e8!important;border:1px solid #70d8ff!important;
-}
-.order-holo-heading{display:flex;align-items:center;gap:13px;flex-shrink:0;
- border-bottom:1px solid #73caff70;padding:0 42px 13px 2px}
-.order-holo-heading h2{font:700 clamp(20px,4.2vw,34px) Georgia,serif;letter-spacing:.13em;
- color:#fff;text-shadow:0 0 10px #64cfff;margin:0}
-.order-holo-heading p{font-size:11px;color:#bcd8ee;margin:4px 0 0}
-.order-holo-cart{font-size:clamp(24px,5vw,40px);color:#a5edff;text-shadow:0 0 9px #40caff}
-.order-holo-scroll{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;
- overscroll-behavior:contain;scrollbar-color:#5aa9dc transparent;padding:4px 2px}
-.order-holo-line{display:flex;align-items:center;justify-content:space-between;gap:12px;
- padding:10px 4px;border-bottom:1px solid #68c9ff70;min-height:65px}
-.order-holo-dish{display:flex;align-items:center;gap:11px;min-width:0;flex:1}
-.order-holo-dish img{width:clamp(42px,8vw,72px);height:clamp(42px,8vw,72px);
- object-fit:cover;flex-shrink:0;border:1px solid #83dcff;border-radius:12px}
-.order-holo-name{display:flex;flex-direction:column;min-width:0;gap:5px}
-.order-holo-name strong{font:700 clamp(13px,1.8vw,18px) Georgia,serif;color:#fff;line-height:1.15}
-.order-holo-name small{font-size:clamp(10px,1.25vw,12px);color:#b9d5e9;overflow-wrap:anywhere}
-.order-holo-controls{display:flex;align-items:center;justify-content:flex-end;gap:clamp(7px,2vw,22px);flex-shrink:0}
-.order-holo-controls .order-qty{gap:8px}
-.order-holo-controls .order-qty button{width:30px;height:30px;border-radius:9px;background:#0c2b4b;color:#fff;border:1px solid #6cdbff;box-shadow:0 0 6px #2bbaff88}
-.order-holo-controls .order-qty span{min-width:13px;text-align:center}
-.order-holo-unit{font-size:12px;color:#c5e1f4;white-space:nowrap}
-.order-holo-price{font:700 16px Georgia,serif;white-space:nowrap;min-width:60px;text-align:right}
-.order-holo-controls .order-remove{width:29px;height:30px;border:1px solid #6cdbff;
- border-radius:9px;text-decoration:none;color:#e5faff;font-size:22px;line-height:1;background:#102c4b}
-.order-holo-scroll .order-notes-label{font-size:11px;color:#c3dff4;margin:11px 0 5px}
-.order-holo-scroll textarea{box-sizing:border-box;width:100%;min-height:46px;resize:vertical;
- background:#071c34d9;color:#fff;border:1px solid #4c9cce;border-radius:9px;padding:8px;font-size:14px}
-.order-holo-scroll textarea::placeholder{color:#a4c2d6}
-.order-holo-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;
- flex-shrink:0;border-top:1px solid #76d8ff70;padding-top:12px;margin-top:5px}
-.order-holo-footer button{border-radius:13px;padding:10px 12px;font-size:13px;cursor:pointer;white-space:nowrap}
+ position:absolute!important;top:9px!important;right:10px!important;left:auto!important;
+ transform:none!important;width:32px!important;height:32px!important;z-index:5!important;
+ border:1px solid #79dfff!important;border-radius:10px!important;background:#0d2846e8!important;
+ color:white!important;font-size:22px!important;box-shadow:0 0 8px #27c9ff88!important}
+.order-holo-heading{display:flex;align-items:center;gap:9px;flex:0 0 auto;
+ min-height:48px;border-bottom:1px solid #73caff80;padding:0 37px 8px 2px}
+.order-holo-heading>div{min-width:0}
+.order-holo-heading h2{font:700 clamp(19px,3vw,29px) Georgia,serif;letter-spacing:.09em;
+ color:#fff;text-shadow:0 0 9px #64cfff;margin:0;white-space:nowrap}
+.order-holo-heading p{font-size:10px;color:#c5ddef;margin:2px 0 0}
+.order-holo-cart{font-size:25px;color:#a5edff;text-shadow:0 0 9px #40caff}
+.order-holo-heading .order-holo-add-top{margin-left:auto;white-space:nowrap;flex:0 0 auto;
+ border:1px solid #74dcff;border-radius:10px;padding:7px 9px;background:#0c3a5a;color:#fff;
+ font-size:11px;font-weight:700;box-shadow:0 0 7px #2ebfff55}
+.order-holo-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;
+ overscroll-behavior:contain;scrollbar-color:#5aa9dc transparent;padding:3px 1px}
+.order-holo-line{display:flex!important;flex-flow:row nowrap!important;align-items:center!important;
+ justify-content:space-between!important;gap:7px!important;padding:6px 2px!important;
+ min-height:0!important;border-bottom:1px solid #68c9ff70}
+.order-holo-dish{display:flex!important;flex:1 1 44%!important;min-width:0!important;
+ align-items:center!important;gap:7px!important}
+.order-holo-dish img{width:clamp(35px,5vw,55px)!important;height:clamp(35px,5vw,55px)!important;
+ flex:0 0 auto!important;object-fit:cover;border:1px solid #83dcff;border-radius:8px}
+.order-holo-name{display:flex;flex-direction:column;min-width:0;gap:2px}
+.order-holo-name strong{font:700 clamp(11px,1.8vw,15px) Georgia,serif;color:#fff;line-height:1.08}
+.order-holo-name small{font-size:clamp(8px,1.25vw,11px);color:#b9d5e9;line-height:1.12}
+.order-holo-controls{display:flex!important;flex:0 0 auto!important;align-items:center!important;
+ flex-flow:row nowrap!important;justify-content:flex-end!important;gap:clamp(4px,1vw,12px)!important;
+ padding-left:0!important}
+.order-holo-controls .order-qty{display:flex;align-items:center;gap:4px!important;margin:0!important}
+.order-holo-controls .order-qty button{width:27px!important;height:27px!important;padding:0!important;
+ border-radius:7px;background:#0c2b4b;color:#fff;border:1px solid #6cdbff;box-shadow:0 0 6px #2bbaff88}
+.order-holo-controls .order-qty span{min-width:10px;text-align:center;font-size:11px}
+.order-holo-unit{font-size:11px;color:#c5e1f4;white-space:nowrap}
+.order-holo-price{font:700 14px Georgia,serif;white-space:nowrap;min-width:0!important;text-align:right}
+.order-holo-controls .order-remove{width:27px!important;height:27px!important;padding:0!important;
+ flex:0 0 auto;border:1px solid #6cdbff;border-radius:7px;color:#e5faff;font-size:20px;
+ line-height:1;background:#102c4b}
+.order-holo-notes{margin:4px 1px 2px;border-bottom:1px solid #68c9ff50}
+.order-holo-notes summary{cursor:pointer;font-size:10px;color:#c6e3f5;padding:5px 0}
+.order-holo-notes textarea{box-sizing:border-box;width:100%;min-height:43px;max-height:70px;
+ resize:vertical;background:#071c34d9;color:#fff;border:1px solid #4c9cce;
+ border-radius:7px;padding:7px;font-size:12px}
+.order-holo-notes textarea::placeholder{color:#a4c2d6}
+.order-holo-footer{display:flex!important;flex-flow:row nowrap!important;align-items:center!important;
+ justify-content:space-between!important;gap:7px!important;flex:0 0 auto;
+ border-top:1px solid #76d8ff80;padding-top:9px;margin-top:3px}
+.order-holo-footer button{border-radius:9px;padding:8px 9px;font-size:11px;cursor:pointer;white-space:nowrap}
 .order-holo-footer button:disabled{opacity:.45;cursor:default}
 .order-holo-footer .order-clear{background:#102b49;border:1px solid #6cb4eb;color:#fff}
-.order-holo-footer .order-send{background:linear-gradient(110deg,#078dce,#207be9);border:1px solid #9eeaff;
- color:#fff;box-shadow:0 0 9px #31baff99;font-weight:700}
-.order-holo-total{display:flex;align-items:baseline;gap:8px;white-space:nowrap;color:#fff}
-.order-holo-total span{font-size:14px}
-.order-holo-total strong{font:700 clamp(17px,3vw,27px) Georgia,serif}
-.order-holo-panel>.order-notice{margin:5px 0 0;color:#c8e8ff}
+.order-holo-footer .order-send{background:linear-gradient(110deg,#078dce,#207be9);
+ border:1px solid #9eeaff;color:#fff;box-shadow:0 0 9px #31baff99;font-weight:700}
+.order-holo-total{display:flex;align-items:baseline;gap:5px;white-space:nowrap;color:#fff}
+.order-holo-total span{font-size:12px}
+.order-holo-total strong{font:700 clamp(16px,2.5vw,23px) Georgia,serif}
+.order-holo-panel>.order-notice{margin:4px 0 0;color:#c8e8ff;font-size:10px}
+.order-neon .order-shape.order-holo-panel.order-holo-empty{height:auto!important;
+ max-height:min(43dvh,360px)!important;transform:perspective(700px) rotateY(-12deg) rotateX(2deg) rotateZ(1.1deg)!important}
+.order-holo-empty .order-holo-scroll{flex:0 1 auto!important}
+.order-holo-empty .order-empty{margin:12px 2px!important;font-size:13px!important;line-height:1.35!important}
 @media(max-width:650px){
- .order-neon .order-shape.order-holo-panel{width:96vw!important;height:min(74dvh,670px)!important;
-  padding:15px 12px 13px!important;border-radius:19px!important}
- .order-holo-heading{padding-bottom:10px;gap:8px}
- .order-holo-line{gap:5px;padding:9px 1px;align-items:flex-start;flex-wrap:wrap}
- .order-holo-dish{flex:1 1 55%;gap:7px}
- .order-holo-dish img{width:44px;height:44px;border-radius:9px}
- .order-holo-name strong{font-size:13px}
- .order-holo-name small{font-size:10px}
- .order-holo-controls{flex:1 1 100%;justify-content:flex-end;gap:8px;padding-left:51px}
- .order-holo-controls .order-qty{gap:6px;margin-right:auto}
- .order-holo-controls .order-qty button{width:27px;height:27px}
- .order-holo-unit{font-size:10px}
- .order-holo-price{font-size:13px;min-width:45px}
- .order-holo-controls .order-remove{width:27px;height:27px}
- .order-holo-footer{gap:6px}
- .order-holo-footer button{font-size:11px;padding:9px 7px}
- .order-holo-total{gap:4px}
- .order-holo-total span{font-size:11px}
- .order-holo-total strong{font-size:17px}
+ .order-neon .order-shape.order-holo-panel{
+  width:96vw!important;height:min(39dvh,355px)!important;max-height:calc(100dvh - 155px)!important;
+  padding:11px 10px!important;
+  transform:perspective(620px) rotateY(-10deg) rotateX(2deg) rotateZ(.9deg)!important;
+ }
+ .order-neon .order-shape.order-holo-panel.order-holo-empty{height:auto!important;
+  transform:perspective(620px) rotateY(-10deg) rotateX(2deg) rotateZ(.9deg)!important}
+ .order-holo-heading{min-height:43px;padding-bottom:6px;gap:6px}
+ .order-holo-heading h2{font-size:clamp(17px,4.5vw,22px)}
+ .order-holo-heading p{font-size:9px}
+ .order-holo-cart{font-size:19px}
+ .order-holo-heading .order-holo-add-top{font-size:9px;padding:6px 5px}
+ .order-holo-line{gap:3px!important;padding:5px 1px!important}
+ .order-holo-dish{gap:4px!important;flex:1 1 auto!important}
+ .order-holo-dish img{width:32px!important;height:32px!important;border-radius:6px}
+ .order-holo-name strong{font-size:10px!important}
+ .order-holo-name small{font-size:8px!important}
+ .order-holo-controls{gap:3px!important}
+ .order-holo-controls .order-qty{gap:2px!important}
+ .order-holo-controls .order-qty button{width:21px!important;height:23px!important;font-size:14px!important}
+ .order-holo-controls .order-qty span{min-width:8px!important;font-size:10px}
+ .order-holo-unit{font-size:9px}
+ .order-holo-price{font-size:10px!important}
+ .order-holo-controls .order-remove{width:21px!important;height:23px!important;font-size:16px}
+ .order-holo-footer{display:flex!important;flex-flow:row nowrap!important;gap:5px!important}
+ .order-holo-footer button{font-size:10px!important;padding:7px 6px!important}
+ .order-holo-total span{font-size:10px}
+ .order-holo-total strong{font-size:15px!important}
 }
-@media(max-height:590px){
- .order-neon .order-shape.order-holo-panel{height:calc(100dvh - 65px)!important;max-height:calc(100dvh - 65px)!important}
- .order-orbit.order-neon{padding-bottom:15px!important}
+@media(max-width:360px){
+ .order-holo-unit{display:none!important}
+ .order-holo-heading .order-holo-add-top{font-size:8px}
 }
+@media(max-height:550px){.order-neon .order-shape.order-holo-panel{height:min(64dvh,355px)!important;max-height:calc(100dvh - 55px)!important}}
 @media(prefers-reduced-motion:reduce){.order-neon .order-shape.order-holo-panel{animation:none!important}}
-
-/* V13.1 — horizontal floating glass, compact on iPhone, no giant empty panel. */
-.order-orbit.order-neon{background:rgba(3,10,23,.38)!important;backdrop-filter:blur(2px)!important;-webkit-backdrop-filter:blur(2px)!important}
-.order-neon .order-shape.order-holo-panel{
- width:min(91vw,850px)!important;
- height:min(57dvh,490px)!important;
- max-height:calc(100dvh - 190px)!important;
- background:linear-gradient(125deg,rgba(8,28,52,.84),rgba(9,32,56,.81) 55%,rgba(5,22,45,.87))!important;
- backdrop-filter:blur(14px) saturate(115%)!important;
- -webkit-backdrop-filter:blur(14px) saturate(115%)!important;
- box-shadow:0 0 0 1px #3b8cff55,0 0 11px #1fbdff8a,0 0 22px #218bff55,inset 0 0 22px #31aaff19,0 16px 40px #0009!important;
-}
-.order-neon .order-shape.order-holo-panel.order-holo-empty{height:auto!important;min-height:0!important;max-height:min(52dvh,420px)!important}
-.order-holo-empty .order-holo-scroll{flex:0 1 auto!important;overflow-y:auto!important}
-.order-holo-empty .order-empty{margin:14px 2px 16px!important;font-size:clamp(13px,2.5vw,17px)!important;line-height:1.35!important}
-.order-holo-empty .order-notes-label{margin-top:6px!important}
-.order-holo-empty .order-holo-scroll textarea{min-height:42px!important;max-height:58px!important}
-.order-holo-footer .order-add-dishes{
- background:#0c3a5a!important;color:#effbff!important;border:1px solid #74dcff!important;
- box-shadow:inset 0 0 7px #2dbdff33,0 0 6px #2ebfff55!important;font-weight:700;
-}
-.order-holo-footer .order-add-dishes:focus-visible{outline:2px solid #fff;outline-offset:3px}
-@media(max-width:650px){
- .order-neon .order-shape.order-holo-panel{width:92vw!important;height:min(55dvh,470px)!important;padding:13px 12px 12px!important}
- .order-neon .order-shape.order-holo-panel.order-holo-empty{height:auto!important;max-height:min(49dvh,390px)!important}
- .order-holo-heading h2{font-size:clamp(19px,5.1vw,25px)!important}
- .order-holo-heading p{font-size:10px!important}
- .order-holo-footer{display:grid!important;grid-template-columns:1fr auto!important;gap:8px!important}
- .order-holo-footer .order-add-dishes{grid-column:1;grid-row:1}
- .order-holo-footer .order-holo-total{grid-column:2;grid-row:1}
- .order-holo-footer .order-clear{grid-column:1;grid-row:2}
- .order-holo-footer .order-send{grid-column:2;grid-row:2}
- .order-holo-footer button{padding:8px 9px!important;font-size:11px!important}
- .order-holo-footer .order-holo-total strong{font-size:16px!important}
- .order-holo-footer .order-holo-total span{font-size:11px!important}
- .order-holo-empty .order-holo-footer .order-clear,.order-holo-empty .order-holo-footer .order-send{display:none!important}
- .order-holo-empty .order-holo-footer{display:flex!important;justify-content:space-between!important}
-}
-
-/* V13.2 — reference composition: wide, subtly receding holographic glass;
-   every dish stays on ONE horizontal row, even on a narrow phone. */
-.order-neon .order-shape.order-holo-panel.order-holo-filled{
- width:min(96vw,850px)!important;
- height:min(54dvh,485px)!important;
- max-height:calc(100dvh - 150px)!important;
- padding:clamp(10px,2.5vw,22px)!important;
- transform:perspective(1200px) rotateY(-3deg) rotateZ(.65deg)!important;
- transform-origin:50% 50%!important;
- background:linear-gradient(115deg,rgba(8,28,52,.78),rgba(10,37,63,.67) 60%,rgba(6,26,49,.79))!important;
-}
-.order-holo-filled .order-holo-heading{padding-bottom:8px!important}
-.order-holo-filled .order-holo-line{
- display:flex!important;flex-flow:row nowrap!important;align-items:center!important;
- justify-content:space-between!important;gap:clamp(4px,1vw,10px)!important;
- padding:7px 2px!important;min-height:0!important;
-}
-.order-holo-filled .order-holo-dish{
- flex:1 1 42%!important;min-width:0!important;max-width:none!important;
- display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:7px!important;
-}
-.order-holo-filled .order-holo-dish img{
- width:clamp(30px,8vw,58px)!important;height:clamp(30px,8vw,58px)!important;
- flex:0 0 auto!important;border-radius:7px!important;
-}
-.order-holo-filled .order-holo-name{flex:1 1 auto!important;min-width:0!important;gap:2px!important}
-.order-holo-filled .order-holo-name strong{
- font-size:clamp(10px,2.4vw,15px)!important;line-height:1.08!important;
- overflow-wrap:normal!important;
-}
-.order-holo-filled .order-holo-name small{font-size:clamp(8px,1.85vw,11px)!important;line-height:1.12!important}
-.order-holo-filled .order-holo-controls{
- flex:0 0 auto!important;min-width:0!important;display:flex!important;
- flex-flow:row nowrap!important;align-items:center!important;justify-content:flex-end!important;
- gap:clamp(3px,.85vw,12px)!important;padding-left:0!important;
-}
-.order-holo-filled .order-holo-controls .order-qty{
- display:flex!important;align-items:center!important;flex-wrap:nowrap!important;
- gap:3px!important;margin-right:0!important;
-}
-.order-holo-filled .order-holo-controls .order-qty button{
- width:clamp(21px,5.4vw,29px)!important;height:clamp(23px,5.6vw,29px)!important;
- flex:0 0 auto!important;padding:0!important;font-size:15px!important;
-}
-.order-holo-filled .order-holo-controls .order-qty span{font-size:11px!important;min-width:9px!important}
-.order-holo-filled .order-holo-unit{
- font-size:clamp(9px,2.2vw,12px)!important;white-space:nowrap!important;
-}
-.order-holo-filled .order-holo-price{
- font-size:clamp(10px,2.5vw,15px)!important;min-width:0!important;white-space:nowrap!important;
-}
-.order-holo-filled .order-holo-controls .order-remove{
- width:clamp(21px,5.4vw,29px)!important;height:clamp(23px,5.6vw,29px)!important;
- flex:0 0 auto!important;font-size:18px!important;padding:0!important;
-}
-.order-holo-filled .order-holo-footer{gap:5px!important}
-@media(max-width:430px){
- .order-neon .order-shape.order-holo-panel.order-holo-filled{
-  width:97vw!important;height:min(53dvh,470px)!important;
-  padding:11px 9px!important;transform:perspective(1000px) rotateY(-2deg) rotateZ(.45deg)!important;
- }
- .order-holo-filled .order-holo-heading h2{font-size:19px!important}
- .order-holo-filled .order-holo-heading p{font-size:9px!important}
- .order-holo-filled .order-holo-line{gap:3px!important;padding:6px 0!important}
- .order-holo-filled .order-holo-dish{flex:1 1 auto!important;gap:4px!important}
- .order-holo-filled .order-holo-dish img{width:32px!important;height:32px!important}
- .order-holo-filled .order-holo-name strong{font-size:10px!important}
- .order-holo-filled .order-holo-name small{font-size:8px!important}
- .order-holo-filled .order-holo-controls{gap:3px!important}
- .order-holo-filled .order-holo-unit{font-size:9px!important}
- .order-holo-filled .order-holo-price{font-size:10px!important}
- .order-holo-filled .order-holo-controls .order-qty button{
-  width:21px!important;height:23px!important;
- }
- .order-holo-filled .order-holo-controls .order-remove{width:21px!important;height:23px!important}
-}
-@media(max-width:355px){
- .order-holo-filled .order-holo-unit{display:none!important}
- .order-holo-filled .order-holo-dish img{width:28px!important;height:28px!important}
-}
-@media(prefers-reduced-motion:reduce){
- .order-neon .order-shape.order-holo-panel.order-holo-filled{transition:none!important}
-}
