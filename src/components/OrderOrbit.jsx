@@ -32,7 +32,7 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    const onHeader=!!target.closest('.order-holo-heading');
    const onButton=!!target.closest('button');
    const onControl=!!target.closest('textarea,input,summary');
-   const mode=onControl?'control':onButton?'button-pending':viewRef.current.zoom>1.01?'pan':onHeader?'dismiss':onList?'scroll':'idle';
+   const mode=onControl?'control':onButton?'button-pending':onList?'scroll':viewRef.current.zoom>1.01?'pan':onHeader?'dismiss':'idle';
    gesture={mode,onList,onHeader,startX:t.clientX,startY:t.clientY,scroll:list.scrollTop,...viewRef.current};
   };
   const move=e=>{
@@ -46,7 +46,7 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    const t=e.touches[0],dx=t.clientX-gesture.startX,dy=t.clientY-gesture.startY;
    if(gesture.mode==='button-pending'){
     if(Math.hypot(dx,dy)<7)return;
-    gesture.mode=gesture.zoom>1.01?'pan':gesture.onList?'scroll':gesture.onHeader?'dismiss':'idle';
+    gesture.mode=gesture.onList?'scroll':gesture.zoom>1.01?'pan':gesture.onHeader?'dismiss':'idle';
     suppressActionClickRef.current=true;
    }
    if(gesture.mode==='dismiss'){
@@ -57,7 +57,7 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    }
    if(gesture.mode==='scroll'){
     e.preventDefault();e.stopPropagation();
-    list.scrollTop=gesture.scroll-dy;return;
+    list.scrollTop=gesture.scroll-dy/gesture.zoom;return;
    }
    if(gesture.mode==='pan'){
     e.preventDefault();e.stopPropagation();
