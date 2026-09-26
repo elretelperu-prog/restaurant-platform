@@ -3,7 +3,7 @@ import {dishImages} from '../data/la-terraza.js';
 const money=n=>'S/ '+Number(n).toFixed(2);
 export default function OrderOrbit({theme='futurista',open,closing,onClose,items,onChangeQty,onRemove,notes,onNotes}){
  const shapeRef=useRef(null);
- const suppressQtyClickRef=useRef(false);
+ const suppressActionClickRef=useRef(false);
  const [thread,setThread]=useState(null);
  const [confirmNotice,setConfirmNotice]=useState(false);
  const [view,setView]=useState({zoom:1,x:0,y:0,closeProgress:0});
@@ -24,16 +24,16 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    return {...next,x:Math.max(-maxX,Math.min(maxX,next.x)),y:Math.max(-maxY,Math.min(maxY,next.y))};
   };
   const start=e=>{
-   if(e.touches.length===1)suppressQtyClickRef.current=false;
+   if(e.touches.length===1)suppressActionClickRef.current=false;
    if(e.touches.length>=2){const m=midpoint(e.touches);gesture={mode:'pinch',distance:Math.max(1,distance(e.touches)),mid:m,...viewRef.current};return;}
    if(e.touches.length!==1)return;
    const t=e.touches[0],target=e.target;
    const onList=!!target.closest('.order-holo-scroll');
    const onHeader=!!target.closest('.order-holo-heading');
-   const onQtyButton=!!target.closest('.order-holo-controls .order-qty button');
-   const onControl=!!target.closest('button,textarea,input,summary');
-   const mode=onQtyButton&&viewRef.current.zoom>1.01?'qty-pending':onControl?'control':viewRef.current.zoom>1.01?'pan':onHeader?'dismiss':onList?'scroll':'idle';
-   gesture={mode,startX:t.clientX,startY:t.clientY,scroll:list.scrollTop,...viewRef.current};
+   const onButton=!!target.closest('button');
+   const onControl=!!target.closest('textarea,input,summary');
+   const mode=onControl?'control':onButton?'button-pending':viewRef.current.zoom>1.01?'pan':onHeader?'dismiss':onList?'scroll':'idle';
+   gesture={mode,onList,onHeader,startX:t.clientX,startY:t.clientY,scroll:list.scrollTop,...viewRef.current};
   };
   const move=e=>{
    if(e.touches.length>=2){
@@ -44,9 +44,10 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    }
    if(e.touches.length!==1||!gesture||gesture.mode==='pinch'||gesture.mode==='control')return;
    const t=e.touches[0],dx=t.clientX-gesture.startX,dy=t.clientY-gesture.startY;
-   if(gesture.mode==='qty-pending'){
+   if(gesture.mode==='button-pending'){
     if(Math.hypot(dx,dy)<7)return;
-    gesture.mode='pan';suppressQtyClickRef.current=true;
+    gesture.mode=gesture.zoom>1.01?'pan':gesture.onList?'scroll':gesture.onHeader?'dismiss':'idle';
+    suppressActionClickRef.current=true;
    }
    if(gesture.mode==='dismiss'){
     if(Math.abs(dy)<8&&Math.abs(dx)<8)return;
@@ -72,17 +73,17 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    if(e.touches.length===0)gesture=null;
    else if(e.touches.length===1)start(e);
   };
-  const cancelQtyClick=e=>{
-   if(suppressQtyClickRef.current&&e.target.closest('.order-holo-controls .order-qty button')){
-    e.preventDefault();e.stopPropagation();suppressQtyClickRef.current=false;
+  const cancelActionClick=e=>{
+   if(suppressActionClickRef.current&&e.target.closest('button')){
+    e.preventDefault();e.stopPropagation();suppressActionClickRef.current=false;
    }
   };
-  panel.addEventListener('click',cancelQtyClick,true);
+  panel.addEventListener('click',cancelActionClick,true);
   panel.addEventListener('touchstart',start,{passive:true,capture:true});
   panel.addEventListener('touchmove',move,{passive:false,capture:true});
   panel.addEventListener('touchend',end,{passive:true,capture:true});
   panel.addEventListener('touchcancel',end,{passive:true,capture:true});
-  return()=>{panel.removeEventListener('click',cancelQtyClick,true);panel.removeEventListener('touchstart',start,true);panel.removeEventListener('touchmove',move,true);panel.removeEventListener('touchend',end,true);panel.removeEventListener('touchcancel',end,true);};
+  return()=>{panel.removeEventListener('click',cancelActionClick,true);panel.removeEventListener('touchstart',start,true);panel.removeEventListener('touchmove',move,true);panel.removeEventListener('touchend',end,true);panel.removeEventListener('touchcancel',end,true);};
  },[open,theme,onClose]);
 
  const count=items.reduce((n,i)=>n+i.qty,0),total=items.reduce((n,i)=>n+i.qty*i.price,0);
