@@ -4,7 +4,7 @@ export default function App(){
  const switchTheme=next=>{if(next===theme)return;setTheme(next);const url=new URL(window.location.href);url.searchParams.set('tema',next);window.history.replaceState(null,'',url.pathname+url.search+url.hash)};
  const [selected,setSelected]=useState(null),[qty,setQty]=useState(1),[items,setItems]=useState([]),[closing,setClosing]=useState(false);
  const [orderOpen,setOrderOpen]=useState(false),[orderClosing,setOrderClosing]=useState(false),[orderNotes,setOrderNotes]=useState('');
- const count=items.reduce((n,item)=>n+item.qty,0);
+ const count=items.length;
  const [bubblePos,setBubblePos]=useState({x:0,y:0});
  const [drag,setDrag]=useState(null);
  const [customerName,setCustomerName]=useState('');
