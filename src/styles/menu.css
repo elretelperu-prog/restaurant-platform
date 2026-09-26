@@ -1221,3 +1221,14 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .order-neon .order-holo-panel .order-holo-scroll{overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important}
 .order-neon .order-holo-panel .order-holo-heading{touch-action:none!important;cursor:grab}
 .order-neon .order-holo-panel .order-holo-heading:active{cursor:grabbing}
+
+/* V14.8 — compact futuristic order header/footer; keep gesture surfaces unchanged. */
+.order-neon .order-holo-panel .order-holo-heading{min-height:36.5px!important;padding-bottom:5px!important;gap:5px!important}
+.order-neon .order-holo-panel .order-holo-heading h2{font-size:clamp(13.94px,3.69vw,18.04px)!important}
+.order-neon .order-holo-panel .order-holo-heading p{font-size:7.65px!important}
+.order-neon .order-holo-panel .order-holo-cart{font-size:21.25px!important}
+.order-neon .order-holo-panel .order-holo-footer{gap:3.9px!important;padding-top:7px!important;margin-top:2px!important}
+.order-neon .order-holo-panel .order-holo-footer button{font-size:7.8px!important;padding:5.46px 4.68px!important}
+.order-neon .order-holo-panel .order-holo-total{gap:3.9px!important}
+.order-neon .order-holo-panel .order-holo-total span{font-size:7.8px!important}
+.order-neon .order-holo-panel .order-holo-total strong{font-size:11.7px!important}
