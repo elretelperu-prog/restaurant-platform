@@ -29,7 +29,7 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    const onList=!!target.closest('.order-holo-scroll');
    const onHeader=!!target.closest('.order-holo-heading');
    const onControl=!!target.closest('button,textarea,input,summary');
-   const mode=onControl?'control':onHeader?'dismiss':viewRef.current.zoom>1.01?'pan':onList?'scroll':'idle';
+   const mode=onControl?'control':viewRef.current.zoom>1.01?'pan':onHeader?'dismiss':onList?'scroll':'idle';
    gesture={mode,startX:t.clientX,startY:t.clientY,scroll:list.scrollTop,...viewRef.current};
   };
   const move=e=>{
