@@ -19,7 +19,7 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    if(e.touches.length>=2){
     e.preventDefault();e.stopPropagation();
     if(!gesture||gesture.mode!=='pinch'){gesture={mode:'pinch',distance:Math.max(1,distance(e.touches)),zoom:zoomRef.current};return;}
-    const next=Math.max(1,Math.min(1.65,gesture.zoom*distance(e.touches)/gesture.distance));
+    const next=Math.max(0.8,Math.min(1.4,gesture.zoom*distance(e.touches)/gesture.distance));
     zoomRef.current=next;setOrderZoom(next);return;
    }
    if(e.touches.length===1&&gesture?.mode==='scroll'){
@@ -60,7 +60,7 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    {thread&&<><circle cx={thread.x} cy={thread.y} r="4" className="order-neon-origin"/><circle cx={thread.tipX} cy={thread.top} r="4" className="order-neon-origin"/></>}
   </svg>
   <div className="order-neon-dock-light" style={thread?{left:thread.x,top:thread.y+18}:undefined} aria-hidden="true"><span>◯</span></div>
-  {theme==='futurista'?<section ref={shapeRef} className={"order-shape order-holo-panel "+(items.length===0?"order-holo-empty":"order-holo-filled")} role="dialog" aria-modal="true" aria-label="Mi pedido">
+  {theme==='futurista'?<section ref={shapeRef} className={"order-shape order-holo-panel "+(items.length===0?"order-holo-empty":"order-holo-filled")} role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--holo-zoom':orderZoom}}>
    <button type="button" className="order-close" aria-label="Cerrar pedido" onClick={onClose}>×</button>
    <header className="order-holo-heading"><span className="order-holo-cart" aria-hidden="true">⌑</span><div><h2>MI PEDIDO</h2><p>{count} {count===1?'producto':'productos'} · Borrador</p></div><button type="button" className="order-add-dishes order-holo-add-top" onClick={onClose}>+ Añadir platos</button></header>
    <div className="order-holo-scroll">
