@@ -1106,3 +1106,41 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  .order-orbit.order-neon{padding-bottom:15px!important}
 }
 @media(prefers-reduced-motion:reduce){.order-neon .order-shape.order-holo-panel{animation:none!important}}
+
+/* V13.1 — horizontal floating glass, compact on iPhone, no giant empty panel. */
+.order-orbit.order-neon{background:rgba(3,10,23,.38)!important;backdrop-filter:blur(2px)!important;-webkit-backdrop-filter:blur(2px)!important}
+.order-neon .order-shape.order-holo-panel{
+ width:min(91vw,850px)!important;
+ height:min(57dvh,490px)!important;
+ max-height:calc(100dvh - 190px)!important;
+ background:linear-gradient(125deg,rgba(8,28,52,.84),rgba(9,32,56,.81) 55%,rgba(5,22,45,.87))!important;
+ backdrop-filter:blur(14px) saturate(115%)!important;
+ -webkit-backdrop-filter:blur(14px) saturate(115%)!important;
+ box-shadow:0 0 0 1px #3b8cff55,0 0 11px #1fbdff8a,0 0 22px #218bff55,inset 0 0 22px #31aaff19,0 16px 40px #0009!important;
+}
+.order-neon .order-shape.order-holo-panel.order-holo-empty{height:auto!important;min-height:0!important;max-height:min(52dvh,420px)!important}
+.order-holo-empty .order-holo-scroll{flex:0 1 auto!important;overflow-y:auto!important}
+.order-holo-empty .order-empty{margin:14px 2px 16px!important;font-size:clamp(13px,2.5vw,17px)!important;line-height:1.35!important}
+.order-holo-empty .order-notes-label{margin-top:6px!important}
+.order-holo-empty .order-holo-scroll textarea{min-height:42px!important;max-height:58px!important}
+.order-holo-footer .order-add-dishes{
+ background:#0c3a5a!important;color:#effbff!important;border:1px solid #74dcff!important;
+ box-shadow:inset 0 0 7px #2dbdff33,0 0 6px #2ebfff55!important;font-weight:700;
+}
+.order-holo-footer .order-add-dishes:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(max-width:650px){
+ .order-neon .order-shape.order-holo-panel{width:92vw!important;height:min(55dvh,470px)!important;padding:13px 12px 12px!important}
+ .order-neon .order-shape.order-holo-panel.order-holo-empty{height:auto!important;max-height:min(49dvh,390px)!important}
+ .order-holo-heading h2{font-size:clamp(19px,5.1vw,25px)!important}
+ .order-holo-heading p{font-size:10px!important}
+ .order-holo-footer{display:grid!important;grid-template-columns:1fr auto!important;gap:8px!important}
+ .order-holo-footer .order-add-dishes{grid-column:1;grid-row:1}
+ .order-holo-footer .order-holo-total{grid-column:2;grid-row:1}
+ .order-holo-footer .order-clear{grid-column:1;grid-row:2}
+ .order-holo-footer .order-send{grid-column:2;grid-row:2}
+ .order-holo-footer button{padding:8px 9px!important;font-size:11px!important}
+ .order-holo-footer .order-holo-total strong{font-size:16px!important}
+ .order-holo-footer .order-holo-total span{font-size:11px!important}
+ .order-holo-empty .order-holo-footer .order-clear,.order-holo-empty .order-holo-footer .order-send{display:none!important}
+ .order-holo-empty .order-holo-footer{display:flex!important;justify-content:space-between!important}
+}
