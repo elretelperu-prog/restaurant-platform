@@ -5,66 +5,72 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
  const shapeRef=useRef(null);
  const [thread,setThread]=useState(null);
  const [confirmNotice,setConfirmNotice]=useState(false);
- const [view,setView]=useState({zoom:1,x:0,y:0});
- const viewRef=useRef({zoom:1,x:0,y:0});
+ const [view,setView]=useState({zoom:1,x:0,y:0,closeProgress:0});
+ const viewRef=useRef({zoom:1,x:0,y:0,closeProgress:0});
  useEffect(()=>{
-  if(!open){viewRef.current={zoom:1,x:0,y:0};setView(viewRef.current);return;}
+  if(!open){viewRef.current={zoom:1,x:0,y:0,closeProgress:0};setView(viewRef.current);return;}
   if(theme!=='futurista')return;
   const panel=shapeRef.current,list=panel?.querySelector('.order-holo-scroll');
   if(!panel||!list)return;
   let gesture=null;
   const distance=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
   const midpoint=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
-  const clamp=(next)=>{
-   const z=next.zoom;
-   const w=panel.offsetWidth*z,h=panel.offsetHeight*z;
-   const vw=window.innerWidth,vh=window.innerHeight;
+  const update=next=>{viewRef.current=next;setView(next);};
+  const clamp=next=>{
+   const z=next.zoom,w=panel.offsetWidth*z,h=panel.offsetHeight*z,vw=window.innerWidth,vh=window.innerHeight;
    const maxX=Math.max(0,(w-vw)/2+Math.min(100,vw*.24));
    const maxY=Math.max(0,(h-vh)/2+Math.min(130,vh*.24));
-   return {zoom:z,x:Math.max(-maxX,Math.min(maxX,next.x)),y:Math.max(-maxY,Math.min(maxY,next.y))};
+   return {...next,x:Math.max(-maxX,Math.min(maxX,next.x)),y:Math.max(-maxY,Math.min(maxY,next.y))};
   };
-  const update=next=>{const value=clamp(next);viewRef.current=value;setView(value);};
   const start=e=>{
-   if(e.touches.length>=2){
-    const m=midpoint(e.touches);
-    gesture={mode:'pinch',distance:Math.max(1,distance(e.touches)),mid:m,...viewRef.current};
-   }else if(e.touches.length===1){
-    gesture={mode:viewRef.current.zoom>1.01?'pan':'scroll',x:e.touches[0].clientX,y:e.touches[0].clientY,scroll:list.scrollTop,...viewRef.current};
-   }
+   if(e.touches.length>=2){const m=midpoint(e.touches);gesture={mode:'pinch',distance:Math.max(1,distance(e.touches)),mid:m,...viewRef.current};return;}
+   if(e.touches.length!==1)return;
+   const t=e.touches[0],target=e.target;
+   const onList=!!target.closest('.order-holo-scroll');
+   const onHeader=!!target.closest('.order-holo-heading');
+   const onControl=!!target.closest('button,textarea,input,summary');
+   const mode=onControl?'control':onHeader?'dismiss':onList?'scroll':viewRef.current.zoom>1.01?'pan':'idle';
+   gesture={mode,startX:t.clientX,startY:t.clientY,scroll:list.scrollTop,...viewRef.current};
   };
   const move=e=>{
    if(e.touches.length>=2){
     e.preventDefault();e.stopPropagation();
     if(!gesture||gesture.mode!=='pinch'){start(e);return;}
-    const m=midpoint(e.touches);
-    const z=Math.max(.65,Math.min(4,gesture.zoom*distance(e.touches)/gesture.distance));
-    update({zoom:z,x:gesture.x+m.x-gesture.mid.x,y:gesture.y+m.y-gesture.mid.y});
-    return;
+    const m=midpoint(e.touches),z=Math.max(.65,Math.min(4,gesture.zoom*distance(e.touches)/gesture.distance));
+    update(clamp({zoom:z,x:gesture.x+m.x-gesture.mid.x,y:gesture.y+m.y-gesture.mid.y,closeProgress:0}));return;
    }
-   if(e.touches.length===1&&gesture){
-    if(gesture.mode==='pinch'){gesture=null;return;}
+   if(e.touches.length!==1||!gesture||gesture.mode==='pinch'||gesture.mode==='control')return;
+   const t=e.touches[0],dx=t.clientX-gesture.startX,dy=t.clientY-gesture.startY;
+   if(gesture.mode==='dismiss'){
+    if(Math.abs(dy)<8&&Math.abs(dx)<8)return;
     e.preventDefault();e.stopPropagation();
-    if(gesture.mode==='pan'){
-     update({zoom:gesture.zoom,x:gesture.x+e.touches[0].clientX-gesture.xStart,y:gesture.y+e.touches[0].clientY-gesture.yStart});
-    }else{
-     list.scrollTop=gesture.scroll+gesture.y-e.touches[0].clientY;
-    }
+    const progress=Math.max(0,Math.min(1,dy/Math.max(180,window.innerHeight*.35)));
+    update({...viewRef.current,closeProgress:progress});return;
    }
-  };
-  const begin=e=>{
-   start(e);
-   if(gesture?.mode==='pan'){gesture.xStart=e.touches[0].clientX;gesture.yStart=e.touches[0].clientY;}
+   if(gesture.mode==='scroll'){
+    e.preventDefault();e.stopPropagation();
+    list.scrollTop=gesture.scroll-dy;return;
+   }
+   if(gesture.mode==='pan'){
+    e.preventDefault();e.stopPropagation();
+    update(clamp({zoom:gesture.zoom,x:gesture.x+dx,y:gesture.y+dy,closeProgress:0}));
+   }
   };
   const end=e=>{
+   if(gesture?.mode==='dismiss'&&e.touches.length===0){
+    const progress=viewRef.current.closeProgress;
+    if(progress>=.72){gesture=null;onClose();return;}
+    update({...viewRef.current,closeProgress:0});
+   }
    if(e.touches.length===0)gesture=null;
-   else if(e.touches.length===1){start(e);if(gesture?.mode==='pan'){gesture.xStart=e.touches[0].clientX;gesture.yStart=e.touches[0].clientY;}}
+   else if(e.touches.length===1)start(e);
   };
-  panel.addEventListener('touchstart',begin,{passive:true,capture:true});
+  panel.addEventListener('touchstart',start,{passive:true,capture:true});
   panel.addEventListener('touchmove',move,{passive:false,capture:true});
   panel.addEventListener('touchend',end,{passive:true,capture:true});
   panel.addEventListener('touchcancel',end,{passive:true,capture:true});
-  return()=>{panel.removeEventListener('touchstart',begin,true);panel.removeEventListener('touchmove',move,true);panel.removeEventListener('touchend',end,true);panel.removeEventListener('touchcancel',end,true);};
- },[open,theme]);
+  return()=>{panel.removeEventListener('touchstart',start,true);panel.removeEventListener('touchmove',move,true);panel.removeEventListener('touchend',end,true);panel.removeEventListener('touchcancel',end,true);};
+ },[open,theme,onClose]);
 
  const count=items.reduce((n,i)=>n+i.qty,0),total=items.reduce((n,i)=>n+i.qty*i.price,0);
  useLayoutEffect(()=>{
@@ -91,7 +97,7 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    {thread&&<><circle cx={thread.x} cy={thread.y} r="4" className="order-neon-origin"/><circle cx={thread.tipX} cy={thread.top} r="4" className="order-neon-origin"/></>}
   </svg>
   <div className="order-neon-dock-light" style={thread?{left:thread.x,top:thread.y+18}:undefined} aria-hidden="true"><span>◯</span></div>
-  {theme==='futurista'?<section ref={shapeRef} className={"order-shape order-holo-panel "+(items.length===0?"order-holo-empty":"order-holo-filled")} role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--holo-zoom':view.zoom,'--holo-pan-x':view.x+'px','--holo-pan-y':view.y+'px'}}>
+  {theme==='futurista'?<section ref={shapeRef} className={"order-shape order-holo-panel "+(items.length===0?"order-holo-empty":"order-holo-filled")} role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--holo-zoom':view.zoom,'--holo-pan-x':view.x+'px','--holo-pan-y':view.y+'px','--holo-close-progress':view.closeProgress}}>
    <button type="button" className="order-close" aria-label="Cerrar pedido" onClick={onClose}>×</button>
    <header className="order-holo-heading"><span className="order-holo-cart" aria-hidden="true">⌑</span><div><h2>MI PEDIDO</h2><p>{count} {count===1?'producto':'productos'} · Borrador</p></div><button type="button" className="order-add-dishes order-holo-add-top" onClick={onClose}>+ Añadir platos</button></header>
    <div className="order-holo-scroll">
