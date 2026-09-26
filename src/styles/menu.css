@@ -1238,7 +1238,7 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 
 /* V15.6: rebuilt circle and order share the original order glass. */
-.theme-futurista{--glass-bg:linear-gradient(115deg,rgba(8,28,52,.89),rgba(9,36,62,.81) 52%,rgba(5,22,45,.87));--glass-border:1.5px solid #7be6ff;--glass-shadow:0 0 0 1px #3b8cff77,0 0 11px #1fbdff9c,0 0 27px #218bff66,inset 0 0 22px #31aaff24,0 16px 40px #000a}
+.theme-futurista{--glass-bg:linear-gradient(115deg,rgba(8,28,52,.7743),rgba(9,36,62,.7047) 52%,rgba(5,22,45,.7569));--glass-border:1.5px solid #7be6ff;--glass-shadow:0 0 0 1px #3b8cff77,0 0 11px #1fbdff9c,0 0 27px #218bff66,inset 0 0 22px #31aaff24,0 16px 40px #000a}
 .theme-futurista .dish-holo-circle{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%) scale(1);width:min(55.2vw,287px);aspect-ratio:1;border-radius:50%;padding:28px 24px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:auto;transform-origin:center;animation:bubbleIn .28s cubic-bezier(.2,.8,.2,1);touch-action:none;user-select:none;cursor:grab;background:var(--glass-bg)!important;border:var(--glass-border)!important;box-shadow:var(--glass-shadow)!important;backdrop-filter:blur(13px) saturate(115%);-webkit-backdrop-filter:blur(13px) saturate(115%);color:#f5faff;isolation:isolate}
 .theme-futurista .dish-holo-circle.dragging{cursor:grabbing}
 .theme-futurista .dish-holo-circle::before{content:"";position:absolute;inset:5px;border:1px solid #8de8ff4a;border-radius:50%;pointer-events:none}
