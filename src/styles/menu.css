@@ -622,12 +622,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-picker button{font:600 11px Arial,sans-serif;border:0;border-radius:25px;padding:6px 11px;color:#ddd;background:transparent;cursor:pointer}
 .theme-picker button.active{background:#f5e9d0;color:#292017}
 .theme-futurista .theme-picker button.active{background:linear-gradient(105deg,#19c5ec,#7656e9);color:#fff}
-.theme-futurista .dish-bubble{background:radial-gradient(circle at 28% 15%,#263657,#10182f 72%)!important;color:#f7f8ff!important;border:1.5px solid #668fff!important;box-shadow:0 0 13px #2c9aff,0 0 25px #9b4bff88,inset 0 0 16px #3567cc66!important}
-.theme-futurista .dish-bubble h2,.theme-futurista .dish-bubble .bubble-price{color:#f7f8ff!important;text-shadow:0 0 7px #936cff}
-.theme-futurista .dish-bubble .bubble-close{color:#f7f8ff!important}
-.theme-futurista .dish-bubble .qty button{color:#eaf7ff;background:#172a48;border-color:#65aaff;box-shadow:0 0 6px #3b9aff77}
-.theme-futurista .dish-bubble .confirm{background:linear-gradient(100deg,#11aee6,#7444e7)!important;color:#fff!important;box-shadow:0 0 10px #448dff88}
-.theme-futurista .dish-thread line{stroke:#52aaff!important;stroke-width:1.15!important;stroke-dasharray:3 5!important;filter:drop-shadow(0 0 3px #7b5bff)}
 /* Restore the original cream dish circle in the minimal theme. */
 .theme-minimalista .dish-bubble{background:radial-gradient(circle at 30% 20%,#fffaf0,#f1dfbd)!important;color:#241b12!important;border:1px solid #b78b4b!important;box-shadow:0 10px 25px #0004!important}
 .theme-minimalista .dish-thread line{stroke:#b78b4b!important;stroke-width:1.5!important;stroke-dasharray:3 3!important;filter:none!important}
@@ -1023,10 +1017,10 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  height:min(42dvh,385px)!important;min-height:0!important;max-height:calc(100dvh - 155px)!important;
  padding:clamp(12px,2vw,22px)!important;
  display:flex!important;flex-direction:column!important;gap:0!important;
- border:1.5px solid #7be6ff!important;border-radius:18px 24px 17px 20px!important;
- background:linear-gradient(115deg,rgba(8,28,52,.89),rgba(9,36,62,.81) 52%,rgba(5,22,45,.87))!important;
+ border:var(--glass-border)!important;border-radius:18px 24px 17px 20px!important;
+ background:var(--glass-bg)!important;
  backdrop-filter:blur(13px) saturate(115%)!important;-webkit-backdrop-filter:blur(13px) saturate(115%)!important;
- box-shadow:0 0 0 1px #3b8cff77,0 0 11px #1fbdff9c,0 0 27px #218bff66,inset 0 0 22px #31aaff24,0 16px 40px #000a!important;
+ box-shadow:var(--glass-shadow)!important;
  filter:none!important;overflow:hidden!important;color:#f5faff!important;
  transform:translate(var(--holo-pan-x,0px),calc(var(--holo-pan-y,0px) + var(--holo-close-y,0px))) perspective(700px) rotateY(13deg) rotateX(2deg) rotateZ(-.8deg) scale(var(--holo-effective-zoom,var(--holo-zoom,1)))!important;
  transform-origin:40% 50%!important;
@@ -1242,39 +1236,28 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .order-neon .order-holo-panel .order-holo-footer .order-clear,
 .order-neon .order-holo-panel .order-holo-footer .order-send{font-size:9.75px!important}
 
-/* V15.4 — one shared holographic finish: match Mi pedido exactly, preserving the circle. */
-.theme-futurista .dish-bubble{
- background:linear-gradient(115deg,rgba(8,28,52,.89),rgba(9,36,62,.81) 52%,rgba(5,22,45,.87))!important;
- border:1.5px solid #7be6ff!important;
- background-clip:border-box!important;
- box-shadow:0 0 0 1px #3b8cff77,0 0 11px #1fbdff9c,0 0 27px #218bff66,inset 0 0 22px #31aaff24,0 16px 40px #000a!important;
- -webkit-backdrop-filter:blur(13px) saturate(115%)!important;
- backdrop-filter:blur(13px) saturate(115%)!important;
- color:#f5faff!important;filter:none!important;isolation:isolate!important;
-}
-.theme-futurista .dish-bubble::before{
- content:"";display:block;position:absolute;inset:5px;padding:0;
- border:1px solid #8de8ff4a;border-radius:50%;background:none!important;
- -webkit-mask:none!important;mask:none!important;filter:none!important;
- pointer-events:none;z-index:0;
-}
-.theme-futurista .dish-bubble h2,.theme-futurista .dish-bubble .bubble-price{
- color:#f5faff!important;text-shadow:none!important;
-}
-.theme-futurista .dish-bubble .bubble-close,
-.theme-futurista .dish-bubble .qty button{
- background:transparent!important;border:0!important;box-shadow:none!important;
- color:#b8efff!important;text-shadow:0 0 7px #4ecbff99!important;
-}
-.theme-futurista .dish-bubble .confirm{
- background:transparent!important;border:0!important;border-radius:0!important;
- box-shadow:none!important;color:#b8efff!important;text-shadow:0 0 7px #4ecbff99!important;
- outline-offset:3px!important;
-}
-.theme-futurista .dish-bubble .name-field input{
- background:rgba(8,27,51,.63)!important;border:1px solid #69cfff99!important;
- color:#f0fbff!important;box-shadow:inset 0 0 7px #3a9dff25!important;
-}
-.theme-futurista .dish-bubble .name-field input::placeholder{color:#c0e6f4!important}
-.theme-futurista .dish-bubble .surname-mirror{color:#f0fbff!important}
-.theme-futurista .dish-bubble .surname-suggestion{color:#a5c9df!important}
+
+/* V15.6: rebuilt circle and order share the original order glass. */
+.theme-futurista{--glass-bg:linear-gradient(115deg,rgba(8,28,52,.89),rgba(9,36,62,.81) 52%,rgba(5,22,45,.87));--glass-border:1.5px solid #7be6ff;--glass-shadow:0 0 0 1px #3b8cff77,0 0 11px #1fbdff9c,0 0 27px #218bff66,inset 0 0 22px #31aaff24,0 16px 40px #000a}
+.theme-futurista .dish-holo-circle{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%) scale(1);width:min(55.2vw,287px);aspect-ratio:1;border-radius:50%;padding:28px 24px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:auto;transform-origin:center;animation:bubbleIn .28s cubic-bezier(.2,.8,.2,1);touch-action:none;user-select:none;cursor:grab;background:var(--glass-bg)!important;border:var(--glass-border)!important;box-shadow:var(--glass-shadow)!important;backdrop-filter:blur(13px) saturate(115%);-webkit-backdrop-filter:blur(13px) saturate(115%);color:#f5faff;isolation:isolate}
+.theme-futurista .dish-holo-circle.dragging{cursor:grabbing}
+.theme-futurista .dish-holo-circle::before{content:"";position:absolute;inset:5px;border:1px solid #8de8ff4a;border-radius:50%;pointer-events:none}
+.theme-futurista .dish-holo-circle h2{font:700 clamp(15px,4vw,21px) Georgia,serif;text-align:center;line-height:1.05;max-width:82%;margin:22px 0 2px}
+.theme-futurista .dish-holo-circle .bubble-price{font:700 13px Georgia,serif;margin-bottom:8px}
+.theme-futurista .dish-holo-circle .qty{display:flex;align-items:center;gap:12px;font-size:18px;margin:2px 0 7px}
+.theme-futurista .dish-holo-circle .qty button{width:31px;height:31px;border:0;border-radius:50%;background:transparent;color:#b8efff;font-size:20px;line-height:1;text-shadow:0 0 7px #4ecbff99;box-shadow:none}
+.theme-futurista .dish-holo-circle .confirm{width:78%;padding:8px;border:0;border-radius:0;background:transparent;color:#b8efff;font-size:13px;text-shadow:0 0 7px #4ecbff99;box-shadow:none}
+.theme-futurista .dish-holo-circle .name-field{position:relative;width:78%;margin-bottom:7px;flex-shrink:0;isolation:isolate}
+.theme-futurista .dish-holo-circle .name-field input{position:relative;z-index:1;width:100%;padding:7px 9px;margin-bottom:0;border:1px solid #69cfff99;border-radius:10px;background:rgba(8,27,51,.63);color:#f0fbff;box-shadow:inset 0 0 7px #3a9dff25;font:400 17px Arial,sans-serif;-webkit-text-size-adjust:100%;box-sizing:border-box}
+.theme-futurista .dish-holo-circle .name-field input::placeholder{color:#c0e6f4;opacity:1}
+.dish-holo-circle input.name-input-blink{animation:nameInputBlinkTwice 1s ease-in-out 1!important}
+.dish-holo-circle .surname-hint{position:absolute;z-index:3;inset:0 9px;display:flex;align-items:center;flex-wrap:nowrap;white-space:nowrap;overflow:hidden;gap:7px;pointer-events:none;font:400 15px Arial,sans-serif;letter-spacing:-.2px}
+.dish-holo-circle .surname-mirror{visibility:visible;flex:0 0 auto;color:#f0fbff}
+.dish-holo-circle .surname-suggestion{flex:0 0 auto;color:#a5c9df}
+.dish-holo-circle .name-field input.has-surname-hint:not(:focus){color:transparent!important;-webkit-text-fill-color:transparent!important}
+.dish-holo-circle .name-field:focus-within .surname-hint{display:none}
+.dish-holo-circle .name-field.empty-name-error{overflow:hidden;border-radius:10px}
+.dish-holo-circle .name-field.empty-name-error::after{content:"Escriba nombre y apellido";position:absolute;z-index:3;left:10px;right:10px;top:0;bottom:0;display:flex;align-items:center;white-space:nowrap;overflow:hidden;pointer-events:none;color:#c0e6f4;font:400 16px Arial,sans-serif;animation:emptyNameScroll 3.4s ease-in-out infinite alternate}
+.dish-holo-circle .name-field.empty-name-error:focus-within::after{display:none}
+.dish-orbit.closing .dish-holo-circle{pointer-events:none;animation:bubbleToDishV81 .62s cubic-bezier(.55,.02,.85,.45) forwards!important}
+@media(max-width:430px){.theme-futurista .dish-holo-circle{width:min(59.8vw,264px);padding:22px 18px 18px}}
