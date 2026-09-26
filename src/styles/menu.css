@@ -1144,3 +1144,87 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  .order-holo-empty .order-holo-footer .order-clear,.order-holo-empty .order-holo-footer .order-send{display:none!important}
  .order-holo-empty .order-holo-footer{display:flex!important;justify-content:space-between!important}
 }
+
+/* V13.2 — reference composition: wide, subtly receding holographic glass;
+   every dish stays on ONE horizontal row, even on a narrow phone. */
+.order-neon .order-shape.order-holo-panel.order-holo-filled{
+ width:min(96vw,850px)!important;
+ height:min(54dvh,485px)!important;
+ max-height:calc(100dvh - 150px)!important;
+ padding:clamp(10px,2.5vw,22px)!important;
+ transform:perspective(1200px) rotateY(-3deg) rotateZ(.65deg)!important;
+ transform-origin:50% 50%!important;
+ background:linear-gradient(115deg,rgba(8,28,52,.78),rgba(10,37,63,.67) 60%,rgba(6,26,49,.79))!important;
+}
+.order-holo-filled .order-holo-heading{padding-bottom:8px!important}
+.order-holo-filled .order-holo-line{
+ display:flex!important;flex-flow:row nowrap!important;align-items:center!important;
+ justify-content:space-between!important;gap:clamp(4px,1vw,10px)!important;
+ padding:7px 2px!important;min-height:0!important;
+}
+.order-holo-filled .order-holo-dish{
+ flex:1 1 42%!important;min-width:0!important;max-width:none!important;
+ display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:7px!important;
+}
+.order-holo-filled .order-holo-dish img{
+ width:clamp(30px,8vw,58px)!important;height:clamp(30px,8vw,58px)!important;
+ flex:0 0 auto!important;border-radius:7px!important;
+}
+.order-holo-filled .order-holo-name{flex:1 1 auto!important;min-width:0!important;gap:2px!important}
+.order-holo-filled .order-holo-name strong{
+ font-size:clamp(10px,2.4vw,15px)!important;line-height:1.08!important;
+ overflow-wrap:normal!important;
+}
+.order-holo-filled .order-holo-name small{font-size:clamp(8px,1.85vw,11px)!important;line-height:1.12!important}
+.order-holo-filled .order-holo-controls{
+ flex:0 0 auto!important;min-width:0!important;display:flex!important;
+ flex-flow:row nowrap!important;align-items:center!important;justify-content:flex-end!important;
+ gap:clamp(3px,.85vw,12px)!important;padding-left:0!important;
+}
+.order-holo-filled .order-holo-controls .order-qty{
+ display:flex!important;align-items:center!important;flex-wrap:nowrap!important;
+ gap:3px!important;margin-right:0!important;
+}
+.order-holo-filled .order-holo-controls .order-qty button{
+ width:clamp(21px,5.4vw,29px)!important;height:clamp(23px,5.6vw,29px)!important;
+ flex:0 0 auto!important;padding:0!important;font-size:15px!important;
+}
+.order-holo-filled .order-holo-controls .order-qty span{font-size:11px!important;min-width:9px!important}
+.order-holo-filled .order-holo-unit{
+ font-size:clamp(9px,2.2vw,12px)!important;white-space:nowrap!important;
+}
+.order-holo-filled .order-holo-price{
+ font-size:clamp(10px,2.5vw,15px)!important;min-width:0!important;white-space:nowrap!important;
+}
+.order-holo-filled .order-holo-controls .order-remove{
+ width:clamp(21px,5.4vw,29px)!important;height:clamp(23px,5.6vw,29px)!important;
+ flex:0 0 auto!important;font-size:18px!important;padding:0!important;
+}
+.order-holo-filled .order-holo-footer{gap:5px!important}
+@media(max-width:430px){
+ .order-neon .order-shape.order-holo-panel.order-holo-filled{
+  width:97vw!important;height:min(53dvh,470px)!important;
+  padding:11px 9px!important;transform:perspective(1000px) rotateY(-2deg) rotateZ(.45deg)!important;
+ }
+ .order-holo-filled .order-holo-heading h2{font-size:19px!important}
+ .order-holo-filled .order-holo-heading p{font-size:9px!important}
+ .order-holo-filled .order-holo-line{gap:3px!important;padding:6px 0!important}
+ .order-holo-filled .order-holo-dish{flex:1 1 auto!important;gap:4px!important}
+ .order-holo-filled .order-holo-dish img{width:32px!important;height:32px!important}
+ .order-holo-filled .order-holo-name strong{font-size:10px!important}
+ .order-holo-filled .order-holo-name small{font-size:8px!important}
+ .order-holo-filled .order-holo-controls{gap:3px!important}
+ .order-holo-filled .order-holo-unit{font-size:9px!important}
+ .order-holo-filled .order-holo-price{font-size:10px!important}
+ .order-holo-filled .order-holo-controls .order-qty button{
+  width:21px!important;height:23px!important;
+ }
+ .order-holo-filled .order-holo-controls .order-remove{width:21px!important;height:23px!important}
+}
+@media(max-width:355px){
+ .order-holo-filled .order-holo-unit{display:none!important}
+ .order-holo-filled .order-holo-dish img{width:28px!important;height:28px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .order-neon .order-shape.order-holo-panel.order-holo-filled{transition:none!important}
+}
