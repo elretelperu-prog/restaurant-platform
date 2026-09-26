@@ -1277,3 +1277,14 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .dish-bubble .name-field input::placeholder{color:#c0e6f4!important}
 .theme-futurista .dish-bubble .surname-mirror{color:#f0fbff!important}
 .theme-futurista .dish-bubble .surname-suggestion{color:#a5c9df!important}
+
+/* V15.2 — use the exact order-panel glass colour/opacity on the dish circle. */
+.theme-futurista .dish-bubble{
+ background:linear-gradient(115deg,rgba(8,28,52,.89),rgba(9,36,62,.81) 52%,rgba(5,22,45,.87))!important;
+ -webkit-backdrop-filter:blur(13px) saturate(115%)!important;
+ backdrop-filter:blur(13px) saturate(115%)!important;
+}
+.theme-futurista .dish-bubble .confirm{
+ border:0!important;border-radius:0!important;background:transparent!important;
+ box-shadow:none!important;outline-offset:3px!important;
+}
