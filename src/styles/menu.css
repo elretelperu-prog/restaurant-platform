@@ -1157,3 +1157,7 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .order-neon .order-holo-panel .order-close{color:#d8f4ff!important}
 .order-neon .order-holo-panel .order-holo-controls .order-remove svg{filter:drop-shadow(0 0 3px #39bfff66)}
 .order-neon .order-holo-panel button:focus-visible{outline:2px solid #a6eeff!important;border-radius:4px!important}
+
+/* V13.6 — no separator lines between dishes in futuristic order panel. */
+.order-neon .order-holo-panel .order-holo-line{border-top:0!important;border-bottom:0!important;box-shadow:none!important}
+.order-neon .order-holo-panel .order-holo-line::before,.order-neon .order-holo-panel .order-holo-line::after{border:0!important;box-shadow:none!important;background:none!important}
