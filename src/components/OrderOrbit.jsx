@@ -32,7 +32,7 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    const onHeader=!!target.closest('.order-holo-heading');
    const onButton=!!target.closest('button');
    const onControl=!!target.closest('textarea,input,summary');
-   const mode=onControl?'control':onButton?'button-pending':onList?'scroll':viewRef.current.zoom>1.01?'pan':onHeader?'dismiss':'idle';
+   const mode=onControl?'control':onButton?'button-pending':onList?(viewRef.current.zoom>1.01?'list-pending':'scroll'):viewRef.current.zoom>1.01?'pan':onHeader?'dismiss':'idle';
    gesture={mode,onList,onHeader,startX:t.clientX,startY:t.clientY,scroll:list.scrollTop,...viewRef.current};
   };
   const move=e=>{
@@ -46,8 +46,16 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    const t=e.touches[0],dx=t.clientX-gesture.startX,dy=t.clientY-gesture.startY;
    if(gesture.mode==='button-pending'){
     if(Math.hypot(dx,dy)<7)return;
-    gesture.mode=gesture.onList?'scroll':gesture.zoom>1.01?'pan':gesture.onHeader?'dismiss':'idle';
+    gesture.mode=gesture.onList?(gesture.zoom>1.01?'list-pending':'scroll'):gesture.zoom>1.01?'pan':gesture.onHeader?'dismiss':'idle';
     suppressActionClickRef.current=true;
+   }
+   if(gesture.mode==='list-pending'){
+    if(Math.hypot(dx,dy)<7)return;
+    gesture.mode=Math.abs(dx)>Math.abs(dy)?'list-pan-x':'scroll';
+   }
+   if(gesture.mode==='list-pan-x'){
+    e.preventDefault();e.stopPropagation();
+    update(clamp({zoom:gesture.zoom,x:gesture.x+dx,y:gesture.y,closeProgress:0}));return;
    }
    if(gesture.mode==='dismiss'){
     if(Math.abs(dy)<8&&Math.abs(dx)<8)return;
