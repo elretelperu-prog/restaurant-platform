@@ -1028,7 +1028,7 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  backdrop-filter:blur(13px) saturate(115%)!important;-webkit-backdrop-filter:blur(13px) saturate(115%)!important;
  box-shadow:0 0 0 1px #3b8cff77,0 0 11px #1fbdff9c,0 0 27px #218bff66,inset 0 0 22px #31aaff24,0 16px 40px #000a!important;
  filter:none!important;overflow:hidden!important;color:#f5faff!important;
- transform:perspective(700px) rotateY(13deg) rotateX(2deg) rotateZ(-.8deg)!important;
+ transform:perspective(700px) rotateY(13deg) rotateX(2deg) rotateZ(-.8deg) scale(var(--holo-zoom,1))!important;
  transform-origin:40% 50%!important;
 }
 .order-neon .order-shape.order-holo-panel:before{content:"";display:block;position:absolute;inset:5px;
@@ -1091,17 +1091,17 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .order-holo-total strong{font:700 clamp(16px,2.5vw,23px) Georgia,serif}
 .order-holo-panel>.order-notice{margin:4px 0 0;color:#c8e8ff;font-size:10px}
 .order-neon .order-shape.order-holo-panel.order-holo-empty{height:auto!important;
- max-height:min(43dvh,360px)!important;transform:perspective(700px) rotateY(13deg) rotateX(2deg) rotateZ(-.8deg)!important}
+ max-height:min(43dvh,360px)!important;transform:perspective(700px) rotateY(13deg) rotateX(2deg) rotateZ(-.8deg) scale(var(--holo-zoom,1))!important}
 .order-holo-empty .order-holo-scroll{flex:0 1 auto!important}
 .order-holo-empty .order-empty{margin:12px 2px!important;font-size:13px!important;line-height:1.35!important}
 @media(max-width:650px){
  .order-neon .order-shape.order-holo-panel{
   width:96vw!important;height:min(39dvh,355px)!important;max-height:calc(100dvh - 155px)!important;
   padding:11px 10px!important;
-  transform:perspective(620px) rotateY(12deg) rotateX(2deg) rotateZ(-.7deg)!important;
+  transform:perspective(620px) rotateY(12deg) rotateX(2deg) rotateZ(-.7deg) scale(var(--holo-zoom,1))!important;
  }
  .order-neon .order-shape.order-holo-panel.order-holo-empty{height:auto!important;
-  transform:perspective(620px) rotateY(12deg) rotateX(2deg) rotateZ(-.7deg)!important}
+  transform:perspective(620px) rotateY(12deg) rotateX(2deg) rotateZ(-.7deg) scale(var(--holo-zoom,1))!important}
  .order-holo-heading{min-height:43px;padding-bottom:6px;gap:6px}
  .order-holo-heading h2{font-size:clamp(17px,4.5vw,22px)}
  .order-holo-heading p{font-size:9px}
@@ -1161,3 +1161,51 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 /* V13.6 — no separator lines between dishes in futuristic order panel. */
 .order-neon .order-holo-panel .order-holo-line{border-top:0!important;border-bottom:0!important;box-shadow:none!important}
 .order-neon .order-holo-panel .order-holo-line::before,.order-neon .order-holo-panel .order-holo-line::after{border:0!important;box-shadow:none!important;background:none!important}
+
+/* V13.7 — fixed columns, independent one-finger list scroll and two-finger panel zoom. */
+.order-neon .order-holo-panel{touch-action:pan-y!important}
+.order-neon .order-holo-panel .order-holo-scroll{touch-action:pan-y!important;-webkit-overflow-scrolling:touch!important}
+.order-neon .order-holo-panel .order-holo-line{
+ display:grid!important;
+ grid-template-columns:minmax(0,1fr) 82px 54px 23px!important;
+ column-gap:clamp(3px,.7vw,8px)!important;
+ align-items:center!important;justify-content:stretch!important;
+}
+.order-neon .order-holo-panel .order-holo-dish{grid-column:1;min-width:0!important;width:100%!important}
+.order-neon .order-holo-panel .order-holo-controls{
+ display:contents!important;
+}
+.order-neon .order-holo-panel .order-holo-controls .order-qty{
+ grid-column:2;display:grid!important;grid-template-columns:24px 15px 24px!important;
+ justify-content:center!important;align-items:center!important;gap:1px!important;width:100%!important;
+}
+.order-neon .order-holo-panel .order-holo-controls .order-qty button{
+ width:24px!important;height:28px!important;text-align:center!important;line-height:28px!important;
+}
+.order-neon .order-holo-panel .order-holo-controls .order-qty span{
+ width:15px!important;min-width:15px!important;text-align:center!important;font-variant-numeric:tabular-nums!important;
+}
+.order-neon .order-holo-panel .order-holo-unit{display:none!important}
+.order-neon .order-holo-panel .order-holo-price{
+ grid-column:3;justify-self:end!important;text-align:right!important;
+ font-variant-numeric:tabular-nums!important;font-size:clamp(9px,2.25vw,13px)!important;
+}
+.order-neon .order-holo-panel .order-holo-controls .order-remove{
+ grid-column:4;justify-self:center!important;
+}
+@media(min-width:651px){
+ .order-neon .order-holo-panel .order-holo-line{
+  grid-template-columns:minmax(0,1fr) 90px 78px 28px!important;
+ }
+ .order-neon .order-holo-panel .order-holo-controls .order-qty{
+  grid-template-columns:28px 19px 28px!important;
+ }
+ .order-neon .order-holo-panel .order-holo-controls .order-qty button{width:28px!important}
+ .order-neon .order-holo-panel .order-holo-controls .order-qty span{width:19px!important;min-width:19px!important}
+}
+@media(max-width:360px){
+ .order-neon .order-holo-panel .order-holo-line{grid-template-columns:minmax(0,1fr) 75px 49px 21px!important;column-gap:2px!important}
+ .order-neon .order-holo-panel .order-holo-controls .order-qty{grid-template-columns:21px 13px 21px!important}
+ .order-neon .order-holo-panel .order-holo-controls .order-qty button{width:21px!important}
+ .order-neon .order-holo-panel .order-holo-controls .order-qty span{width:13px!important;min-width:13px!important}
+}
