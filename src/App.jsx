@@ -10,7 +10,7 @@ export default function App(){
  const [customerName,setCustomerName]=useState('');
  const [nameError,setNameError]=useState(false);
  const [blinkKey,setBlinkKey]=useState(0);
- const validGuestName=value=>{const parts=value.trim().split(/\s+/);return parts.length>=2&&parts.every(part=>/^[\\p{L}\\p{M}]+$/u.test(part))};
+ const validGuestName=value=>{const parts=value.trim().split(/\s+/);return parts.length>=2&&parts.every(part=>/^[\p{L}\p{M}]+$/u.test(part))};
  const choose=d=>{setClosing(false);setSelected(d);setQty(1);setCustomerName('');setNameError(false);setBubblePos({x:window.innerWidth/2,y:window.innerHeight*.47})};
  const finishClose=()=>{setClosing(true);setTimeout(()=>{setSelected(null);setClosing(false)},620)};
  const add=()=>{if(closing)return;if(!validGuestName(customerName)){setNameError(true);setBlinkKey(k=>k+1);return;}setNameError(false);setItems(current=>{const name=customerName.trim().replace(/\s+/g,' ');const key=selected.name+'|'+name;const index=current.findIndex(item=>item.key===key);if(index<0)return [...current,{key,name:selected.name,guest:name,price:Number(selected.price),qty}];return current.map((item,i)=>i===index?{...item,qty:item.qty+qty}:item)});finishClose()};
@@ -42,7 +42,7 @@ export default function App(){
     <button className="bubble-close" aria-label="Cerrar" onPointerDown={e=>e.stopPropagation()} onClick={e=>{e.stopPropagation();cancel()}}>×</button>
     <h2>{selected.name}</h2><div className="bubble-price">S/ {selected.price}</div>
     <div className="qty"><button onClick={()=>setQty(Math.max(1,qty-1))}>−</button><b>{qty}</b><button onClick={()=>setQty(q=>q+1)}>+</button></div>
-    <div className={"name-field "+(nameError&&!customerName.trim()?"empty-name-error":"")}><input key={blinkKey} className={(nameError?"name-input-blink ":"")+(nameError&&customerName.trim()&&!/\s/.test(customerName.trim())?"has-surname-hint":"")} placeholder={nameError&&!customerName.trim()?"":"Escriba nombre y apellido"} autoComplete="off" autoCorrect="off" spellCheck={false} name="guest-full-name" aria-label="Nombre y apellido" aria-invalid={nameError} value={customerName} onChange={e=>{const clean=e.target.value.replace(/[^\\p{L}\\p{M}\\s]/gu,'').replace(/\\s+/g,' ');setCustomerName(clean);if(nameError&&validGuestName(clean))setNameError(false)}}/>{nameError&&customerName.trim()&&!/\s/.test(customerName.trim())&&<span className="surname-hint" aria-hidden="true"><span className="surname-mirror">{customerName.trim()}</span><span className="surname-suggestion">apellido</span></span>}</div>
+    <div className={"name-field "+(nameError&&!customerName.trim()?"empty-name-error":"")}><input key={blinkKey} className={(nameError?"name-input-blink ":"")+(nameError&&customerName.trim()&&!/\s/.test(customerName.trim())?"has-surname-hint":"")} placeholder={nameError&&!customerName.trim()?"":"Escriba nombre y apellido"} autoComplete="off" autoCorrect="off" spellCheck={false} name="guest-full-name" aria-label="Nombre y apellido" aria-invalid={nameError} value={customerName} onChange={e=>{const clean=e.target.value.replace(/[^\p{L}\p{M}\s]/gu,'').replace(/\s+/g,' ');setCustomerName(clean);if(nameError&&validGuestName(clean))setNameError(false)}}/>{nameError&&customerName.trim()&&!/\s/.test(customerName.trim())&&<span className="surname-hint" aria-hidden="true"><span className="surname-mirror">{customerName.trim()}</span><span className="surname-suggestion">apellido</span></span>}</div>
     
     <button className="confirm" onClick={add}>Añadir al pedido</button>
    </div>
