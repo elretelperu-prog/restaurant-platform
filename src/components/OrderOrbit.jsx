@@ -30,18 +30,18 @@ export default function OrderOrbit({theme='futurista',open,closing,onClose,items
    {thread&&<><circle cx={thread.x} cy={thread.y} r="4" className="order-neon-origin"/><circle cx={thread.tipX} cy={thread.top} r="4" className="order-neon-origin"/></>}
   </svg>
   <div className="order-neon-dock-light" style={thread?{left:thread.x,top:thread.y+18}:undefined} aria-hidden="true"><span>◯</span></div>
-  {theme==='futurista'?<section ref={shapeRef} className="order-shape order-holo-panel" role="dialog" aria-modal="true" aria-label="Mi pedido">
+  {theme==='futurista'?<section ref={shapeRef} className={"order-shape order-holo-panel "+(items.length===0?"order-holo-empty":"order-holo-filled")} role="dialog" aria-modal="true" aria-label="Mi pedido">
    <button type="button" className="order-close" aria-label="Cerrar pedido" onClick={onClose}>×</button>
    <header className="order-holo-heading"><span className="order-holo-cart" aria-hidden="true">⌑</span><div><h2>MI PEDIDO</h2><p>{count} {count===1?'producto':'productos'} · Borrador</p></div></header>
    <div className="order-holo-scroll">
-    {items.length===0?<p className="order-empty">Aún no has añadido platos. Selecciona uno de la carta para comenzar.</p>:items.map(item=><article className="order-holo-line" key={item.key}>
+    {items.length===0?<p className="order-empty">Aún no has añadido platos.<br/>Elige tus platos desde la carta.</p>:items.map(item=><article className="order-holo-line" key={item.key}>
      <div className="order-holo-dish">{dishImages[item.name]&&<img src={dishImages[item.name]} alt="" loading="lazy"/>}<div className="order-holo-name"><strong>{item.name}</strong><small>Para: {item.guest}</small></div></div>
      <div className="order-holo-controls"><div className="order-qty"><button type="button" aria-label={'Reducir '+item.name} onClick={()=>onChangeQty(item.key,-1)}>−</button><span>{item.qty}</span><button type="button" aria-label={'Aumentar '+item.name} onClick={()=>onChangeQty(item.key,1)}>+</button></div><span className="order-holo-unit">{money(item.price)} c/u</span><strong className="order-holo-price">{money(item.price*item.qty)}</strong><button type="button" className="order-remove" aria-label={'Eliminar '+item.name} onClick={()=>onRemove(item.key)}>×</button></div>
     </article>)}
     <label className="order-notes-label" htmlFor="order-holo-notes">Notas para el restaurante (opcional)</label>
     <textarea id="order-holo-notes" value={notes} onChange={e=>onNotes(e.target.value)} placeholder="Ej.: sin cebolla o indicaciones para la cocina" maxLength={500} rows={2}/>
    </div>
-   <footer className="order-holo-footer"><button type="button" className="order-clear" disabled={!items.length} onClick={()=>items.forEach(item=>onRemove(item.key))}>Vaciar pedido</button><div className="order-holo-total"><span>Total:</span><strong>{money(total)}</strong></div><button type="button" className="order-send" disabled={!items.length} onClick={()=>setConfirmNotice(true)}>Enviar pedido</button></footer>
+   <footer className="order-holo-footer"><button type="button" className="order-add-dishes" onClick={onClose}>+ Añadir platos</button><button type="button" className="order-clear" disabled={!items.length} onClick={()=>items.forEach(item=>onRemove(item.key))}>Vaciar pedido</button><div className="order-holo-total"><span>Total:</span><strong>{money(total)}</strong></div><button type="button" className="order-send" disabled={!items.length} onClick={()=>setConfirmNotice(true)}>Enviar pedido</button></footer>
    {confirmNotice&&<p className="order-notice" role="status">Esta demo todavía no envía pedidos a cocina ni procesa pagos.</p>}
   </section>:<>
   <section ref={shapeRef} className="order-shape" role="dialog" aria-modal="true" aria-label="Mi pedido" style={{'--order-height':Math.min(78,Math.max(57,57+items.length*5))+'dvh'}}>
