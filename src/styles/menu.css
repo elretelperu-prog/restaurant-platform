@@ -1288,3 +1288,8 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  border:0!important;border-radius:0!important;background:transparent!important;
  box-shadow:none!important;outline-offset:3px!important;
 }
+
+/* V15.3 — 15% more transparent dish-circle glass, without fading its contents. */
+.theme-futurista .dish-bubble{
+ background:linear-gradient(115deg,rgba(8,28,52,.7565),rgba(9,36,62,.6885) 52%,rgba(5,22,45,.7395))!important;
+}
