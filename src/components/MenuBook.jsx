@@ -125,7 +125,9 @@ export default function MenuBook({onDish,popupOpen=false}){
  const selectDish=d=>onDish(d);
  return <section className={'stage '+(zoomed?'isZoomed':'')} ref={viewportRef}>
   <div className="bookWrap" ref={wrapRef}>
+   <div className="physical-book-cover" aria-hidden="true"><span className="physical-book-pages-left"/><span className="physical-book-pages-right"/></div>
    <div ref={bookRef} className="book">{pages.map((p,i)=><MenuPage key={i} page={p} pageIndex={i} onDish={selectDish}/>)}</div>
+   <div className="physical-book-spine" aria-hidden="true"><span className="physical-book-spine-light"/></div>
   </div>
  </section>
 }
