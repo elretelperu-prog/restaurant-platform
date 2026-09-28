@@ -1305,3 +1305,40 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .page .price{color:#f3f9ff!important}
 /* The resting paper corner remains visible; the PageFlip engine owns moving-sheet shadows. */
 .theme-futurista .cornerCue::before{background:linear-gradient(135deg,#fffdf3 0%,#f5e8ce 49%,#d9c3a0 79%,#a78a65 100%)!important}
+
+
+/* PREVIEW V17 — clearly dimensional open-book geometry, isolated from production. */
+.theme-futurista .bookWrap{filter:drop-shadow(0 10px 10px #0009)!important}
+.theme-futurista .bookWrap::before{
+ inset:.35% .25% 1.3%!important;border:2px solid #876846!important;border-radius:9px!important;
+ background:linear-gradient(90deg,#3c281a 0%,#89643e 1%,#3c291c 2.2%,#503a28 47%,#180f0c 49.7%,#180f0c 50.3%,#503a28 53%,#3c291c 97.8%,#89643e 99%,#3c281a 100%)!important;
+ box-shadow:0 2px 0 #f5e4c5,0 4px 0 #8f7758,0 6px 0 #f1ddba,0 8px 0 #a58b68,0 10px 0 #dfc49a,0 13px 0 #48321f,0 18px 18px #000b!important;
+}
+/* A recessed book hinge: shaded trough and thin reflected light, visible even at rest. */
+.theme-futurista .bookWrap::after{
+ content:"";position:absolute;z-index:4;pointer-events:none;
+ top:.7%;bottom:1.3%;left:50%;width:clamp(12px,3.3vw,21px);transform:translateX(-50%);
+ background:linear-gradient(90deg,transparent 0%,#4c321d42 17%,#39231483 36%,#2e1d138c 49%,#fff6df91 54%,#80613b52 70%,transparent 100%);
+ box-shadow:inset 2px 0 4px #4e321f22,inset -2px 0 4px #fff8e355;
+ opacity:.8;
+}
+.theme-futurista .page{
+ border-top:1px solid #e4cba5!important;border-bottom:1px solid #9b7951!important;
+ box-shadow:inset 0 0 0 1px #fff9e6,inset 0 0 23px #6e4d271c,0 1px 0 #ead5b1,0 2px 0 #c1a581,0 3px 0 #f1dfbd,0 4px 0 #8d7253!important;
+}
+/* PageFlip adds its own wrappers; directional shadows use page side rather than
+   fixed transforms so the flip/zoom engine keeps full control of the geometry. */
+.theme-futurista .page:nth-child(odd){
+ background:radial-gradient(ellipse at 48% 17%,#fffdf1c9,transparent 58%),linear-gradient(90deg,#b79b75 0%,#dbc5a4 2%,#f7ead0 8%,#fff7e5 28%,#f9efd9 72%,#f2e4c9 92%,#e7d2b0 100%)!important;
+ box-shadow:inset 22px 0 20px -19px #2e1b0f99,inset 7px 0 10px -8px #583c2570,inset 0 0 0 1px #fff9e6,0 1px 0 #ead5b1,0 2px 0 #c1a581,0 3px 0 #f1dfbd,0 4px 0 #8d7253!important;
+}
+.theme-futurista .page:nth-child(even){
+ background:radial-gradient(ellipse at 52% 17%,#fffdf1c9,transparent 58%),linear-gradient(90deg,#e7d2b0 0%,#f2e4c9 8%,#f9efd9 28%,#fff7e5 72%,#f7ead0 92%,#dbc5a4 98%,#b79b75 100%)!important;
+ box-shadow:inset -22px 0 20px -19px #2e1b0f99,inset -7px 0 10px -8px #583c2570,inset 0 0 0 1px #fff9e6,0 1px 0 #ead5b1,0 2px 0 #c1a581,0 3px 0 #f1dfbd,0 4px 0 #8d7253!important;
+}
+/* Physical paper edge: subtle highlights at top and bottom, without covering dish rows. */
+.theme-futurista .page::after{
+ opacity:.42!important;
+ background-image:radial-gradient(#795f3a26 .45px,transparent .7px),linear-gradient(180deg,#fffef1b0 0%,transparent 1.2%,transparent 97.8%,#8a68434a 100%),linear-gradient(90deg,#63401d20,transparent 12%,transparent 85%,#63401d1a)!important;
+ background-size:4px 4px,100% 100%,100% 100%!important;
+}
