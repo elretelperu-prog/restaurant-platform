@@ -1343,6 +1343,42 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  background-size:4px 4px,100% 100%,100% 100%!important;
 }
 
-/* PREVIEW DIAGNOSTIC V18 — unmistakable deployment markers, preview branch only. */
-.theme-futurista .bookWrap::after{content:"1" !important;position:absolute!important;top:22%!important;left:25%!important;bottom:auto!important;width:110px!important;height:140px!important;transform:translate(-50%,-50%)!important;z-index:9999!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#ffeb00!important;color:#111!important;border:7px solid #e00000!important;border-radius:18px!important;box-shadow:0 0 0 5px #fff,0 9px 28px #000a!important;opacity:1!important;font:900 108px/1 Arial,sans-serif!important;pointer-events:none!important}
-.theme-futurista .bookWrap::before{content:"2" !important;position:absolute!important;top:22%!important;left:75%!important;right:auto!important;bottom:auto!important;width:110px!important;height:140px!important;transform:translate(-50%,-50%)!important;z-index:9999!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#ffeb00!important;color:#111!important;border:7px solid #e00000!important;border-radius:18px!important;box-shadow:0 0 0 5px #fff,0 9px 28px #000a!important;opacity:1!important;font:900 108px/1 Arial,sans-serif!important;pointer-events:none!important}
+
+/* PREVIEW V19 — real structural cover + layered sheets + recessed spine.
+   The new DOM elements are decorative and cannot intercept taps, page flips or zoom. */
+.theme-futurista .bookWrap{isolation:isolate;overflow:visible!important;filter:drop-shadow(0 16px 14px #000b)!important}
+.theme-futurista .bookWrap::before,.theme-futurista .bookWrap::after{content:none!important;display:none!important}
+.theme-futurista .physical-book-cover{
+ position:absolute;z-index:0;pointer-events:none;inset:-5px -5px -10px;
+ border:3px solid #715139;border-radius:8px;
+ background:linear-gradient(90deg,#392419 0%,#6b4931 1%,#412b1d 3%,#6d4d32 46%,#24150f 49%,#24150f 51%,#6d4d32 54%,#412b1d 97%,#6b4931 99%,#392419 100%);
+ box-shadow:0 3px 0 #e9d9ba,0 5px 0 #9c7b57,0 7px 0 #f3e4c9,0 9px 0 #8d6a47,0 11px 0 #d8bd94,0 15px 0 #3c291c,0 22px 20px #000a;
+}
+.theme-futurista .physical-book-pages-left,.theme-futurista .physical-book-pages-right{
+ position:absolute;top:2px;bottom:2px;width:calc(50% - 3px);border:1px solid #b69b75;
+ background:repeating-linear-gradient(180deg,#fdf2d9 0 1px,#c6a77e 1px 2px,#f4e5c8 2px 3px);
+ box-shadow:0 3px 0 #b7986e,0 5px 0 #f4e4c6,0 7px 0 #a78a65;
+}
+.theme-futurista .physical-book-pages-left{left:3px;border-radius:3px 0 0 3px}
+.theme-futurista .physical-book-pages-right{right:3px;border-radius:0 3px 3px 0}
+.theme-futurista .book{position:relative!important;z-index:1!important;filter:none!important}
+.theme-futurista .physical-book-spine{
+ position:absolute;z-index:5;pointer-events:none;left:50%;top:0;bottom:0;
+ width:clamp(18px,5vw,34px);transform:translateX(-50%);
+ background:linear-gradient(90deg,transparent 0%,#5a39232b 8%,#4a2b195e 22%,#25140b99 40%,#21140dba 49%,#bba17b70 55%,#fdf0d143 65%,#64432b36 81%,transparent 100%);
+ box-shadow:inset 4px 0 8px -7px #1e120c,inset -3px 0 8px -7px #fff8e8;
+}
+.theme-futurista .physical-book-spine-light{
+ position:absolute;top:0;bottom:0;left:55%;width:1px;
+ background:linear-gradient(180deg,#f8e6c080,#e7c99b9c,#f8e6c080);
+ box-shadow:0 0 4px #fff0d4a3;
+}
+/* The sheets curve into the structural gutter; keep all menu text and rows unchanged. */
+.theme-futurista .page:nth-child(odd){
+ background:radial-gradient(ellipse at 54% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#9b7957 0%,#c6a681 1.2%,#e4cfab 3%,#fff7e4 10%,#fff9ea 38%,#f7e9ce 79%,#e2c9a4 96%,#ad8864 100%)!important;
+ box-shadow:inset 17px 0 18px -15px #3c2617a8,inset -11px 0 15px -11px #4d311c78,inset 0 0 0 1px #fff9e6,0 2px 0 #d4ba94!important;
+}
+.theme-futurista .page:nth-child(even){
+ background:radial-gradient(ellipse at 46% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#ad8864 0%,#e2c9a4 4%,#f7e9ce 21%,#fff9ea 62%,#fff7e4 90%,#e4cfab 97%,#c6a681 98.8%,#9b7957 100%)!important;
+ box-shadow:inset -17px 0 18px -15px #3c2617a8,inset 11px 0 15px -11px #4d311c78,inset 0 0 0 1px #fff9e6,0 2px 0 #d4ba94!important;
+}
