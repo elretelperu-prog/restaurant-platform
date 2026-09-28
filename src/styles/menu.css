@@ -1382,3 +1382,33 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  background:radial-gradient(ellipse at 46% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#ad8864 0%,#e2c9a4 4%,#f7e9ce 21%,#fff9ea 62%,#fff7e4 90%,#e4cfab 97%,#c6a681 98.8%,#9b7957 100%)!important;
  box-shadow:inset -17px 0 18px -15px #3c2617a8,inset 11px 0 15px -11px #4d311c78,inset 0 0 0 1px #fff9e6,0 2px 0 #d4ba94!important;
 }
+
+
+/* PREVIEW V20 — softer curved gutter, finer natural paper stack, dock clearance. */
+.theme-futurista .physical-book-spine{
+ width:clamp(26px,7vw,46px)!important;top:1px!important;bottom:2px!important;
+ background:linear-gradient(90deg,transparent 0%,#6b4b3020 13%,#58392040 27%,#35211467 40%,#27190f75 48%,#6f523b48 55%,#ead5b843 68%,#fff8e51a 80%,transparent 100%)!important;
+ box-shadow:none!important;opacity:.84!important;
+}
+.theme-futurista .physical-book-spine-light{left:58%!important;width:1px!important;opacity:.42!important;box-shadow:0 0 6px #fff2d9aa!important}
+.theme-futurista .physical-book-cover{
+ inset:-3px -3px -5px!important;border-width:2px!important;border-radius:6px!important;
+ box-shadow:0 1px 0 #f1e1c4,0 3px 0 #bda27e,0 5px 0 #ead9ba,0 7px 0 #806343,0 10px 12px #0008!important;
+}
+.theme-futurista .physical-book-pages-left,.theme-futurista .physical-book-pages-right{
+ top:2px!important;bottom:2px!important;
+ background:repeating-linear-gradient(180deg,#fdf2db 0 1px,#e4d0ad 1px 2px,#f7ead1 2px 4px,#c7ad89 4px 4.5px,#f9ecd5 4.5px 7px)!important;
+ box-shadow:0 1px 0 #e7d4b4,0 2px 0 #bda37d,0 3px 0 #f9ebd2,0 4px 0 #d7bd96!important;
+}
+.theme-futurista .bookWrap{filter:drop-shadow(0 8px 9px #0007)!important}
+.theme-futurista .page:nth-child(odd){
+ background:radial-gradient(ellipse at 54% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#bfa17f 0%,#ddc7a6 1.2%,#f1dfc2 4%,#fff7e4 11%,#fff9ea 38%,#f7e9ce 82%,#ead7b9 96%,#c3a17b 100%)!important;
+ box-shadow:inset 12px 0 17px -14px #4e321e8a,inset -12px 0 17px -14px #4e321e8a,inset 0 0 0 1px #fff9e6,0 1px 0 #d4ba94!important;
+}
+.theme-futurista .page:nth-child(even){
+ background:radial-gradient(ellipse at 46% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#c3a17b 0%,#ead7b9 4%,#f7e9ce 18%,#fff9ea 62%,#fff7e4 89%,#f1dfc2 96%,#ddc7a6 98.8%,#bfa17f 100%)!important;
+ box-shadow:inset -12px 0 17px -14px #4e321e8a,inset 12px 0 17px -14px #4e321e8a,inset 0 0 0 1px #fff9e6,0 1px 0 #d4ba94!important;
+}
+/* Leave visual space above the fixed dock without shrinking the menu or moving its dish rows. */
+.theme-futurista .physical-book-cover{bottom:-5px!important}
+.theme-futurista .physical-book-pages-left,.theme-futurista .physical-book-pages-right{bottom:2px!important}
