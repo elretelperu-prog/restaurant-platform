@@ -1463,27 +1463,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .physical-book-pages-right{right:1px!important;border-radius:0 6px 8px 0!important;filter:drop-shadow(2px 3px 2px #38251766)!important}
 
 
-/* PREVIEW V23 — open-V physical perspective, seen almost front-on.
-   Geometry only: no menu row, type, image, price or interaction changes. */
-.theme-futurista .bookWrap{perspective:1500px!important;perspective-origin:50% 45%!important}
-.theme-futurista .book{transform-style:preserve-3d!important}
-/* StPageFlip creates one visible half per side. A tiny Y-axis tilt makes the
-   outside edges feel closer while both facing edges recede into the binding. */
-.theme-futurista .stf__item:first-child{transform-origin:100% 50%!important;transform:rotateY(1.35deg)!important}
-.theme-futurista .stf__item:last-child{transform-origin:0% 50%!important;transform:rotateY(-1.35deg)!important}
-/* Keep the page face readable while making the upper/lower silhouettes reveal the V. */
-.theme-futurista .page:nth-child(odd){
- clip-path:polygon(.45% .22%,100% 0,100% 100%,.15% 99.72%)!important;
- box-shadow:inset -21px 0 24px -18px #4b2d1985,inset 8px 0 13px -12px #fff8e9,0 3px 4px -4px #2d1b10a0!important;
-}
-.theme-futurista .page:nth-child(even){
- clip-path:polygon(0 0,99.55% .22%,99.85% 99.72%,0 100%)!important;
- box-shadow:inset 21px 0 24px -18px #4b2d1985,inset -8px 0 13px -12px #fff8e9,0 3px 4px -4px #2d1b10a0!important;
-}
-/* Cover follows the same very-open V without stealing usable menu space. */
-.theme-futurista .physical-book-cover{clip-path:polygon(.45% .25%,49.7% 0,50.3% 0,99.55% .25%,100% 99.5%,50.25% 100%,49.75% 100%,0 99.5%)!important}
-
-
 /* PREVIEW V24 — frame the whole physical book so its silhouette can be perceived.
    Content/layout inside each page is unchanged; only the book viewport is inset. */
 .theme-futurista .bookWrap{
@@ -1508,22 +1487,4 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  .theme-futurista .bookWrap{width:92%!important;height:calc(100% - 48px)!important;margin:17px auto 31px!important}
 }
 
-
-/* PREVIEW V25 — PageFlip safety fix.
-   Never transform or clip StPageFlip's animated wrappers/pages: the library owns
-   that geometry while dragging. Physical depth remains on decorative layers only. */
-.theme-futurista .stf__item:first-child,
-.theme-futurista .stf__item:last-child{
- transform:none!important;
- transform-origin:initial!important;
-}
-.theme-futurista .page:nth-child(odd),
-.theme-futurista .page:nth-child(even){
- clip-path:none!important;
-}
-/* Keep V24's framed-book depth on non-interactive decoration. */
-.theme-futurista .physical-book-cover{
- clip-path:none!important;
- transform:perspective(1500px) rotateX(.18deg)!important;
- transform-origin:50% 50%!important;
-}
+/* PREVIEW V26 — PageFlip owns all animated geometry. No CSS transform/clip-path is applied to .stf__item or .page. V24 framing remains intact. */
