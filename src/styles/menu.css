@@ -1285,11 +1285,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 
 .theme-futurista .bookWrap{filter:drop-shadow(0 10px 10px #0009)!important}
-.theme-futurista .bookWrap::before{
- inset:.35% .25% 1.3%!important;border:2px solid #876846!important;border-radius:9px!important;
- background:linear-gradient(90deg,#3c281a 0%,#89643e 1%,#3c291c 2.2%,#503a28 47%,#180f0c 49.7%,#180f0c 50.3%,#503a28 53%,#3c291c 97.8%,#89643e 99%,#3c281a 100%)!important;
- box-shadow:0 2px 0 #f5e4c5,0 4px 0 #8f7758,0 6px 0 #f1ddba,0 8px 0 #a58b68,0 10px 0 #dfc49a,0 13px 0 #48321f,0 18px 18px #000b!important;
-}
 /* A recessed book hinge: shaded trough and thin reflected light, visible even at rest. */
 .theme-futurista .page{
  border-top:1px solid #e4cba5!important;border-bottom:1px solid #9b7951!important;
