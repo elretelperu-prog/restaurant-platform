@@ -1626,3 +1626,26 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .page:nth-child(even)::after{left:0;background:linear-gradient(90deg,rgba(29,15,8,.42) 0%,rgba(55,31,18,.24) 24%,rgba(87,54,31,.08) 60%,transparent 100%)}
 /* Refine lower SVG silhouette so the bottom also rises at the outer edges and dips at the binding. */
 .theme-futurista .physical-book-surface-svg{bottom:-5px!important;height:calc(100% + 24px)!important}
+
+
+/* PREVIEW V34 — UNIFIED PAGE SURFACE.
+   The PageFlip pages no longer paint a second rectangular sheet.
+   Their live content is printed directly over the curved SVG book surface. */
+.theme-futurista .page,
+.theme-futurista .page:nth-child(odd),
+.theme-futurista .page:nth-child(even){
+ background:transparent!important;
+ background-color:transparent!important;
+ box-shadow:none!important;
+ border-color:transparent!important;
+}
+/* Remove the rectangular paper tint/edge from PageFlip's visible face while preserving its DOM hit area. */
+.theme-futurista .page::before{background:transparent!important;box-shadow:none!important;border:0!important}
+/* The SVG is now the only resting paper surface. */
+.theme-futurista .physical-book-surface-svg{z-index:1!important}
+.theme-futurista .book{z-index:2!important;background:transparent!important}
+/* Keep only a narrow physical gutter; remove V33's broad overlay that made a second layer visible. */
+.theme-futurista .page:nth-child(odd)::after{right:0!important;width:9%!important;background:linear-gradient(90deg,transparent,rgba(55,31,18,.10),rgba(29,15,8,.25))!important}
+.theme-futurista .page:nth-child(even)::after{left:0!important;width:9%!important;background:linear-gradient(90deg,rgba(29,15,8,.25),rgba(55,31,18,.10),transparent)!important}
+/* Align printed content with the SVG sheet instead of shrinking it into an inner rectangle. */
+.theme-futurista .page{padding-left:4.5%!important;padding-right:4.5%!important}
