@@ -1273,11 +1273,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 /* PREVIEW V16 — physical open menu: paper, spine, edge depth and natural light.
    Visual-only: PageFlip, touch zoom, page selection and orders are unchanged. */
-.theme-futurista .page{
- border:1px solid #c7b08c!important;border-radius:1px!important;
- background:radial-gradient(ellipse at 43% 10%,rgba(255,255,247,.7),transparent 55%),linear-gradient(90deg,#e3d2b1 0%,#f4e9d1 5%,#fff8e8 22%,#f8efd9 73%,#e7d8ba 100%)!important;
- box-shadow:inset 0 0 0 1px #fffaf0a8,inset 0 0 16px #6e4d2722,0 0 1px #49351d55!important;
-}
 .theme-futurista .page::before{border-color:#a8875866!important;background:none!important;inset:5px 5px 8px!important}
 .theme-futurista .page h2{color:#30251a!important;text-shadow:0 1px 0 #fff8e9!important}
 .theme-futurista .page .sub,.theme-futurista .page .pg{color:#80694d!important}
