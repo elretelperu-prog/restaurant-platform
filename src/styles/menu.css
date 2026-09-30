@@ -1273,11 +1273,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 /* PREVIEW V16 — physical open menu: paper, spine, edge depth and natural light.
    Visual-only: PageFlip, touch zoom, page selection and orders are unchanged. */
-.theme-futurista .bookWrap::before{
- inset:1.2% .45% 1.4%!important;border:1px solid #6b5944!important;border-radius:5px!important;
- background:linear-gradient(90deg,#463323 0%,#74583b 1.2%,#2c201a 2%,#2d221c 49.5%,#140f0d 50%,#3b2c20 50.5%,#59432d 98%,#34271d 100%)!important;
- box-shadow:0 3px 0 #bba17a,0 5px 0 #4c3928,0 8px 0 #9d805d,0 13px 18px #0009,0 0 0 1px #d2b68d88!important;
-}
 .theme-futurista .page{
  border:1px solid #c7b08c!important;border-radius:1px!important;
  background:radial-gradient(ellipse at 43% 10%,rgba(255,255,247,.7),transparent 55%),linear-gradient(90deg,#e3d2b1 0%,#f4e9d1 5%,#fff8e8 22%,#f8efd9 73%,#e7d8ba 100%)!important;
