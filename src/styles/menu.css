@@ -1649,26 +1649,3 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .page:nth-child(even)::after{left:0!important;width:9%!important;background:linear-gradient(90deg,rgba(29,15,8,.25),rgba(55,31,18,.10),transparent)!important}
 /* Align printed content with the SVG sheet instead of shrinking it into an inner rectangle. */
 .theme-futurista .page{padding-left:4.5%!important;padding-right:4.5%!important}
-
-
-/* PREVIEW V35 — physical page-turn rendering + cleaner unified resting book. */
-/* During a turn the moving PageFlip sheet must be opaque; otherwise the next/previous
-   page prints through it and text/photos appear to vanish or pile on top of each other. */
-.theme-futurista .bookWrap.is-page-turning .page,
-.theme-futurista .bookWrap.is-page-turning .page:nth-child(odd),
-.theme-futurista .bookWrap.is-page-turning .page:nth-child(even){
- background:linear-gradient(90deg,#ead7b8 0%,#fff8e7 10%,#fffbed 72%,#dfc49d 100%)!important;
- background-color:#fff8e7!important;
- backface-visibility:hidden!important;
- -webkit-backface-visibility:hidden!important;
-}
-.theme-futurista .bookWrap.is-page-turning .page:nth-child(even){background:linear-gradient(90deg,#dfc49d 0%,#fffbed 28%,#fff8e7 90%,#ead7b8 100%)!important}
-.theme-futurista .bookWrap.is-page-turning .page::before{background:transparent!important}
-/* At rest there is still only one paper surface: the SVG. */
-.theme-futurista .bookWrap:not(.is-page-turning) .page{background:transparent!important;box-shadow:none!important}
-/* Refine the binding: less like a brown strip, more like paper falling into a narrow trough. */
-.theme-futurista .physical-book-surface-svg .surface-gutter-svg{opacity:.58!important;filter:blur(7px)!important}
-.theme-futurista .page:nth-child(odd)::after,.theme-futurista .page:nth-child(even)::after{width:6.5%!important;filter:blur(2px)!important}
-/* Slightly softer content bend: keeps the print readable while retaining the physical fall into the spine. */
-.theme-futurista .page:nth-child(odd)>h2,.theme-futurista .page:nth-child(odd)>.sub,.theme-futurista .page:nth-child(odd)>.item,.theme-futurista .page:nth-child(odd)>.pg{transform-origin:100% 50%!important;transform:perspective(620px) rotateY(-4deg) scaleX(.972)!important}
-.theme-futurista .page:nth-child(even)>h2,.theme-futurista .page:nth-child(even)>.sub,.theme-futurista .page:nth-child(even)>.item,.theme-futurista .page:nth-child(even)>.pg{transform-origin:0% 50%!important;transform:perspective(620px) rotateY(4deg) scaleX(.972)!important}
