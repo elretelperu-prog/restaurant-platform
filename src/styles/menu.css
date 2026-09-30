@@ -1507,3 +1507,23 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 @media (max-width:430px){
  .theme-futurista .bookWrap{width:92%!important;height:calc(100% - 48px)!important;margin:17px auto 31px!important}
 }
+
+
+/* PREVIEW V25 — PageFlip safety fix.
+   Never transform or clip StPageFlip's animated wrappers/pages: the library owns
+   that geometry while dragging. Physical depth remains on decorative layers only. */
+.theme-futurista .stf__item:first-child,
+.theme-futurista .stf__item:last-child{
+ transform:none!important;
+ transform-origin:initial!important;
+}
+.theme-futurista .page:nth-child(odd),
+.theme-futurista .page:nth-child(even){
+ clip-path:none!important;
+}
+/* Keep V24's framed-book depth on non-interactive decoration. */
+.theme-futurista .physical-book-cover{
+ clip-path:none!important;
+ transform:perspective(1500px) rotateX(.18deg)!important;
+ transform-origin:50% 50%!important;
+}
