@@ -1615,3 +1615,14 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .page:nth-child(odd)>h2,.theme-futurista .page:nth-child(odd)>.sub,.theme-futurista .page:nth-child(odd)>.item,.theme-futurista .page:nth-child(odd)>.pg{transform-origin:100% 50%!important;transform:perspective(720px) rotateY(-3deg) scaleX(.978)!important}
 .theme-futurista .page:nth-child(even)>h2,.theme-futurista .page:nth-child(even)>.sub,.theme-futurista .page:nth-child(even)>.item,.theme-futurista .page:nth-child(even)>.pg{transform-origin:0% 50%!important;transform:perspective(720px) rotateY(3deg) scaleX(.978)!important}
 @media(max-width:430px){.theme-futurista .bookWrap{width:89%!important;height:calc(100% - 58px)!important;margin:20px auto 38px!important}}
+
+
+/* PREVIEW V33 — content follows the open-book surface; PageFlip geometry remains untouched. */
+.theme-futurista .page:nth-child(odd)>h2,.theme-futurista .page:nth-child(odd)>.sub,.theme-futurista .page:nth-child(odd)>.item,.theme-futurista .page:nth-child(odd)>.pg{transform-origin:100% 50%!important;transform:perspective(560px) rotateY(-4.6deg) translateX(-1px) scaleX(.965)!important}
+.theme-futurista .page:nth-child(even)>h2,.theme-futurista .page:nth-child(even)>.sub,.theme-futurista .page:nth-child(even)>.item,.theme-futurista .page:nth-child(even)>.pg{transform-origin:0% 50%!important;transform:perspective(560px) rotateY(4.6deg) translateX(1px) scaleX(.965)!important}
+/* Progressive gutter falloff over the printed page, including photos and blue rules. */
+.theme-futurista .page:nth-child(odd)::after,.theme-futurista .page:nth-child(even)::after{content:"";position:absolute;z-index:6;pointer-events:none;top:2%;bottom:2%;width:18%;filter:blur(1.5px)}
+.theme-futurista .page:nth-child(odd)::after{right:0;background:linear-gradient(90deg,transparent 0%,rgba(87,54,31,.08) 40%,rgba(55,31,18,.24) 76%,rgba(29,15,8,.42) 100%)}
+.theme-futurista .page:nth-child(even)::after{left:0;background:linear-gradient(90deg,rgba(29,15,8,.42) 0%,rgba(55,31,18,.24) 24%,rgba(87,54,31,.08) 60%,transparent 100%)}
+/* Refine lower SVG silhouette so the bottom also rises at the outer edges and dips at the binding. */
+.theme-futurista .physical-book-surface-svg{bottom:-5px!important;height:calc(100% + 24px)!important}
