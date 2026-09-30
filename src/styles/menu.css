@@ -1647,3 +1647,24 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
   backface-visibility:hidden!important;
   -webkit-backface-visibility:hidden!important;
 }
+
+
+/* PREVIEW V42b — PAPER CURL VISIBILITY ONLY.
+   Keep V41 page isolation untouched. This changes only PageFlip's own fold/shadow
+   rendering so the corner reads as an opaque cream sheet rather than transparent glass. */
+.theme-futurista .v41-pageflip-scene .stf__item{
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
+}
+.theme-futurista .v41-pageflip-scene .stf__block{
+  background-color:#fff7e4!important;
+}
+/* PageFlip creates its curl shading with generated shadow elements. Increase paper
+   separation/contrast without exposing any inactive logical menu page. */
+.theme-futurista .v41-pageflip-scene [class*="shadow"]{
+  opacity:.78!important;
+  mix-blend-mode:multiply!important;
+}
+.theme-futurista .v41-pageflip-scene [class*="fold"]{
+  background-color:#fff7e4!important;
+}
