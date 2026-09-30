@@ -30,11 +30,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - Commit: `2fbc9cd76d27f8823e31d82e973199c103a1b5ee`
 - Removed an older `.theme-futurista .page:nth-child(even)` background/box-shadow rule that is superseded later in the stylesheet.
 - Expected effect: none; visual appearance and behaviour must remain unchanged.
-- Awaiting user verification in Vercel Preview before micro-cleanup 14.
+- User verified micro-cleanup 13 successfully in Vercel Preview.
+- **Micro-cleanup 14** completed: removed superseded physical-book spine/spine-light styling; these elements are disabled by later approved CSS.
+- Cleanup commit: `e62db0262748cc4220d33b304a5526bd4420f2d1`
+- Expected effect: none; awaiting user verification before micro-cleanup 15.
 
 ## Next action
 
-1. User verifies micro-cleanup 13 in Vercel Preview.
+1. User verifies micro-cleanup 14 in Vercel Preview.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
