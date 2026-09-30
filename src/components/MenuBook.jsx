@@ -11,6 +11,9 @@ export default function MenuBook({onDish,popupOpen=false}){
   const book=bookRef.current,wrap=wrapRef.current,viewport=viewportRef.current;
   const w=Math.max(150,Math.floor(wrap.clientWidth/2)),h=Math.max(480,Math.floor(wrap.clientHeight));
   const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:false});
+  // V39: PageFlip alone owns the moving sheet. Keep one DOM face per logical page.
+  // Avoid browser compositing hints on the page/content while the library applies its fold transform.
+  book.classList.add('single-face-pageflip');
 
   let timers=[],raf=0,token=0,scale=1,baseScale=1,pinchDist=0,panX=0,panY=0,panStartX=0,panStartY=0,basePanX=0,basePanY=0,mode='normal',moved=false,tappedDish=null,gestureShield=false;
   const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf)};
