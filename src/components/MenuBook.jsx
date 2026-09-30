@@ -125,7 +125,16 @@ export default function MenuBook({onDish,popupOpen=false}){
  const selectDish=d=>onDish(d);
  return <section className={'stage '+(zoomed?'isZoomed':'')} ref={viewportRef}>
   <div className="bookWrap" ref={wrapRef}>
-   <div className="physical-book-cover" aria-hidden="true"><span className="physical-book-pages-left"/><span className="physical-book-pages-right"/></div>\n   <div className="physical-book-surface" aria-hidden="true"><span className="surface-left"/><span className="surface-right"/><span className="surface-gutter"/></div>
+   <div className="physical-book-cover" aria-hidden="true"><span className="physical-book-pages-left"/><span className="physical-book-pages-right"/></div>\n   <svg className="physical-book-surface-svg" viewBox="0 0 1000 1500" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+     <linearGradient id="paperLeft" x1="0" x2="1"><stop offset="0" stopColor="#ead8b9"/><stop offset=".18" stopColor="#fff9e9"/><stop offset=".76" stopColor="#fffbed"/><stop offset="1" stopColor="#8b6042"/></linearGradient>
+     <linearGradient id="paperRight" x1="0" x2="1"><stop offset="0" stopColor="#8b6042"/><stop offset=".24" stopColor="#fffbed"/><stop offset=".82" stopColor="#fff9e9"/><stop offset="1" stopColor="#ead8b9"/></linearGradient>
+     <linearGradient id="gutter" x1="0" x2="1"><stop offset="0" stopColor="#6a4528" stopOpacity="0"/><stop offset=".5" stopColor="#25140b" stopOpacity=".72"/><stop offset="1" stopColor="#6a4528" stopOpacity="0"/></linearGradient>
+    </defs>
+    <path className="surface-page surface-page-left" d="M24 45 C175 9 365 8 500 72 L500 1432 C355 1380 180 1391 25 1450 C10 1120 10 365 24 45Z" fill="url(#paperLeft)"/>
+    <path className="surface-page surface-page-right" d="M500 72 C635 8 825 9 976 45 C990 365 990 1120 975 1450 C820 1391 645 1380 500 1432Z" fill="url(#paperRight)"/>
+    <path className="surface-gutter-svg" d="M465 62 C490 150 488 1320 462 1440 C487 1424 513 1424 538 1440 C512 1320 510 150 535 62 C513 78 487 78 465 62Z" fill="url(#gutter)"/>
+   </svg>
    <div ref={bookRef} className="book">{pages.map((p,i)=><MenuPage key={i} page={p} pageIndex={i} onDish={selectDish}/>)}</div>
    <div className="physical-book-spine" aria-hidden="true"><span className="physical-book-spine-light"/></div>
   </div>
