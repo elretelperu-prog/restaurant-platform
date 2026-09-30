@@ -24,9 +24,18 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - Marker-removal commit: `9b76ec799dbb23a84d9aaa63e5cff04c30a64ec0`
 - `src/components/MenuPage.jsx` is back to its V56 content.
 
+## Latest cleanup
+
+- **Micro-cleanup 13** completed.
+- Commit: `2fbc9cd76d27f8823e31d82e973199c103a1b5ee`
+- Removed an older `.theme-futurista .page:nth-child(even)` background/box-shadow rule that is superseded later in the stylesheet.
+- Expected effect: none; visual appearance and behaviour must remain unchanged.
+- Awaiting user verification in Vercel Preview before micro-cleanup 14.
+
 ## Next action
 
-1. Continue incremental code cleanup from the confirmed V56 lineage.
+1. User verifies micro-cleanup 13 in Vercel Preview.
+2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
 4. After each meaningful change: commit -> Vercel Preview -> user verifies -> continue.
