@@ -12,6 +12,9 @@ export default function MenuBook({onDish,popupOpen=false}){
   const w=Math.max(150,Math.floor(wrap.clientWidth/2)),h=Math.max(480,Math.floor(wrap.clientHeight));
   const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:false});
 
+  let turnClone=null;
+  const clearTurnClone=()=>{if(turnClone){turnClone.remove();turnClone=null;}wrap.classList.remove('has-turn-clone')};
+  const makeTurnClone=()=>{clearTurnClone();const rect=book.getBoundingClientRect(),wr=wrap.getBoundingClientRect();const idx=pf.getCurrentPageIndex();const forward=idx<pages.length-2;const pageIndex=Math.max(0,Math.min(pages.length-1,forward?idx+1:idx));const src=book.querySelectorAll('.page')[pageIndex];if(!src)return;turnClone=src.cloneNode(true);turnClone.classList.add('turn-page-clone',forward?'turn-forward':'turn-back');turnClone.style.width=(rect.width/2)+'px';turnClone.style.height=rect.height+'px';turnClone.style.left=((forward?rect.left+rect.width/2:rect.left)-wr.left)+'px';turnClone.style.top=(rect.top-wr.top)+'px';wrap.appendChild(turnClone);wrap.classList.add('has-turn-clone');};
   let timers=[],raf=0,token=0,scale=1,baseScale=1,pinchDist=0,panX=0,panY=0,panStartX=0,panStartY=0,basePanX=0,basePanY=0,mode='normal',moved=false,tappedDish=null,gestureShield=false;
   const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf)};
   const isBack=()=>pf.getCurrentPageIndex()>=2;
@@ -106,10 +109,12 @@ export default function MenuBook({onDish,popupOpen=false}){
   viewport.addEventListener('touchmove',move,{passive:false,capture:true});
   viewport.addEventListener('touchend',end,{passive:false,capture:true});
   viewport.addEventListener('touchcancel',end,{passive:false,capture:true});
-  pf.on('init',startIdle);pf.on('flip',startIdle);
+  pf.on('init',startIdle);
+  pf.on('changeState',e=>{const st=e?.data;if(st==='user_fold'||st==='fold_corner')makeTurnClone();if(st==='read')clearTurnClone();});
+  pf.on('flip',()=>{clearTurnClone();startIdle()});
   pf.loadFromHTML(book.querySelectorAll('.page'));
 
-  return()=>{restoreFoldRef.current=null;token++;clearTimers();viewport.removeEventListener('touchstart',down,true);viewport.removeEventListener('touchmove',move,true);viewport.removeEventListener('touchend',end,true);viewport.removeEventListener('touchcancel',end,true);pf.destroy()};
+  return()=>{clearTurnClone();restoreFoldRef.current=null;token++;clearTimers();viewport.removeEventListener('touchstart',down,true);viewport.removeEventListener('touchmove',move,true);viewport.removeEventListener('touchend',end,true);viewport.removeEventListener('touchcancel',end,true);pf.destroy()};
  },[]);
 
  // Repaint the resting curl after Circle + Thread finishes closing.
