@@ -1435,3 +1435,29 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  background:radial-gradient(ellipse at 46% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#79573e 0%,#9b7857 1%,#d3b58e 4%,#e9d6b7 10%,#f8ecd5 24%,#fff9ea 62%,#fff7e4 89%,#ead9bd 97%,#c2a581 100%)!important;
  box-shadow:inset 18px 0 20px -14px #53351d8c,inset 5px 0 8px -6px #3d25165e,inset -7px 0 10px -10px #5138205c,inset 0 0 0 1px #fff9e6!important;
 }
+
+
+/* PREVIEW V22 — subtle physical sheet curvature without touching menu content/layout. */
+.theme-futurista .physical-book-cover{
+ left:-4px!important;right:-4px!important;top:-3px!important;bottom:-4px!important;
+ border-radius:8px 8px 10px 10px!important;
+ box-shadow:0 1px 0 #f3e4c9,0 3px 0 #a98963,0 5px 0 #e4cfac,0 8px 12px #0007!important;
+}
+.theme-futurista .page{
+ transform-style:preserve-3d!important;
+ border-top-color:#e7d1ad!important;border-bottom-color:#aa8962!important;
+}
+/* Facing edges visually dip into the binding; outer edges catch a softer highlight. */
+.theme-futurista .page:nth-child(odd){
+ border-radius:5px 1px 2px 7px!important;
+ background:radial-gradient(ellipse at 8% 48%,#fffdf19c 0%,transparent 23%),radial-gradient(ellipse at 100% 50%,#72503638 0%,transparent 17%),linear-gradient(90deg,#b99b77 0%,#ead9bd 2.5%,#fff7e4 10%,#fff9ea 39%,#f8ecd5 76%,#ead8ba 90%,#cfb087 96%,#987454 99%,#725139 100%)!important;
+ box-shadow:inset 8px 0 12px -11px #fff9e8,inset -22px 0 24px -18px #4a2d198f,inset -7px 0 11px -9px #3420147d,inset 0 5px 7px -8px #fff,inset 0 -5px 7px -8px #5b3e2770!important;
+}
+.theme-futurista .page:nth-child(even){
+ border-radius:1px 5px 7px 2px!important;
+ background:radial-gradient(ellipse at 92% 48%,#fffdf19c 0%,transparent 23%),radial-gradient(ellipse at 0% 50%,#72503638 0%,transparent 17%),linear-gradient(90deg,#725139 0%,#987454 1%,#cfb087 4%,#ead8ba 10%,#f8ecd5 24%,#fff9ea 61%,#fff7e4 90%,#ead9bd 97.5%,#b99b77 100%)!important;
+ box-shadow:inset -8px 0 12px -11px #fff9e8,inset 22px 0 24px -18px #4a2d198f,inset 7px 0 11px -9px #3420147d,inset 0 5px 7px -8px #fff,inset 0 -5px 7px -8px #5b3e2770!important;
+}
+/* Contact shadows under the paper edges make the sheets read as lifted objects. */
+.theme-futurista .physical-book-pages-left{left:1px!important;border-radius:6px 0 0 8px!important;filter:drop-shadow(-2px 3px 2px #38251766)!important}
+.theme-futurista .physical-book-pages-right{right:1px!important;border-radius:0 6px 8px 0!important;filter:drop-shadow(2px 3px 2px #38251766)!important}
