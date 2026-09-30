@@ -13,7 +13,7 @@ export default function MenuBook({onDish,popupOpen=false}){
   const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:false});
   // V41: PageFlip is the only owner of page-turn geometry.
   // Mark the active scene so CSS can isolate the exact visible spread during Safari compositing.
-  book.classList.add('single-face-pageflip','v41-pageflip-scene');
+  book.classList.add('single-face-pageflip','v41-pageflip-scene','v42-pageflip-scene');
 
   let timers=[],raf=0,token=0,scale=1,baseScale=1,pinchDist=0,panX=0,panY=0,panStartX=0,panStartY=0,basePanX=0,basePanY=0,mode='normal',moved=false,tappedDish=null,gestureShield=false;
   const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf)};
@@ -109,6 +109,15 @@ export default function MenuBook({onDish,popupOpen=false}){
   viewport.addEventListener('touchmove',move,{passive:false,capture:true});
   viewport.addEventListener('touchend',end,{passive:false,capture:true});
   viewport.addEventListener('touchcancel',end,{passive:false,capture:true});
+  let turnTimer=0;
+  const markTurnFaces=()=>{
+   const current=pf.getCurrentPageIndex();
+   const left=current%2===0?current:current-1;
+   const candidates=new Set([left-1,left,left+1,left+2]);
+   book.querySelectorAll('.page').forEach((page,i)=>page.classList.toggle('v42-turn-face',candidates.has(i)));
+  };
+  const beginTurn=()=>{book.classList.add('v42-turning');markTurnFaces();clearTimeout(turnTimer)};
+  const finishTurn=()=>{clearTimeout(turnTimer);turnTimer=setTimeout(()=>book.classList.remove('v42-turning'),80)};
   const syncVisibleSpread=()=>{
    const current=pf.getCurrentPageIndex();
    const left=current%2===0?current:current-1;
@@ -119,12 +128,14 @@ export default function MenuBook({onDish,popupOpen=false}){
     page.setAttribute('aria-hidden',visible?'false':'true');
    });
   };
-  pf.on('init',()=>{syncVisibleSpread();startIdle()});
-  pf.on('flip',()=>{syncVisibleSpread();startIdle()});
+  pf.on('init',()=>{syncVisibleSpread();markTurnFaces();startIdle()});
+  pf.on('flip',()=>{syncVisibleSpread();markTurnFaces();finishTurn();startIdle()});
+  book.addEventListener('touchstart',beginTurn,{passive:true});
+  book.addEventListener('mousedown',beginTurn,{passive:true});
   pf.loadFromHTML(book.querySelectorAll('.page'));
   requestAnimationFrame(syncVisibleSpread);
 
-  return()=>{restoreFoldRef.current=null;token++;clearTimers();viewport.removeEventListener('touchstart',down,true);viewport.removeEventListener('touchmove',move,true);viewport.removeEventListener('touchend',end,true);viewport.removeEventListener('touchcancel',end,true);pf.destroy()};
+  return()=>{restoreFoldRef.current=null;token++;clearTimers();clearTimeout(turnTimer);book.removeEventListener('touchstart',beginTurn);book.removeEventListener('mousedown',beginTurn);viewport.removeEventListener('touchstart',down,true);viewport.removeEventListener('touchmove',move,true);viewport.removeEventListener('touchend',end,true);viewport.removeEventListener('touchcancel',end,true);pf.destroy()};
  },[]);
 
  // Repaint the resting curl after Circle + Thread finishes closing.
