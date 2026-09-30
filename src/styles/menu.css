@@ -1583,3 +1583,19 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .page:nth-child(odd)>h2,.theme-futurista .page:nth-child(odd)>.sub,.theme-futurista .page:nth-child(odd)>.item,.theme-futurista .page:nth-child(odd)>.pg{transform-origin:100% 50%!important;transform:perspective(1100px) rotateY(-1.15deg) scaleX(.994)!important}
 .theme-futurista .page:nth-child(even)>h2,.theme-futurista .page:nth-child(even)>.sub,.theme-futurista .page:nth-child(even)>.item,.theme-futurista .page:nth-child(even)>.pg{transform-origin:0% 50%!important;transform:perspective(1100px) rotateY(1.15deg) scaleX(.994)!important}
 @media(max-width:430px){.theme-futurista .bookWrap{width:89%!important;height:calc(100% - 58px)!important;margin:22px auto 36px!important}}
+
+
+/* PREVIEW V31 — NEW TECHNIQUE: independent curved surface, separate from PageFlip.
+   PageFlip remains rectangular and interactive; this layer supplies the physical geometry. */
+.theme-futurista .physical-book-surface{position:absolute;z-index:0;pointer-events:none;inset:-2px -1px -7px;filter:drop-shadow(0 10px 9px #0008)}
+.theme-futurista .physical-book-surface .surface-left,.theme-futurista .physical-book-surface .surface-right{position:absolute;top:0;bottom:0;width:50%;background:#f8ecd5}
+.theme-futurista .physical-book-surface .surface-left{left:0;clip-path:path('M 0 18 Q 95 0 100% 22 L 100% calc(100% - 20px) Q 90% calc(100% - 2px) 0 calc(100% - 13px) Z');border-radius:16px 0 20px 25px;box-shadow:inset -35px 0 34px -27px #382014a8,inset 8px 0 12px -10px #fff}
+.theme-futurista .physical-book-surface .surface-right{right:0;clip-path:path('M 0 22 Q 55% 0 100% 18 L 100% calc(100% - 13px) Q 10% calc(100% - 2px) 0 calc(100% - 20px) Z');border-radius:0 16px 25px 20px;box-shadow:inset 35px 0 34px -27px #382014a8,inset -8px 0 12px -10px #fff}
+.theme-futurista .physical-book-surface .surface-gutter{position:absolute;z-index:2;left:50%;top:12px;bottom:13px;width:46px;transform:translateX(-50%);background:radial-gradient(ellipse at center,#1d100a8c 0%,#4b2e1c5e 28%,#b48b6430 52%,transparent 74%);filter:blur(3px)}
+/* Page faces become transparent at their outer silhouette so the independent curved sheet shows through. */
+.theme-futurista .page{background-color:transparent!important}
+/* Printed matter bends toward the gutter while PageFlip wrappers themselves stay untouched. */
+.theme-futurista .page:nth-child(odd)>h2,.theme-futurista .page:nth-child(odd)>.sub,.theme-futurista .page:nth-child(odd)>.item,.theme-futurista .page:nth-child(odd)>.pg{transform-origin:100% 50%!important;transform:perspective(850px) rotateY(-2.2deg) scaleX(.986)!important}
+.theme-futurista .page:nth-child(even)>h2,.theme-futurista .page:nth-child(even)>.sub,.theme-futurista .page:nth-child(even)>.item,.theme-futurista .page:nth-child(even)>.pg{transform-origin:0% 50%!important;transform:perspective(850px) rotateY(2.2deg) scaleX(.986)!important}
+/* Narrow central occlusion makes photos/rules entering the binding disappear progressively like real print. */
+.theme-futurista .bookWrap:after{content:""!important;display:block!important;position:absolute!important;z-index:4!important;pointer-events:none!important;left:50%!important;top:15px!important;bottom:18px!important;width:26px!important;transform:translateX(-50%)!important;background:linear-gradient(90deg,transparent,#3c241538 24%,#170c0875 49%,#170c0875 51%,#3c241538 76%,transparent)!important;filter:blur(2px)!important;opacity:.9!important}
