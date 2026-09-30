@@ -1394,3 +1394,5 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
   backface-visibility:hidden!important;
   -webkit-backface-visibility:hidden!important;
 }
+
+/* V44 deployment trigger — no visual or functional change. */
