@@ -1649,3 +1649,25 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .page:nth-child(even)::after{left:0!important;width:9%!important;background:linear-gradient(90deg,rgba(29,15,8,.25),rgba(55,31,18,.10),transparent)!important}
 /* Align printed content with the SVG sheet instead of shrinking it into an inner rectangle. */
 .theme-futurista .page{padding-left:4.5%!important;padding-right:4.5%!important}
+
+
+/* PREVIEW V37 — PageFlip internal moving faces only.
+   Do not alter .page at rest and do not touch the curved physical SVG surface. */
+.theme-futurista .stf__parent .stf__block,
+.theme-futurista .stf__parent .stf__item{
+ backface-visibility:hidden!important;
+ -webkit-backface-visibility:hidden!important;
+}
+/* PageFlip's dynamically positioned sheets are the only elements that get an opaque paper backing. */
+.theme-futurista .stf__parent .stf__item[style*="position: absolute"]{
+ background-color:#fff8e8!important;
+ background-image:linear-gradient(90deg,rgba(202,174,137,.30),rgba(255,250,235,.98) 10%,rgba(255,251,238,.98) 88%,rgba(190,153,112,.28))!important;
+ overflow:hidden!important;
+ isolation:isolate!important;
+}
+.theme-futurista .stf__parent .stf__item[style*="position: absolute"] > .page{
+ background-color:#fff8e8!important;
+ background-image:linear-gradient(90deg,rgba(214,190,154,.18),rgba(255,250,235,.96) 9%,rgba(255,251,238,.96) 91%,rgba(201,170,130,.18))!important;
+ backface-visibility:hidden!important;
+ -webkit-backface-visibility:hidden!important;
+}
