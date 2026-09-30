@@ -1488,3 +1488,23 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 }
 
 /* PREVIEW V26 — PageFlip owns all animated geometry. No CSS transform/clip-path is applied to .stf__item or .page. V24 framing remains intact. */
+
+
+/* PREVIEW V27 — clean separation: dark stage → shadow → cover → paper.
+   Remove the striped simulated page stacks that visually filled the margin. */
+.theme-futurista .physical-book-pages-left,
+.theme-futurista .physical-book-pages-right{display:none!important}
+.theme-futurista .physical-book-cover{
+ background:linear-gradient(90deg,#4b3424 0%,#6c4d35 2%,#513824 48%,#342116 50%,#513824 52%,#6c4d35 98%,#4b3424 100%)!important;
+ border:2px solid #715139!important;
+ box-shadow:0 2px 2px #0007,0 10px 18px #000b!important;
+}
+.theme-futurista .bookWrap{
+ filter:drop-shadow(0 12px 11px #000a)!important;
+}
+/* The exposed area around the physical book is deliberately plain and dark. */
+.theme-futurista .bookStage,
+.theme-futurista .menu-stage,
+.theme-futurista .menuStage{
+ background:#07111f!important;
+}
