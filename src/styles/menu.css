@@ -1651,24 +1651,36 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .page{padding-left:4.5%!important;padding-right:4.5%!important}
 
 
-/* PREVIEW V38 — one transform plane for PageFlip content.
-   The curved SVG/shadows keep the physical-book illusion; menu children must not carry
-   independent 3D transforms because Safari composes them with PageFlip during a fold. */
-.theme-futurista .page>h2,
-.theme-futurista .page>.sub,
-.theme-futurista .page>.item,
-.theme-futurista .page>.pg{
- transform:none!important;
- transform-origin:50% 50%!important;
+/* PREVIEW V39 — SINGLE FACE architecture.
+   The SVG is the stationary physical book. PageFlip owns exactly one live DOM face per
+   logical page. No child, page or PageFlip wrapper receives a second CSS 3D transform. */
+.theme-futurista .single-face-pageflip,
+.theme-futurista .single-face-pageflip .page,
+.theme-futurista .single-face-pageflip .page>h2,
+.theme-futurista .single-face-pageflip .page>.sub,
+.theme-futurista .single-face-pageflip .page>.item,
+.theme-futurista .single-face-pageflip .page>.pg{
+ transform:none;
+ transform-style:flat!important;
+ will-change:auto!important;
+}
+.theme-futurista .single-face-pageflip .page>h2,
+.theme-futurista .single-face-pageflip .page>.sub,
+.theme-futurista .single-face-pageflip .page>.item,
+.theme-futurista .single-face-pageflip .page>.pg{
  backface-visibility:visible!important;
  -webkit-backface-visibility:visible!important;
 }
-/* Preserve the resting curvature with lighting only, not nested geometry. */
-.theme-futurista .page:nth-child(odd)::after{
- right:0!important;width:9%!important;
- background:linear-gradient(90deg,transparent,rgba(55,31,18,.10),rgba(29,15,8,.25))!important;
+/* Do not manufacture an extra paper face from pseudo-elements. */
+.theme-futurista .single-face-pageflip .page::before{content:none!important;display:none!important}
+/* Curvature at rest is lighting only; it never participates in PageFlip geometry. */
+.theme-futurista .single-face-pageflip .page:nth-child(odd)::after,
+.theme-futurista .single-face-pageflip .page:nth-child(even)::after{
+ content:""!important;display:block!important;position:absolute!important;pointer-events:none!important;
+ top:2%!important;bottom:2%!important;width:7%!important;z-index:6!important;filter:blur(1.2px)!important;
 }
-.theme-futurista .page:nth-child(even)::after{
- left:0!important;width:9%!important;
- background:linear-gradient(90deg,rgba(29,15,8,.25),rgba(55,31,18,.10),transparent)!important;
-}
+.theme-futurista .single-face-pageflip .page:nth-child(odd)::after{right:0!important;left:auto!important;background:linear-gradient(90deg,transparent,rgba(61,35,20,.22))!important}
+.theme-futurista .single-face-pageflip .page:nth-child(even)::after{left:0!important;right:auto!important;background:linear-gradient(90deg,rgba(61,35,20,.22),transparent)!important}
+/* Never restyle PageFlip's generated wrappers as pages. Their geometry remains library-owned. */
+.theme-futurista .stf__parent .stf__item,
+.theme-futurista .stf__parent .stf__block{background:transparent!important;box-shadow:none!important;filter:none!important}
