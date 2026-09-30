@@ -1284,7 +1284,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 
 
-.theme-futurista .bookWrap{filter:drop-shadow(0 10px 10px #0009)!important}
 /* A recessed book hinge: shaded trough and thin reflected light, visible even at rest. */
 .theme-futurista .page{
  border-top:1px solid #e4cba5!important;border-bottom:1px solid #9b7951!important;
