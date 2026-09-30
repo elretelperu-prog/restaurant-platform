@@ -17,20 +17,19 @@
 
 A temporary visual test was added to confirm that ChatGPT can modify the correct Preview branch:
 
-- Page 1 displays a very large **1**.
-- Page 2 displays a very large **2**.
-- The original pagination indicator (`1 / 4`, `2 / 4`, etc.) was restored after the first test.
-- File changed: `src/components/MenuPage.jsx`
-- Temporary visual-test commit: `dea48f67109d9b1874a5c0477a0838e484ca45ea`
-- User visually confirmed in Vercel Preview that the large **1** and **2** are visible.
+- The temporary large **1** and **2** markers were successfully shown and visually confirmed by the user in Vercel Preview.
+- They have now been removed completely.
+- The original pagination indicator (`1 / 4`, `2 / 4`, etc.) remains unchanged.
+- Verification-test commit: `dea48f67109d9b1874a5c0477a0838e484ca45ea`
+- Marker-removal commit: `9b76ec799dbb23a84d9aaa63e5cff04c30a64ec0`
+- `src/components/MenuPage.jsx` is back to its V56 content.
 
 ## Next action
 
-1. Remove the temporary large **1** and **2** markers completely.
+1. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
-3. Continue incremental code cleanup from the confirmed V56 lineage.
-4. Each cleanup must be small and isolated.
-5. After each meaningful change: commit -> Vercel Preview -> user verifies -> continue.
+3. Each cleanup must be small and isolated.
+4. After each meaningful change: commit -> Vercel Preview -> user verifies -> continue.
 
 ## Development rules
 
