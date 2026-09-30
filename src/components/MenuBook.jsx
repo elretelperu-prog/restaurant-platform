@@ -106,8 +106,6 @@ export default function MenuBook({onDish,popupOpen=false}){
   viewport.addEventListener('touchmove',move,{passive:false,capture:true});
   viewport.addEventListener('touchend',end,{passive:false,capture:true});
   viewport.addEventListener('touchcancel',end,{passive:false,capture:true});
-  const syncTurnState=e=>{const state=e?.data;wrap.classList.toggle('is-page-turning',state&&state!=='read');};
-  pf.on('changeState',syncTurnState);
   pf.on('init',startIdle);pf.on('flip',startIdle);
   pf.loadFromHTML(book.querySelectorAll('.page'));
 
