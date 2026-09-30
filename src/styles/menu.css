@@ -1287,10 +1287,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 /* A recessed book hinge: shaded trough and thin reflected light, visible even at rest. */
 /* PageFlip adds its own wrappers; directional shadows use page side rather than
    fixed transforms so the flip/zoom engine keeps full control of the geometry. */
-.theme-futurista .page:nth-child(odd){
- background:radial-gradient(ellipse at 48% 17%,#fffdf1c9,transparent 58%),linear-gradient(90deg,#b79b75 0%,#dbc5a4 2%,#f7ead0 8%,#fff7e5 28%,#f9efd9 72%,#f2e4c9 92%,#e7d2b0 100%)!important;
- box-shadow:inset 22px 0 20px -19px #2e1b0f99,inset 7px 0 10px -8px #583c2570,inset 0 0 0 1px #fff9e6,0 1px 0 #ead5b1,0 2px 0 #c1a581,0 3px 0 #f1dfbd,0 4px 0 #8d7253!important;
-}
 .theme-futurista .page:nth-child(even){
  background:radial-gradient(ellipse at 52% 17%,#fffdf1c9,transparent 58%),linear-gradient(90deg,#e7d2b0 0%,#f2e4c9 8%,#f9efd9 28%,#fff7e5 72%,#f7ead0 92%,#dbc5a4 98%,#b79b75 100%)!important;
  box-shadow:inset -22px 0 20px -19px #2e1b0f99,inset -7px 0 10px -8px #583c2570,inset 0 0 0 1px #fff9e6,0 1px 0 #ead5b1,0 2px 0 #c1a581,0 3px 0 #f1dfbd,0 4px 0 #8d7253!important;
