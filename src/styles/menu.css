@@ -1273,7 +1273,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 /* PREVIEW V16 — physical open menu: paper, spine, edge depth and natural light.
    Visual-only: PageFlip, touch zoom, page selection and orders are unchanged. */
-.theme-futurista .page::before{border-color:#a8875866!important;background:none!important;inset:5px 5px 8px!important}
 .theme-futurista .page h2{color:#30251a!important;text-shadow:0 1px 0 #fff8e9!important}
 .theme-futurista .page .sub,.theme-futurista .page .pg{color:#80694d!important}
 .theme-futurista .page .nm{color:#30251a!important;text-shadow:none!important}
