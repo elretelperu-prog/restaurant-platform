@@ -1534,153 +1534,89 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  .theme-futurista .bookWrap{width:89%!important}
 }
 
-
-/* PREVIEW V29 — realistic open-book silhouette from the approved visual mockup.
-   IMPORTANT: PageFlip's .stf__item geometry is untouched. Curvature is painted into
-   the page face so the printed content reads as bending into the gutter. */
+/* PREVIEW V40 — CLEAN CURVED BOOK REBUILD.
+   Experimental Vercel branch only.
+   V29–V39 were removed instead of overridden: one physical curved base, one PageFlip
+   face per logical page, and no nested 3D transforms on printed content. */
 .theme-futurista .bookWrap{
- width:89%!important;height:calc(100% - 58px)!important;margin:22px auto 36px!important;
+ width:89%!important;
+ height:calc(100% - 58px)!important;
+ margin:20px auto 38px!important;
+ position:relative!important;
+ align-self:center!important;
+ perspective:1500px!important;
+ perspective-origin:50% 45%!important;
+ transform-origin:50% 50%!important;
  filter:drop-shadow(0 5px 4px #0005) drop-shadow(0 18px 16px #000c)!important;
 }
 .theme-futurista .physical-book-cover{
- left:-6px!important;right:-6px!important;top:-4px!important;bottom:-9px!important;
- border:1px solid #74553a!important;border-radius:9px 9px 13px 13px!important;
- background:linear-gradient(90deg,#4c3322,#67472f 2%,#543a27 47.5%,#2d1c12 50%,#543a27 52.5%,#67472f 98%,#4c3322)!important;
+ left:-7px!important;right:-7px!important;top:-6px!important;bottom:-10px!important;
+ border:1px solid #74553a!important;
+ border-radius:12px 12px 19px 19px!important;
+ background:linear-gradient(90deg,#493022,#67472f 3%,#543824 47%,#2c1b12 50%,#543824 53%,#67472f 97%,#493022)!important;
  box-shadow:0 3px 0 #a8835d,0 8px 0 #51351f,0 15px 20px #000a!important;
 }
-/* Printed sheet lighting: broad paper crown + deep but soft gutter. */
-.theme-futurista .page:nth-child(odd){
- border-radius:8px 1px 10px 12px!important;
- background:radial-gradient(ellipse at 18% 48%,#fffdf5 0%,#fff9e9 44%,transparent 72%),linear-gradient(90deg,#d8bd97 0%,#f2e2c7 5%,#fff9ea 58%,#f4e5cd 80%,#dfc6a3 91%,#b58e68 97%,#755039 100%)!important;
- box-shadow:inset -34px 0 34px -27px #3820149c,inset -14px 0 20px -15px #70472b80,inset 7px 0 12px -11px #fff,inset 0 -9px 13px -13px #50321e8a!important;
+.theme-futurista .physical-book-pages-left,
+.theme-futurista .physical-book-pages-right,
+.theme-futurista .physical-book-spine,
+.theme-futurista .physical-book-spine-light{display:none!important}
+
+/* This SVG is the only stationary paper silhouette. */
+.theme-futurista .physical-book-surface-svg{
+ display:block!important;
+ position:absolute!important;
+ z-index:1!important;
+ pointer-events:none!important;
+ left:-4px!important;top:-7px!important;
+ width:calc(100% + 8px)!important;
+ height:calc(100% + 22px)!important;
+ overflow:visible!important;
+ filter:drop-shadow(0 10px 8px #0007)!important;
 }
-.theme-futurista .page:nth-child(even){
- border-radius:1px 8px 12px 10px!important;
- background:radial-gradient(ellipse at 82% 48%,#fffdf5 0%,#fff9e9 44%,transparent 72%),linear-gradient(90deg,#755039 0%,#b58e68 3%,#dfc6a3 9%,#f4e5cd 20%,#fff9ea 42%,#fffdf5 100%)!important;
- box-shadow:inset 34px 0 34px -27px #3820149c,inset 14px 0 20px -15px #70472b80,inset -7px 0 12px -11px #fff,inset 0 -9px 13px -13px #50321e8a!important;
+.theme-futurista .physical-book-surface-svg .surface-page{
+ stroke:#c7a57d!important;stroke-width:2!important;vector-effect:non-scaling-stroke!important;
 }
-/* Bend the PRINT near the binding, not PageFlip's animated wrapper. This makes
-   photos/rules/type nearest the gutter visually follow the paper curvature. */
-.theme-futurista .page:nth-child(odd) .page-inner{
- transform-origin:100% 50%!important;transform:perspective(1800px) rotateY(-.55deg) scaleX(.997)!important;
-}
-.theme-futurista .page:nth-child(even) .page-inner{
- transform-origin:0% 50%!important;transform:perspective(1800px) rotateY(.55deg) scaleX(.997)!important;
-}
-/* Soft center trough independent of PageFlip interaction; no ribbon/bookmark. */
-.theme-futurista .bookWrap::after{
- content:"";position:absolute;z-index:8;pointer-events:none;left:50%;top:7px;bottom:8px;width:34px;transform:translateX(-50%);
- background:linear-gradient(90deg,transparent 0%,#3d25161a 23%,#2b180f52 46%,#160d0870 50%,#2b180f52 54%,#3d25161a 77%,transparent 100%);
- filter:blur(2px);opacity:.78;
-}
-@media (max-width:430px){.theme-futurista .bookWrap{width:89%!important;height:calc(100% - 54px)!important;margin:20px auto 34px!important}}
+.theme-futurista .physical-book-surface-svg .surface-gutter-svg{filter:blur(4px)!important}
 
-/* V30 live curved-book preview */
-.theme-futurista .bookWrap{width:89%!important;height:calc(100% - 62px)!important;margin:24px auto 38px!important;filter:drop-shadow(0 19px 17px #000c)!important}
-.theme-futurista .physical-book-cover{left:-8px!important;right:-8px!important;top:-5px!important;bottom:-12px!important;border-radius:13px 13px 22px 22px!important;border:1px solid #745239!important;background:linear-gradient(90deg,#3f291b,#68472f 3%,#543723 46%,#2b190f 50%,#543723 54%,#68472f 97%,#3f291b)!important;box-shadow:0 4px 0 #9a744f,0 10px 0 #4a2f1d,0 18px 22px #000a!important}
-.theme-futurista .page:nth-child(odd){border-radius:14px 2px 17px 24px!important;background:linear-gradient(90deg,#d5b991 0%,#f5e7cd 5%,#fffbed 58%,#f0dec0 84%,#c9a47d 94%,#8b6042 99%,#5a3928 100%)!important;box-shadow:inset -42px 0 42px -32px #2f190da8,inset -18px 0 25px -18px #6841288a,inset 9px 0 14px -13px #fff,inset 0 -15px 18px -16px #53321d99!important}
-.theme-futurista .page:nth-child(even){border-radius:2px 14px 24px 17px!important;background:linear-gradient(90deg,#5a3928 0%,#8b6042 1%,#c9a47d 6%,#f0dec0 16%,#fffbed 42%,#fffef7 100%)!important;box-shadow:inset 42px 0 42px -32px #2f190da8,inset 18px 0 25px -18px #6841288a,inset -9px 0 14px -13px #fff,inset 0 -15px 18px -16px #53321d99!important}
-.theme-futurista .page:nth-child(odd)>h2,.theme-futurista .page:nth-child(odd)>.sub,.theme-futurista .page:nth-child(odd)>.item,.theme-futurista .page:nth-child(odd)>.pg{transform-origin:100% 50%!important;transform:perspective(1100px) rotateY(-1.15deg) scaleX(.994)!important}
-.theme-futurista .page:nth-child(even)>h2,.theme-futurista .page:nth-child(even)>.sub,.theme-futurista .page:nth-child(even)>.item,.theme-futurista .page:nth-child(even)>.pg{transform-origin:0% 50%!important;transform:perspective(1100px) rotateY(1.15deg) scaleX(.994)!important}
-@media(max-width:430px){.theme-futurista .bookWrap{width:89%!important;height:calc(100% - 58px)!important;margin:22px auto 36px!important}}
-
-
-/* PREVIEW V31 — NEW TECHNIQUE: independent curved surface, separate from PageFlip.
-   PageFlip remains rectangular and interactive; this layer supplies the physical geometry. */
-.theme-futurista .physical-book-surface{position:absolute;z-index:0;pointer-events:none;inset:-2px -1px -7px;filter:drop-shadow(0 10px 9px #0008)}
-.theme-futurista .physical-book-surface .surface-left,.theme-futurista .physical-book-surface .surface-right{position:absolute;top:0;bottom:0;width:50%;background:#f8ecd5}
-.theme-futurista .physical-book-surface .surface-left{left:0;clip-path:path('M 0 18 Q 95 0 100% 22 L 100% calc(100% - 20px) Q 90% calc(100% - 2px) 0 calc(100% - 13px) Z');border-radius:16px 0 20px 25px;box-shadow:inset -35px 0 34px -27px #382014a8,inset 8px 0 12px -10px #fff}
-.theme-futurista .physical-book-surface .surface-right{right:0;clip-path:path('M 0 22 Q 55% 0 100% 18 L 100% calc(100% - 13px) Q 10% calc(100% - 2px) 0 calc(100% - 20px) Z');border-radius:0 16px 25px 20px;box-shadow:inset 35px 0 34px -27px #382014a8,inset -8px 0 12px -10px #fff}
-.theme-futurista .physical-book-surface .surface-gutter{position:absolute;z-index:2;left:50%;top:12px;bottom:13px;width:46px;transform:translateX(-50%);background:radial-gradient(ellipse at center,#1d100a8c 0%,#4b2e1c5e 28%,#b48b6430 52%,transparent 74%);filter:blur(3px)}
-/* Page faces become transparent at their outer silhouette so the independent curved sheet shows through. */
-.theme-futurista .page{background-color:transparent!important}
-/* Printed matter bends toward the gutter while PageFlip wrappers themselves stay untouched. */
-.theme-futurista .page:nth-child(odd)>h2,.theme-futurista .page:nth-child(odd)>.sub,.theme-futurista .page:nth-child(odd)>.item,.theme-futurista .page:nth-child(odd)>.pg{transform-origin:100% 50%!important;transform:perspective(850px) rotateY(-2.2deg) scaleX(.986)!important}
-.theme-futurista .page:nth-child(even)>h2,.theme-futurista .page:nth-child(even)>.sub,.theme-futurista .page:nth-child(even)>.item,.theme-futurista .page:nth-child(even)>.pg{transform-origin:0% 50%!important;transform:perspective(850px) rotateY(2.2deg) scaleX(.986)!important}
-/* Narrow central occlusion makes photos/rules entering the binding disappear progressively like real print. */
-.theme-futurista .bookWrap:after{content:""!important;display:block!important;position:absolute!important;z-index:4!important;pointer-events:none!important;left:50%!important;top:15px!important;bottom:18px!important;width:26px!important;transform:translateX(-50%)!important;background:linear-gradient(90deg,transparent,#3c241538 24%,#170c0875 49%,#170c0875 51%,#3c241538 76%,transparent)!important;filter:blur(2px)!important;opacity:.9!important}
-
-
-/* PREVIEW V32 — true SVG book geometry + recentered live menu. */
-.theme-futurista .bookWrap{width:89%!important;height:calc(100% - 58px)!important;margin:20px auto 38px!important;left:auto!important;right:auto!important;transform-origin:50% 50%!important}
-.theme-futurista .physical-book-surface{display:none!important}
-.theme-futurista .physical-book-surface-svg{display:block;position:absolute;z-index:0;pointer-events:none;left:-4px;right:-4px;top:-7px;width:calc(100% + 8px);height:calc(100% + 18px);overflow:visible;filter:drop-shadow(0 12px 9px #0008)}
-.theme-futurista .physical-book-surface-svg .surface-page{stroke:#d0b28c;stroke-width:2;vector-effect:non-scaling-stroke}
-.theme-futurista .physical-book-surface-svg .surface-gutter-svg{filter:blur(5px)}
-/* Keep the real PageFlip interaction plane centred. The SVG underneath supplies silhouette only. */
-.theme-futurista .book{position:relative!important;z-index:2!important;margin-left:auto!important;margin-right:auto!important}
-/* Remove the V31 centre overlay: SVG now owns the gutter. */
-.theme-futurista .bookWrap:after{display:none!important;content:none!important}
-/* More visible printed-page fall toward the binding without moving PageFlip wrappers. */
-.theme-futurista .page:nth-child(odd)>h2,.theme-futurista .page:nth-child(odd)>.sub,.theme-futurista .page:nth-child(odd)>.item,.theme-futurista .page:nth-child(odd)>.pg{transform-origin:100% 50%!important;transform:perspective(720px) rotateY(-3deg) scaleX(.978)!important}
-.theme-futurista .page:nth-child(even)>h2,.theme-futurista .page:nth-child(even)>.sub,.theme-futurista .page:nth-child(even)>.item,.theme-futurista .page:nth-child(even)>.pg{transform-origin:0% 50%!important;transform:perspective(720px) rotateY(3deg) scaleX(.978)!important}
-@media(max-width:430px){.theme-futurista .bookWrap{width:89%!important;height:calc(100% - 58px)!important;margin:20px auto 38px!important}}
-
-
-/* PREVIEW V33 — content follows the open-book surface; PageFlip geometry remains untouched. */
-.theme-futurista .page:nth-child(odd)>h2,.theme-futurista .page:nth-child(odd)>.sub,.theme-futurista .page:nth-child(odd)>.item,.theme-futurista .page:nth-child(odd)>.pg{transform-origin:100% 50%!important;transform:perspective(560px) rotateY(-4.6deg) translateX(-1px) scaleX(.965)!important}
-.theme-futurista .page:nth-child(even)>h2,.theme-futurista .page:nth-child(even)>.sub,.theme-futurista .page:nth-child(even)>.item,.theme-futurista .page:nth-child(even)>.pg{transform-origin:0% 50%!important;transform:perspective(560px) rotateY(4.6deg) translateX(1px) scaleX(.965)!important}
-/* Progressive gutter falloff over the printed page, including photos and blue rules. */
-.theme-futurista .page:nth-child(odd)::after,.theme-futurista .page:nth-child(even)::after{content:"";position:absolute;z-index:6;pointer-events:none;top:2%;bottom:2%;width:18%;filter:blur(1.5px)}
-.theme-futurista .page:nth-child(odd)::after{right:0;background:linear-gradient(90deg,transparent 0%,rgba(87,54,31,.08) 40%,rgba(55,31,18,.24) 76%,rgba(29,15,8,.42) 100%)}
-.theme-futurista .page:nth-child(even)::after{left:0;background:linear-gradient(90deg,rgba(29,15,8,.42) 0%,rgba(55,31,18,.24) 24%,rgba(87,54,31,.08) 60%,transparent 100%)}
-/* Refine lower SVG silhouette so the bottom also rises at the outer edges and dips at the binding. */
-.theme-futurista .physical-book-surface-svg{bottom:-5px!important;height:calc(100% + 24px)!important}
-
-
-/* PREVIEW V34 — UNIFIED PAGE SURFACE.
-   The PageFlip pages no longer paint a second rectangular sheet.
-   Their live content is printed directly over the curved SVG book surface. */
-.theme-futurista .page,
-.theme-futurista .page:nth-child(odd),
-.theme-futurista .page:nth-child(even){
+/* PageFlip gets a clean interaction/rendering plane. It alone owns turn geometry. */
+.theme-futurista .book{
+ position:relative!important;z-index:2!important;
+ margin-left:auto!important;margin-right:auto!important;
  background:transparent!important;
- background-color:transparent!important;
- box-shadow:none!important;
- border-color:transparent!important;
 }
-/* Remove the rectangular paper tint/edge from PageFlip's visible face while preserving its DOM hit area. */
-.theme-futurista .page::before{background:transparent!important;box-shadow:none!important;border:0!important}
-/* The SVG is now the only resting paper surface. */
-.theme-futurista .physical-book-surface-svg{z-index:1!important}
-.theme-futurista .book{z-index:2!important;background:transparent!important}
-/* Keep only a narrow physical gutter; remove V33's broad overlay that made a second layer visible. */
-.theme-futurista .page:nth-child(odd)::after{right:0!important;width:9%!important;background:linear-gradient(90deg,transparent,rgba(55,31,18,.10),rgba(29,15,8,.25))!important}
-.theme-futurista .page:nth-child(even)::after{left:0!important;width:9%!important;background:linear-gradient(90deg,rgba(29,15,8,.25),rgba(55,31,18,.10),transparent)!important}
-/* Align printed content with the SVG sheet instead of shrinking it into an inner rectangle. */
-.theme-futurista .page{padding-left:4.5%!important;padding-right:4.5%!important}
-
-
-/* PREVIEW V39 — SINGLE FACE architecture.
-   The SVG is the stationary physical book. PageFlip owns exactly one live DOM face per
-   logical page. No child, page or PageFlip wrapper receives a second CSS 3D transform. */
-.theme-futurista .single-face-pageflip,
+.theme-futurista .single-face-pageflip{transform-style:flat!important}
 .theme-futurista .single-face-pageflip .page,
-.theme-futurista .single-face-pageflip .page>h2,
-.theme-futurista .single-face-pageflip .page>.sub,
-.theme-futurista .single-face-pageflip .page>.item,
-.theme-futurista .single-face-pageflip .page>.pg{
- transform:none;
- transform-style:flat!important;
+.theme-futurista .single-face-pageflip .page:nth-child(odd),
+.theme-futurista .single-face-pageflip .page:nth-child(even){
+ background:transparent!important;background-color:transparent!important;
+ border:0!important;box-shadow:none!important;
+ border-radius:0!important;
+ transform:none!important;transform-style:flat!important;
  will-change:auto!important;
+ padding-left:4.5%!important;padding-right:4.5%!important;
 }
+/* No legacy paper/lighting pseudo-faces in front of the curved base. */
+.theme-futurista .single-face-pageflip .page::before,
+.theme-futurista .single-face-pageflip .page::after{
+ content:none!important;display:none!important;
+}
+/* Printed matter is a single flat DOM face. No independent h2/item/photo/price transforms. */
 .theme-futurista .single-face-pageflip .page>h2,
 .theme-futurista .single-face-pageflip .page>.sub,
 .theme-futurista .single-face-pageflip .page>.item,
 .theme-futurista .single-face-pageflip .page>.pg{
- backface-visibility:visible!important;
- -webkit-backface-visibility:visible!important;
+ position:relative!important;z-index:2!important;
+ transform:none!important;transform-style:flat!important;
+ will-change:auto!important;
+ backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;
 }
-/* Do not manufacture an extra paper face from pseudo-elements. */
-.theme-futurista .single-face-pageflip .page::before{content:none!important;display:none!important}
-/* Curvature at rest is lighting only; it never participates in PageFlip geometry. */
-.theme-futurista .single-face-pageflip .page:nth-child(odd)::after,
-.theme-futurista .single-face-pageflip .page:nth-child(even)::after{
- content:""!important;display:block!important;position:absolute!important;pointer-events:none!important;
- top:2%!important;bottom:2%!important;width:7%!important;z-index:6!important;filter:blur(1.2px)!important;
-}
-.theme-futurista .single-face-pageflip .page:nth-child(odd)::after{right:0!important;left:auto!important;background:linear-gradient(90deg,transparent,rgba(61,35,20,.22))!important}
-.theme-futurista .single-face-pageflip .page:nth-child(even)::after{left:0!important;right:auto!important;background:linear-gradient(90deg,rgba(61,35,20,.22),transparent)!important}
-/* Never restyle PageFlip's generated wrappers as pages. Their geometry remains library-owned. */
+.theme-futurista .single-face-pageflip .page .item{background:transparent!important}
+
+/* Do not decorate PageFlip-generated wrappers; they must remain library-owned. */
 .theme-futurista .stf__parent .stf__item,
-.theme-futurista .stf__parent .stf__block{background:transparent!important;box-shadow:none!important;filter:none!important}
+.theme-futurista .stf__parent .stf__block{
+ background:transparent!important;box-shadow:none!important;filter:none!important;
+}
+@media(max-width:430px){
+ .theme-futurista .bookWrap{width:89%!important;height:calc(100% - 58px)!important;margin:20px auto 38px!important}
+}
