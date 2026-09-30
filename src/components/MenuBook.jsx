@@ -11,9 +11,9 @@ export default function MenuBook({onDish,popupOpen=false}){
   const book=bookRef.current,wrap=wrapRef.current,viewport=viewportRef.current;
   const w=Math.max(150,Math.floor(wrap.clientWidth/2)),h=Math.max(480,Math.floor(wrap.clientHeight));
   const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:false});
-  // V39: PageFlip alone owns the moving sheet. Keep one DOM face per logical page.
-  // Avoid browser compositing hints on the page/content while the library applies its fold transform.
-  book.classList.add('single-face-pageflip');
+  // V41: PageFlip is the only owner of page-turn geometry.
+  // Mark the active scene so CSS can isolate the exact visible spread during Safari compositing.
+  book.classList.add('single-face-pageflip','v41-pageflip-scene');
 
   let timers=[],raf=0,token=0,scale=1,baseScale=1,pinchDist=0,panX=0,panY=0,panStartX=0,panStartY=0,basePanX=0,basePanY=0,mode='normal',moved=false,tappedDish=null,gestureShield=false;
   const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf)};
@@ -109,8 +109,20 @@ export default function MenuBook({onDish,popupOpen=false}){
   viewport.addEventListener('touchmove',move,{passive:false,capture:true});
   viewport.addEventListener('touchend',end,{passive:false,capture:true});
   viewport.addEventListener('touchcancel',end,{passive:false,capture:true});
-  pf.on('init',startIdle);pf.on('flip',startIdle);
+  const syncVisibleSpread=()=>{
+   const current=pf.getCurrentPageIndex();
+   const left=current%2===0?current:current-1;
+   const right=left+1;
+   book.querySelectorAll('.page').forEach((page,i)=>{
+    const visible=i===left||i===right;
+    page.classList.toggle('v41-visible-page',visible);
+    page.setAttribute('aria-hidden',visible?'false':'true');
+   });
+  };
+  pf.on('init',()=>{syncVisibleSpread();startIdle()});
+  pf.on('flip',()=>{syncVisibleSpread();startIdle()});
   pf.loadFromHTML(book.querySelectorAll('.page'));
+  requestAnimationFrame(syncVisibleSpread);
 
   return()=>{restoreFoldRef.current=null;token++;clearTimers();viewport.removeEventListener('touchstart',down,true);viewport.removeEventListener('touchmove',move,true);viewport.removeEventListener('touchend',end,true);viewport.removeEventListener('touchcancel',end,true);pf.destroy()};
  },[]);
