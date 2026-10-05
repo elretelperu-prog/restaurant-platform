@@ -109,6 +109,9 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - **Stage 2 PageFlip closed-loop work started.** Commit `73800b06b2b05a00efdf7ee3dbbd7e399e4f8041` stabilizes touch ownership: normal one-finger page gestures are left to StPageFlip, idle fold animation is stopped while PageFlip is folding/flipping, and a conservative horizontal-swipe fallback completes next/previous turns if a mobile browser interrupts PageFlip's internal gesture. Dish tap interception and pinch/pan paths remain intact.
 - Static code checks passed for PageFlip fallback, state guard, dish tap capture, pinch and pan paths. Await physical iPhone + Android verification. Do not start Stage 3 until the user explicitly says `Etapa 2 aprobada`.
 
+
+- User supplied video `IMG_1543.mp4`: observed failure is not merely swipe recognition; during the turn the destination spread is not progressively revealed and instead appears abruptly at completion. Root cause identified in V41 Safari isolation CSS: inactive logical pages were forced to `visibility:hidden`, `opacity:0`, `content-visibility:hidden`, `contain:strict`, preventing PageFlip from painting the reverse/destination sheet during the fold. Stage 2 repair commit `c11793b07dfac7acad98cd2e03325aa7e7d6bb39` keeps all PageFlip sheets paintable during animation while inactive pages remain non-interactive. Await physical verification; Stage 3 remains blocked.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
