@@ -1312,17 +1312,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .physical-book-pages-left{left:3px;border-radius:3px 0 0 3px}
 .theme-futurista .physical-book-pages-right{right:3px;border-radius:0 3px 3px 0}
 .theme-futurista .book{position:relative!important;z-index:1!important;filter:none!important}
-.theme-futurista .physical-book-spine{
- position:absolute;z-index:5;pointer-events:none;left:50%;top:0;bottom:0;
- width:clamp(18px,5vw,34px);transform:translateX(-50%);
- background:linear-gradient(90deg,transparent 0%,#5a39232b 8%,#4a2b195e 22%,#25140b99 40%,#21140dba 49%,#bba17b70 55%,#fdf0d143 65%,#64432b36 81%,transparent 100%);
- box-shadow:inset 4px 0 8px -7px #1e120c,inset -3px 0 8px -7px #fff8e8;
-}
-.theme-futurista .physical-book-spine-light{
- position:absolute;top:0;bottom:0;left:55%;width:1px;
- background:linear-gradient(180deg,#f8e6c080,#e7c99b9c,#f8e6c080);
- box-shadow:0 0 4px #fff0d4a3;
-}
 /* The sheets curve into the structural gutter; keep all menu text and rows unchanged. */
 .theme-futurista .page:nth-child(odd){
  background:radial-gradient(ellipse at 54% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#9b7957 0%,#c6a681 1.2%,#e4cfab 3%,#fff7e4 10%,#fff9ea 38%,#f7e9ce 79%,#e2c9a4 96%,#ad8864 100%)!important;
