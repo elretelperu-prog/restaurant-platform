@@ -69,11 +69,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - User proceeded after reviewing micro-cleanup 25.
 - **Micro-cleanup 26** completed: removed a superseded `physical-book-cover` block containing an old inset and shadow; later approved cover rules fully replace those properties.
 - Cleanup commit: `e76e5b16b281b9df022f96378da6722d78613558`
-- Expected effect: none; awaiting user verification before micro-cleanup 27.
+- User proceeded after reviewing micro-cleanup 26.
+- **Micro-cleanup 27** completed: removed an older superseded `physical-book-cover` geometry/shadow block (`inset`, border width/radius and shadow); later approved rules fully replace those properties.
+- Cleanup commit: `8351add350ea2d1ceedc61a4c111632c4407ce8d`
+- Expected effect: none; awaiting user verification before micro-cleanup 28.
 
 ## Next action
 
-1. User verifies micro-cleanup 26 in Vercel Preview.
+1. User verifies micro-cleanup 27 in Vercel Preview.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
