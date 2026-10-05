@@ -121,6 +121,9 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 
 - Video `IMG_1547.mp4` after `915bd94` showed improvement in curl geometry but printed faces still mixed during the fold. Diagnosis: previous repair correctly stopped cancelling PageFlip transforms, but then over-corrected by forcing `preserve-3d`/`will-change:transform` onto the page/content plane. Stage 2 commit `a99fdcc82e6ab4155126fcedc5931079f266320c` removes that forced inner 3D promotion while NOT restoring the harmful `transform:none`; PageFlip retains ownership of its wrapper transforms and printed content stays on a flat sheet plane. Await physical verification; Stage 3 remains blocked.
 
+
+- Screenshots `IMG_1548.jpeg` (turn) and `IMG_1549.jpeg` (zoom) after `c66bfe1` still showed individual menu rows/photos peeling and overlapping instead of one coherent sheet. Final conflicting CSS was identified: `.single-face-pageflip{transform-style:flat!important}` flattened the PageFlip scene, while custom `.stf__parent .stf__item/.stf__block` rules were overriding PageFlip-generated renderer wrappers (background/shadow/filter). Stage 2 commit `83aa97db41aaea618d1d9cbea82e59d33b6fdee0` removes both renderer-level overrides and also stops forcing `will-change` on page nodes. Visual skin/padding remains; PageFlip now fully owns its generated wrappers and scene transforms. Await physical iPhone/Android verification; Stage 3 remains blocked.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
