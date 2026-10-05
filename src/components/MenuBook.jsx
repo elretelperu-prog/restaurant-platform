@@ -4,6 +4,7 @@ import MenuPage from './MenuPage.jsx';
 import {pages} from '../data/la-terraza.js';
 
 export default function MenuBook({onDish,popupOpen=false}){
+ const diagnostic=new URLSearchParams(window.location.search).get('pfdiag')==='1';
  const bookRef=useRef(null),wrapRef=useRef(null),viewportRef=useRef(null),restoreFoldRef=useRef(null),hadPopupRef=useRef(false);
  const [zoomed,setZoomed]=useState(false);
 
@@ -13,7 +14,7 @@ export default function MenuBook({onDish,popupOpen=false}){
   const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:false});
   // V41: PageFlip is the only owner of page-turn geometry.
   // Mark the active scene so CSS can isolate the exact visible spread during Safari compositing.
-  book.classList.add('single-face-pageflip');
+  if(!diagnostic)book.classList.add('single-face-pageflip');
 
   let timers=[],raf=0,token=0,scale=1,baseScale=1,pinchDist=0,panX=0,panY=0,panStartX=0,panStartY=0,basePanX=0,basePanY=0,mode='normal',moved=false,tappedDish=null,gestureShield=false;
   const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf)};
@@ -42,6 +43,7 @@ export default function MenuBook({onDish,popupOpen=false}){
   const exitReading=()=>{mode='normal';scale=1;panX=0;panY=0;transform();startIdle()};
 
   const down=e=>{
+   if(diagnostic)return;
    if(e.touches.length===1&&scale<=1.05){
     const dish=e.target.closest('.item');
     if(dish){
@@ -59,6 +61,7 @@ export default function MenuBook({onDish,popupOpen=false}){
    }
   };
   const move=e=>{
+   if(diagnostic)return;
    if(tappedDish&&mode==='normal'&&e.touches.length===1){
     const dx=e.touches[0].clientX-panStartX,dy=e.touches[0].clientY-panStartY;
     if(Math.hypot(dx,dy)>8){moved=true;tappedDish=null;}
@@ -74,6 +77,7 @@ export default function MenuBook({onDish,popupOpen=false}){
    }
   };
   const end=e=>{
+   if(diagnostic)return;
    if(tappedDish&&mode==='normal'&&e.touches.length===0){
     const dish=tappedDish;tappedDish=null;
     e.preventDefault();e.stopImmediatePropagation();
@@ -109,7 +113,7 @@ export default function MenuBook({onDish,popupOpen=false}){
   viewport.addEventListener('touchmove',move,{passive:false,capture:true});
   viewport.addEventListener('touchend',end,{passive:false,capture:true});
   viewport.addEventListener('touchcancel',end,{passive:false,capture:true});
-  pf.on('init',startIdle);pf.on('flip',startIdle);
+  if(!diagnostic){pf.on('init',startIdle);pf.on('flip',startIdle);}
   pf.loadFromHTML(book.querySelectorAll('.page'));
 
   return()=>{restoreFoldRef.current=null;token++;clearTimers();viewport.removeEventListener('touchstart',down,true);viewport.removeEventListener('touchmove',move,true);viewport.removeEventListener('touchend',end,true);viewport.removeEventListener('touchcancel',end,true);pf.destroy()};
@@ -127,8 +131,8 @@ export default function MenuBook({onDish,popupOpen=false}){
 
  const selectDish=d=>onDish(d);
  return <section className={'stage '+(zoomed?'isZoomed':'')} ref={viewportRef}>
-  <div className="bookWrap" ref={wrapRef}>
-   <div className="physical-book-cover" aria-hidden="true"><span className="physical-book-pages-left"/><span className="physical-book-pages-right"/></div>\n   <svg className="physical-book-surface-svg" viewBox="0 0 1000 1500" preserveAspectRatio="none" aria-hidden="true">
+  <div className={'bookWrap '+(diagnostic?'pf-diagnostic-wrap':'')} ref={wrapRef}>
+   {!diagnostic&&<div className="physical-book-cover" aria-hidden="true"><span className="physical-book-pages-left"/><span className="physical-book-pages-right"/></div>}\n   {!diagnostic&&<svg className="physical-book-surface-svg" viewBox="0 0 1000 1500" preserveAspectRatio="none" aria-hidden="true">
     <defs>
      <linearGradient id="paperLeft" x1="0" x2="1"><stop offset="0" stopColor="#ead8b9"/><stop offset=".18" stopColor="#fff9e9"/><stop offset=".76" stopColor="#fffbed"/><stop offset="1" stopColor="#8b6042"/></linearGradient>
      <linearGradient id="paperRight" x1="0" x2="1"><stop offset="0" stopColor="#8b6042"/><stop offset=".24" stopColor="#fffbed"/><stop offset=".82" stopColor="#fff9e9"/><stop offset="1" stopColor="#ead8b9"/></linearGradient>
@@ -137,9 +141,11 @@ export default function MenuBook({onDish,popupOpen=false}){
     <path className="surface-page surface-page-left" d="M24 45 C175 9 365 8 500 72 L500 1432 C355 1380 180 1391 25 1450 C10 1120 10 365 24 45Z" fill="url(#paperLeft)"/>
     <path className="surface-page surface-page-right" d="M500 72 C635 8 825 9 976 45 C990 365 990 1120 975 1450 C820 1391 645 1380 500 1432Z" fill="url(#paperRight)"/>
     <path className="surface-gutter-svg" d="M465 62 C490 150 488 1320 462 1440 C487 1424 513 1424 538 1440 C512 1320 510 150 535 62 C513 78 487 78 465 62Z" fill="url(#gutter)"/>
-   </svg>
-   <div ref={bookRef} className="book">{pages.map((p,i)=><MenuPage key={i} page={p} pageIndex={i} onDish={selectDish}/>)}</div>
-   <div className="physical-book-spine" aria-hidden="true"><span className="physical-book-spine-light"/></div>
+   </svg>}
+   <div ref={bookRef} className={'book '+(diagnostic?'pf-diagnostic-book':'')}>{diagnostic
+    ?[0,1,2,3].map(i=><div className="pf-diagnostic-page" key={i}><strong>PAGE {i+1}</strong><span>{i<2?'FRONT SPREAD':'BACK SPREAD'}</span></div>)
+    :pages.map((p,i)=><MenuPage key={i} page={p} pageIndex={i} onDish={selectDish}/>)}</div>
+   {!diagnostic&&<div className="physical-book-spine" aria-hidden="true"><span className="physical-book-spine-light"/></div>}
   </div>
  </section>
 }
