@@ -1360,12 +1360,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 
 
-.theme-futurista .bookWrap{
- width:92%!important;height:calc(100% - 54px)!important;
- margin:20px auto 34px!important;align-self:center!important;
- perspective:1500px!important;perspective-origin:50% 45%!important;
- filter:drop-shadow(0 14px 12px #000b)!important;
-}
 /* Dark tabletop-like stage around the book, matching the futuristic screen rather than paper. */
 .theme-futurista .bookStage,.theme-futurista .menu-stage,.theme-futurista .menuStage{
  background:radial-gradient(ellipse at 50% 42%,#122237 0%,#08111f 55%,#03070d 100%)!important;
