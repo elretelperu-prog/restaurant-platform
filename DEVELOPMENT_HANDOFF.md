@@ -94,11 +94,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - User proceeded after reviewing micro-cleanups 37 + 38 and asked to continue two rounds at a time.
 - **Micro-cleanup 39** completed: removed a duplicate final `bookWrap` sizing rule; the preceding final approved block already contains the exact same width, height and margin. Cleanup commit: `3c1778d395e6d989c3af604e4c6f5af73e704db8`.
 - **Micro-cleanup 40** completed: removed the oldest superseded odd-page paper background/shadow rule; four later odd-page rules remain, with the final approved one still controlling appearance. Cleanup commit: `4d91fa1aa03b6f41cd62e053d8ea746f17703228`.
-- Expected effect: none; awaiting one user verification before micro-cleanups 41 + 42.
+- User proceeded after reviewing micro-cleanups 39 + 40.
+- **Micro-cleanup 41** completed: removed the oldest superseded even-page paper background/shadow rule; later even-page rules remain and control the approved appearance. Cleanup commit: `7dca250ad6e082b8b3b30c16126f98e510eb8c17`.
+- **Micro-cleanup 42** completed: removed the next superseded odd-page paper background/shadow rule; later odd-page rules remain and control the approved appearance. Cleanup commit: `c761ab2a7f0e958b9bd01392d90c1b592c731973`.
+- Expected effect: none; awaiting one user verification before micro-cleanups 43 + 44.
 
 ## Next action
 
-1. User verifies micro-cleanups 39 + 40 in Vercel Preview.
+1. User verifies micro-cleanups 41 + 42 in Vercel Preview.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
