@@ -1339,7 +1339,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 }
 /* Leave visual space above the fixed dock without shrinking the menu or moving its dish rows. */
 .theme-futurista .physical-book-cover{bottom:-5px!important}
-.theme-futurista .physical-book-pages-left,.theme-futurista .physical-book-pages-right{bottom:2px!important}
 
 
 
