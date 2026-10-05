@@ -10,8 +10,10 @@ export default function MenuBook({onDish,popupOpen=false}){
 
  useEffect(()=>{
   const book=bookRef.current,wrap=wrapRef.current,viewport=viewportRef.current;
-  const w=Math.max(150,Math.floor(wrap.clientWidth/2)),h=Math.max(480,Math.floor(wrap.clientHeight));
-  const pf=new PageFlip(book,{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:diagnostic?true:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:false});
+  const w=diagnostic?160:Math.max(150,Math.floor(wrap.clientWidth/2)),h=diagnostic?320:Math.max(480,Math.floor(wrap.clientHeight));
+  const pf=new PageFlip(book,diagnostic
+   ?{width:w,height:h,size:'fixed',showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:false,showPageCorners:true}
+   :{width:w,height:h,size:'stretch',minWidth:145,maxWidth:270,minHeight:480,maxHeight:760,showCover:false,usePortrait:false,drawShadow:true,maxShadowOpacity:.55,flippingTime:700,mobileScrollSupport:false,useMouseEvents:true,disableFlipByClick:true,clickEventForward:true,startPage:0,autoSize:true,showPageCorners:false});
   // V41: PageFlip is the only owner of page-turn geometry.
   // Mark the active scene so CSS can isolate the exact visible spread during Safari compositing.
   if(!diagnostic)book.classList.add('single-face-pageflip');
