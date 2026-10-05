@@ -3,6 +3,10 @@
     {
       "source": "/pageflip-test",
       "destination": "/"
+    },
+    {
+      "source": "/pageflip-layer1",
+      "destination": "/"
     }
   ]
 }
