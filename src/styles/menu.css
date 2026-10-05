@@ -1388,10 +1388,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 
 
-.theme-futurista .bookWrap{
- width:89%!important;
- filter:drop-shadow(0 4px 4px #0004) drop-shadow(0 15px 15px #000b)!important;
-}
 /* Broad, soft gutter created only by page-face lighting; no transforms/clipping. */
 .theme-futurista .page:nth-child(odd){
  background:radial-gradient(ellipse at 8% 48%,#fffdf18f 0%,transparent 23%),linear-gradient(90deg,#bfa17e 0%,#ead9bd 2.5%,#fff7e4 10%,#fff9ea 41%,#f9eed9 73%,#f0dfc4 87%,#d7ba94 95%,#a47f5d 99%,#876448 100%)!important;
