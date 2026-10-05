@@ -1453,15 +1453,3 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  }
 
 
-/* STAGE 2 — PageFlip must keep the adjacent sheet paintable while it turns.
-   Hiding inactive logical pages caused the destination spread to pop in only
-   after the flip completed, which looked like an abrupt page replacement.
-   PageFlip owns stacking/geometry; CSS only disables interaction on inactive pages. */
-.theme-futurista .v41-pageflip-scene .page{
-  visibility:visible!important;
-  opacity:1!important;
-  content-visibility:visible!important;
-  contain:layout paint!important;
-}
-.theme-futurista .v41-pageflip-scene .page:not(.v41-visible-page){pointer-events:none!important}
-.theme-futurista .v41-pageflip-scene .page.v41-visible-page{pointer-events:auto!important}
