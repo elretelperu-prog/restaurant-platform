@@ -54,11 +54,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - User proceeded after reviewing micro-cleanup 20.
 - **Micro-cleanup 21** completed: removed obsolete left/right positioning and border-radius rules for the legacy physical page-stack layers, which are disabled later by approved CSS.
 - Cleanup commit: `4b685ba6d52ac304dd08332d21627a82116268e2`
-- Expected effect: none; awaiting user verification before micro-cleanup 22.
+- User proceeded after reviewing micro-cleanup 21.
+- **Micro-cleanup 22** completed: removed the obsolete base styling block for the legacy `physical-book-pages-left/right` layers (position, dimensions, border, paper gradient and shadow), which are disabled later by approved CSS.
+- Cleanup commit: `ad08d077c87ec04aa13f61782169c56bf44dab20`
+- Expected effect: none; awaiting user verification before micro-cleanup 23.
 
 ## Next action
 
-1. User verifies micro-cleanup 21 in Vercel Preview.
+1. User verifies micro-cleanup 22 in Vercel Preview.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
