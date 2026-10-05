@@ -1463,3 +1463,10 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .pf-diagnostic-wrap{width:88%!important;height:52dvh!important;min-height:390px!important;max-height:520px!important;margin:8px auto 0!important;align-self:flex-start!important}
 .theme-futurista .pf-diagnostic-book{width:100%!important;height:100%!important;margin:0 auto!important}
 @media(max-width:430px){.theme-futurista .stage:has(.pf-diagnostic-wrap){height:55dvh!important;min-height:400px!important}.theme-futurista .pf-diagnostic-wrap{height:49dvh!important;min-height:370px!important;margin-top:4px!important}}
+
+/* STAGE 2 DIAGNOSTIC spread geometry: PageFlip needs a landscape host wide enough for two pages. */
+.theme-futurista .stage:has(.pf-diagnostic-wrap){height:52dvh!important;min-height:380px!important;align-items:flex-start!important}
+.theme-futurista .pf-diagnostic-wrap{width:96%!important;height:46dvh!important;min-height:350px!important;max-height:470px!important;margin:8px auto 0!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.theme-futurista .pf-diagnostic-book{width:100%!important;height:100%!important;min-width:0!important}
+.theme-futurista .pf-diagnostic-page{padding:16px 8px!important;font-size:20px!important}
+@media(max-width:430px){.theme-futurista .stage:has(.pf-diagnostic-wrap){height:50dvh!important;min-height:360px!important}.theme-futurista .pf-diagnostic-wrap{width:98%!important;height:43dvh!important;min-height:330px!important}}
