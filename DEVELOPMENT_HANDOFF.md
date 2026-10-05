@@ -130,6 +130,8 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 
 - User approved an isolation experiment because the real menu still showed the same corruption after architectural cleanup. Added a **diagnostic-only PageFlip scene** activated with query `pfdiag=1`; normal Preview behavior is unchanged. Commit `985fb38599c31176cf068e0c2dc110c91fda5fc6` adds four extremely simple PAGE 1–4 sheets and bypasses restaurant page skin, stationary book surface, idle fold hooks, zoom/pan interception, and dish logic in diagnostic mode. Commit `a82fcc4e0d2000e9b240f2d4990ab32542d72674` adds isolated diagnostic CSS with no perspective/filter/transform on the outer wrapper. Purpose: determine whether native `page-flip` itself renders correctly on physical iPhone/Android. If diagnostic pages curl correctly, fault is in integration/restaurant page composition; if diagnostic pages also corrupt, fault is PageFlip configuration/library/browser path. Stage 3 remains blocked.
 
+- Diagnostic viewport correction: commit `c58ccfe2d246356d3ee63d19343d4d41ac59b242` moves/sizes only the `?pfdiag=1` isolated scene so PAGE 1–4 stay fully visible above the fixed bottom dock on mobile. Normal app unchanged. Await slow physical turn test.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
