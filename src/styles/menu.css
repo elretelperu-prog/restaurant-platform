@@ -1344,11 +1344,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 
 
-.theme-futurista .physical-book-cover{
- left:-4px!important;right:-4px!important;top:-3px!important;bottom:-4px!important;
- border-radius:8px 8px 10px 10px!important;
- box-shadow:0 1px 0 #f3e4c9,0 3px 0 #a98963,0 5px 0 #e4cfac,0 8px 12px #0007!important;
-}
 .theme-futurista .page{
  transform-style:preserve-3d!important;
  border-top-color:#e7d1ad!important;border-bottom-color:#aa8962!important;
