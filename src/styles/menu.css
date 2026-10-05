@@ -1309,8 +1309,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  background:repeating-linear-gradient(180deg,#fdf2d9 0 1px,#c6a77e 1px 2px,#f4e5c8 2px 3px);
  box-shadow:0 3px 0 #b7986e,0 5px 0 #f4e4c6,0 7px 0 #a78a65;
 }
-.theme-futurista .physical-book-pages-left{left:3px;border-radius:3px 0 0 3px}
-.theme-futurista .physical-book-pages-right{right:3px;border-radius:0 3px 3px 0}
 .theme-futurista .book{position:relative!important;z-index:1!important;filter:none!important}
 /* The sheets curve into the structural gutter; keep all menu text and rows unchanged. */
 .theme-futurista .page:nth-child(odd){
