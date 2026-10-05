@@ -33,11 +33,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - User verified micro-cleanup 13 successfully in Vercel Preview.
 - **Micro-cleanup 14** completed: removed superseded physical-book spine/spine-light styling; these elements are disabled by later approved CSS.
 - Cleanup commit: `e62db0262748cc4220d33b304a5526bd4420f2d1`
-- Expected effect: none; awaiting user verification before micro-cleanup 15.
+- User verified micro-cleanup 14 successfully in Vercel Preview.
+- **Micro-cleanup 15** completed: removed the remaining obsolete base styling for `physical-book-spine` and `physical-book-spine-light`; both are disabled by the approved later CSS.
+- Cleanup commit: `8d11666e35743bb519932b9005fd47b173d9871f`
+- Expected effect: none; awaiting user verification before micro-cleanup 16.
 
 ## Next action
 
-1. User verifies micro-cleanup 14 in Vercel Preview.
+1. User verifies micro-cleanup 15 in Vercel Preview.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
