@@ -4,7 +4,7 @@ import MenuPage from './MenuPage.jsx';
 import {pages} from '../data/la-terraza.js';
 
 export default function MenuBook({onDish,popupOpen=false}){
- const diagnostic=new URLSearchParams(window.location.search).get('pfdiag')==='1';
+ const diagnostic=new URLSearchParams(window.location.search).get('pfdiag')==='1'||window.location.pathname==='/pageflip-test';
  const bookRef=useRef(null),wrapRef=useRef(null),viewportRef=useRef(null),restoreFoldRef=useRef(null),hadPopupRef=useRef(false);
  const [zoomed,setZoomed]=useState(false);
 
