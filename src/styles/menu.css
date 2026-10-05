@@ -1382,9 +1382,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  background:radial-gradient(ellipse at 92% 48%,#fffdf19c 0%,transparent 23%),radial-gradient(ellipse at 0% 50%,#72503638 0%,transparent 17%),linear-gradient(90deg,#725139 0%,#987454 1%,#cfb087 4%,#ead8ba 10%,#f8ecd5 24%,#fff9ea 61%,#fff7e4 90%,#ead9bd 97.5%,#b99b77 100%)!important;
  box-shadow:inset -8px 0 12px -11px #fff9e8,inset 22px 0 24px -18px #4a2d198f,inset 7px 0 11px -9px #3420147d,inset 0 5px 7px -8px #fff,inset 0 -5px 7px -8px #5b3e2770!important;
 }
-/* Contact shadows under the paper edges make the sheets read as lifted objects. */
-.theme-futurista .physical-book-pages-left{left:1px!important;border-radius:6px 0 0 8px!important;filter:drop-shadow(-2px 3px 2px #38251766)!important}
-.theme-futurista .physical-book-pages-right{right:1px!important;border-radius:0 6px 8px 0!important;filter:drop-shadow(2px 3px 2px #38251766)!important}
 
 
 
