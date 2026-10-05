@@ -1325,8 +1325,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 /* Facing edges visually dip into the binding; outer edges catch a softer highlight. */
 .theme-futurista .page:nth-child(odd){
  border-radius:5px 1px 2px 7px!important;
- background:radial-gradient(ellipse at 8% 48%,#fffdf19c 0%,transparent 23%),radial-gradient(ellipse at 100% 50%,#72503638 0%,transparent 17%),linear-gradient(90deg,#b99b77 0%,#ead9bd 2.5%,#fff7e4 10%,#fff9ea 39%,#f8ecd5 76%,#ead8ba 90%,#cfb087 96%,#987454 99%,#725139 100%)!important;
- box-shadow:inset 8px 0 12px -11px #fff9e8,inset -22px 0 24px -18px #4a2d198f,inset -7px 0 11px -9px #3420147d,inset 0 5px 7px -8px #fff,inset 0 -5px 7px -8px #5b3e2770!important;
 }
 .theme-futurista .page:nth-child(even){
  border-radius:1px 5px 7px 2px!important;
