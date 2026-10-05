@@ -15,7 +15,7 @@ export default function MenuBook({onDish,popupOpen=false}){
   // Mark the active scene so CSS can isolate the exact visible spread during Safari compositing.
   book.classList.add('single-face-pageflip');
 
-  let timers=[],raf=0,token=0,scale=1,baseScale=1,pinchDist=0,panX=0,panY=0,panStartX=0,panStartY=0,basePanX=0,basePanY=0,mode='normal',moved=false,tappedDish=null,gestureShield=false,turnTouch=null;
+  let timers=[],raf=0,token=0,scale=1,baseScale=1,pinchDist=0,panX=0,panY=0,panStartX=0,panStartY=0,basePanX=0,basePanY=0,mode='normal',moved=false,tappedDish=null,gestureShield=false;
   const clearTimers=()=>{timers.forEach(clearTimeout);timers=[];cancelAnimationFrame(raf)};
   const isBack=()=>pf.getCurrentPageIndex()>=2;
   const foldPos=(depth,drop=0)=>{const r=pf.getBoundsRect(),back=isBack();return{x:back?r.left+depth:r.left+r.pageWidth*2-depth,y:r.top+depth+drop}};
@@ -49,10 +49,6 @@ export default function MenuBook({onDish,popupOpen=false}){
      // Capture the dish tap before StPageFlip can consume it at normal scale.
      e.stopImmediatePropagation();return;
     }
-    // Stage 2: leave ordinary one-finger page gestures entirely to StPageFlip.
-    // We only remember the touch so a horizontal swipe can be completed if a
-    // mobile browser drops PageFlip's internal move/end sequence.
-    turnTouch={x:e.touches[0].clientX,y:e.touches[0].clientY,t:performance.now()};
    }
    if(e.touches.length===2){
     gestureShield=true;enterReading();mode='pinch';pinchDist=distance(e.touches);baseScale=scale;moved=true;
@@ -78,19 +74,6 @@ export default function MenuBook({onDish,popupOpen=false}){
    }
   };
   const end=e=>{
-   if(turnTouch&&mode==='normal'&&scale<=1.05&&e.touches.length===0){
-    const changed=e.changedTouches&&e.changedTouches[0],start=turnTouch;turnTouch=null;
-    if(changed){
-     const dx=changed.clientX-start.x,dy=changed.clientY-start.y,dt=performance.now()-start.t;
-     // Fallback only for a deliberate horizontal swipe. PageFlip normally
-     // handles this itself; this covers Safari/Android interrupted gestures.
-     if(Math.abs(dx)>=52&&Math.abs(dx)>Math.abs(dy)*1.35&&dt<1400){
-      stopIdle();
-      try{dx<0?pf.flipNext('top'):pf.flipPrev('top')}catch(err){}
-      e.preventDefault();e.stopImmediatePropagation();return;
-     }
-    }
-   }
    if(tappedDish&&mode==='normal'&&e.touches.length===0){
     const dish=tappedDish;tappedDish=null;
     e.preventDefault();e.stopImmediatePropagation();
@@ -126,9 +109,7 @@ export default function MenuBook({onDish,popupOpen=false}){
   viewport.addEventListener('touchmove',move,{passive:false,capture:true});
   viewport.addEventListener('touchend',end,{passive:false,capture:true});
   viewport.addEventListener('touchcancel',end,{passive:false,capture:true});
-  pf.on('init',()=>startIdle());
-  pf.on('flip',()=>startIdle());
-  pf.on('changeState',e=>{if(e.data==='flipping'||e.data==='user_fold')stopIdle();else if(e.data==='read')startIdle()});
+  pf.on('init',startIdle);pf.on('flip',startIdle);
   pf.loadFromHTML(book.querySelectorAll('.page'));
 
   return()=>{restoreFoldRef.current=null;token++;clearTimers();viewport.removeEventListener('touchstart',down,true);viewport.removeEventListener('touchmove',move,true);viewport.removeEventListener('touchend',end,true);viewport.removeEventListener('touchcancel',end,true);pf.destroy()};
