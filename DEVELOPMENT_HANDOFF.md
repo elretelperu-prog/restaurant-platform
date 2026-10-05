@@ -63,11 +63,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - User proceeded after reviewing micro-cleanup 23.
 - **Micro-cleanup 24** completed: removed an earlier duplicate `display:none!important` rule for the legacy spine/spine-light layers; the later approved combined V40 hide rule remains intact.
 - Cleanup commit: `910c39c5dc2dd910365ebe1db82022387f9eef3d`
-- Expected effect: none; awaiting user verification before micro-cleanup 25.
+- User proceeded after reviewing micro-cleanup 24.
+- **Micro-cleanup 25** completed: removed a superseded `bottom:-5px!important` override for `physical-book-cover`; multiple later approved cover rules replace its bottom position, with the final rule setting `bottom:-10px!important`.
+- Cleanup commit: `dcf213c5f32dc9c5e229af64389493f5569f2d1e`
+- Expected effect: none; awaiting user verification before micro-cleanup 26.
 
 ## Next action
 
-1. User verifies micro-cleanup 24 in Vercel Preview.
+1. User verifies micro-cleanup 25 in Vercel Preview.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
