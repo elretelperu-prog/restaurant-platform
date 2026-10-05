@@ -51,11 +51,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - User verified micro-cleanup 19 successfully in Vercel Preview.
 - **Micro-cleanup 20** completed: removed an obsolete `bottom:2px` override for the legacy physical page-stack layers, which are disabled later by approved CSS.
 - Cleanup commit: `d3625ef152c9298969b9e30e9f91ff2e0230dfe7`
-- Expected effect: none; awaiting user verification before micro-cleanup 21.
+- User proceeded after reviewing micro-cleanup 20.
+- **Micro-cleanup 21** completed: removed obsolete left/right positioning and border-radius rules for the legacy physical page-stack layers, which are disabled later by approved CSS.
+- Cleanup commit: `4b685ba6d52ac304dd08332d21627a82116268e2`
+- Expected effect: none; awaiting user verification before micro-cleanup 22.
 
 ## Next action
 
-1. User verifies micro-cleanup 20 in Vercel Preview.
+1. User verifies micro-cleanup 21 in Vercel Preview.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
