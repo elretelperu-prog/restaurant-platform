@@ -1317,7 +1317,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 
 
-.theme-futurista .bookWrap{filter:drop-shadow(0 8px 9px #0007)!important}
 .theme-futurista .page:nth-child(odd){
  background:radial-gradient(ellipse at 54% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#bfa17f 0%,#ddc7a6 1.2%,#f1dfc2 4%,#fff7e4 11%,#fff9ea 38%,#f7e9ce 82%,#ead7b9 96%,#c3a17b 100%)!important;
  box-shadow:inset 12px 0 17px -14px #4e321e8a,inset -12px 0 17px -14px #4e321e8a,inset 0 0 0 1px #fff9e6,0 1px 0 #d4ba94!important;
