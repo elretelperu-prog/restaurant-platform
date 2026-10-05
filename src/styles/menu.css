@@ -1306,10 +1306,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 }
 .theme-futurista .book{position:relative!important;z-index:1!important;filter:none!important}
 /* The sheets curve into the structural gutter; keep all menu text and rows unchanged. */
-.theme-futurista .page:nth-child(odd){
- background:radial-gradient(ellipse at 54% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#9b7957 0%,#c6a681 1.2%,#e4cfab 3%,#fff7e4 10%,#fff9ea 38%,#f7e9ce 79%,#e2c9a4 96%,#ad8864 100%)!important;
- box-shadow:inset 17px 0 18px -15px #3c2617a8,inset -11px 0 15px -11px #4d311c78,inset 0 0 0 1px #fff9e6,0 2px 0 #d4ba94!important;
-}
 .theme-futurista .page:nth-child(even){
  background:radial-gradient(ellipse at 46% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#ad8864 0%,#e2c9a4 4%,#f7e9ce 21%,#fff9ea 62%,#fff7e4 90%,#e4cfab 97%,#c6a681 98.8%,#9b7957 100%)!important;
  box-shadow:inset -17px 0 18px -15px #3c2617a8,inset 11px 0 15px -11px #4d311c78,inset 0 0 0 1px #fff9e6,0 2px 0 #d4ba94!important;
