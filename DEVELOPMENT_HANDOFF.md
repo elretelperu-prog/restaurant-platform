@@ -100,11 +100,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - User proceeded after reviewing micro-cleanups 41 + 42.
 - **Micro-cleanup 43** completed: removed the next superseded even-page paper background/shadow rule; later even-page rules remain. Cleanup commit: `888256a0abe6a77a8fed0bf81b1785ff5d1d7130`.
 - **Micro-cleanup 44** completed: removed a superseded odd-page depth/background/shadow rule; the later approved odd-page styling remains. Cleanup commit: `4d664b69bb696259132769c41c2fd387e3cc3674`.
-- Expected effect: none; awaiting one user verification before micro-cleanups 45 + 46.
+- User proceeded after reviewing micro-cleanups 43 + 44.
+- **Micro-cleanup 45** completed: removed a superseded even-page depth/background/shadow rule; later approved even-page styling remains. Cleanup commit: `d77c49021db95496b8f15972681becb5bf0e4000`.
+- **Micro-cleanup 46** completed: removed superseded odd-page background/shadow declarations from a mixed block while preserving its still-active `border-radius`. Cleanup commit: `8d61c8ed4b963689e7d0154b6ef92e12e06f36f0`.
+- This completes the planned clearly-safe cleanup sequence. Remaining layered CSS includes structural or still-active declarations, so do not continue deleting mechanically. Await user visual verification, then perform a final audit before moving to functionality fixes.
 
 ## Next action
 
-1. User verifies micro-cleanups 43 + 44 in Vercel Preview.
+1. User verifies micro-cleanups 45 + 46 in Vercel Preview, then perform final cleanup audit.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
