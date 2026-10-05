@@ -145,7 +145,7 @@ export default function MenuBook({onDish,popupOpen=false}){
     <path className="surface-gutter-svg" d="M465 62 C490 150 488 1320 462 1440 C487 1424 513 1424 538 1440 C512 1320 510 150 535 62 C513 78 487 78 465 62Z" fill="url(#gutter)"/>
    </svg>}
    <div ref={bookRef} className={'book '+(diagnostic?'pf-diagnostic-book':'')}>{diagnostic
-    ?[0,1,2,3].map(i=><div className="pf-diagnostic-page" key={i}><strong>PAGE {i+1}</strong><span>{i<2?'FRONT SPREAD':'BACK SPREAD'}</span></div>)
+    ?[0,1,2,3].map(i=><div className="page pf-diagnostic-page" key={i}><strong>PAGE {i+1}</strong><span>{i<2?'FRONT SPREAD':'BACK SPREAD'}</span></div>)
     :pages.map((p,i)=><MenuPage key={i} page={p} pageIndex={i} onDish={selectDish}/>)}</div>
    {!diagnostic&&<div className="physical-book-spine" aria-hidden="true"><span className="physical-book-spine-light"/></div>}
   </div>
