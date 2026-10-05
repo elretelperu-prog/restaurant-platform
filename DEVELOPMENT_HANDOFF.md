@@ -82,11 +82,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - User proceeded after reviewing micro-cleanups 29 + 30.
 - **Micro-cleanup 31** completed: removed the penultimate superseded `physical-book-cover` appearance/geometry block; the final approved cover rule remains intact. Cleanup commit: `82feb10a0b9ec54965fcb7775cc7f06c33a71615`.
 - **Micro-cleanup 32** completed: removed an early superseded `bookWrap` drop-shadow override; multiple later approved rules replace the shadow. Cleanup commit: `21b54168d3360fc256b25807b26a03e8f3619e75`.
-- Expected effect: none; awaiting one user verification before micro-cleanups 33 + 34.
+- User proceeded after reviewing micro-cleanups 31 + 32.
+- **Micro-cleanup 33** completed: removed a superseded `bookWrap` drop-shadow block; later approved shadow rules remain. Cleanup commit: `61c1ddfe72626fdccaa1658259d8bd10421146d7`.
+- **Micro-cleanup 34** completed: removed a duplicate `bookWrap{width:89%!important}` override; the later final approved `bookWrap` block already sets the same width. Cleanup commit: `a8a0dce943095ed37ae2bf906e5ed11ae6a21439`.
+- Expected effect: none; awaiting one user verification before micro-cleanups 35 + 36.
 
 ## Next action
 
-1. User verifies micro-cleanups 31 + 32 in Vercel Preview.
+1. User verifies micro-cleanups 33 + 34 in Vercel Preview.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
