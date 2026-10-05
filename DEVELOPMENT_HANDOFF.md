@@ -106,11 +106,13 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - This completes the planned clearly-safe cleanup sequence. Remaining layered CSS includes structural or still-active declarations, so do not continue deleting mechanically.
 - **Final cleanup audit completed after micro-cleanup 46.** No additional deletion is recommended: the remaining duplicate-looking `bookWrap`, `physical-book-cover`, and odd/even page rules still contain structural or active declarations (for example isolation/overflow, positioning/pointer-events, border-radius, and final approved appearance). Cleanup is therefore closed at micro-cleanup 46 to avoid changing the approved UI.
 - Next development phase: functionality fixes for the fold/PageFlip/page-turn gesture, still on Preview only.
+- **Stage 2 PageFlip closed-loop work started.** Commit `73800b06b2b05a00efdf7ee3dbbd7e399e4f8041` stabilizes touch ownership: normal one-finger page gestures are left to StPageFlip, idle fold animation is stopped while PageFlip is folding/flipping, and a conservative horizontal-swipe fallback completes next/previous turns if a mobile browser interrupts PageFlip's internal gesture. Dish tap interception and pinch/pan paths remain intact.
+- Static code checks passed for PageFlip fallback, state guard, dish tap capture, pinch and pan paths. Await physical iPhone + Android verification. Do not start Stage 3 until the user explicitly says `Etapa 2 aprobada`.
 
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
-2. Next: diagnose and fix the fold/PageFlip/page-turn gesture behavior in isolated Preview commits.
+2. Stage 2: user physically verifies PageFlip on iPhone and Android; continue fixing Stage 2 from their results until explicitly approved.
 3. Preserve the approved visual design while repairing functionality.
 4. After each meaningful change: commit -> Vercel Preview -> user verifies -> continue.
 
