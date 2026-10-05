@@ -1416,15 +1416,15 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  margin-left:auto!important;margin-right:auto!important;
  background:transparent!important;
 }
-.theme-futurista .single-face-pageflip{transform-style:flat!important}
+.theme-futurista .single-face-pageflip{transform-style:preserve-3d!important}
 .theme-futurista .single-face-pageflip .page,
 .theme-futurista .single-face-pageflip .page:nth-child(odd),
 .theme-futurista .single-face-pageflip .page:nth-child(even){
  background:transparent!important;background-color:transparent!important;
  border:0!important;box-shadow:none!important;
  border-radius:0!important;
- transform:none!important;transform-style:flat!important;
- will-change:auto!important;
+ transform-style:preserve-3d!important;
+ will-change:transform!important;
  padding-left:4.5%!important;padding-right:4.5%!important;
 }
 /* No legacy paper/lighting pseudo-faces in front of the curved base. */
@@ -1438,9 +1438,8 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .single-face-pageflip .page>.item,
 .theme-futurista .single-face-pageflip .page>.pg{
  position:relative!important;z-index:2!important;
- transform:none!important;transform-style:flat!important;
+ transform-style:inherit!important;
  will-change:auto!important;
- backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;
 }
 .theme-futurista .single-face-pageflip .page .item{background:transparent!important}
 
