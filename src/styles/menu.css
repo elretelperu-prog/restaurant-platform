@@ -1379,9 +1379,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 
 
-.theme-futurista .bookWrap{
- filter:drop-shadow(0 12px 11px #000a)!important;
-}
 /* The exposed area around the physical book is deliberately plain and dark. */
 .theme-futurista .bookStage,
 .theme-futurista .menu-stage,
