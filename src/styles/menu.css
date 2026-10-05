@@ -1319,7 +1319,12 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 
 .theme-futurista .page{
- transform-style:preserve-3d!important;
+ isolation:isolate!important;
+ overflow:hidden!important;
+ opacity:1!important;
+ backface-visibility:hidden!important;
+ -webkit-backface-visibility:hidden!important;
+ transform-style:flat!important;
  border-top-color:#e7d1ad!important;border-bottom-color:#aa8962!important;
 }
 /* Facing edges visually dip into the binding; outer edges catch a softer highlight. */
