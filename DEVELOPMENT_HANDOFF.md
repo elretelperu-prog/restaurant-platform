@@ -118,6 +118,9 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 
 - User screenshots after `c24540d` still showed severe duplicate/overlapping menu faces both during a turn and during zoom. Further diagnosis found a second, independent conflict in the late `single-face-pageflip` CSS: it forced `transform:none!important`, `transform-style:flat!important`, and hidden backfaces on the actual `.page` DOM nodes/content. Those rules override the transforms StPageFlip applies to its HTML pages, so logical pages collapse onto the same plane; zoom makes the overlap especially obvious and the physical curl cannot render correctly. Stage 2 commit `6caa3c6221fcb0abccc6ad7a1d3d6b44345216e7` removes the transform cancellation/backface suppression and restores `preserve-3d`/transform ownership to PageFlip while retaining the approved transparent visual skin. Await physical verification; Stage 3 remains blocked.
 
+
+- Video `IMG_1547.mp4` after `915bd94` showed improvement in curl geometry but printed faces still mixed during the fold. Diagnosis: previous repair correctly stopped cancelling PageFlip transforms, but then over-corrected by forcing `preserve-3d`/`will-change:transform` onto the page/content plane. Stage 2 commit `a99fdcc82e6ab4155126fcedc5931079f266320c` removes that forced inner 3D promotion while NOT restoring the harmful `transform:none`; PageFlip retains ownership of its wrapper transforms and printed content stays on a flat sheet plane. Await physical verification; Stage 3 remains blocked.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
