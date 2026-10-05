@@ -1457,3 +1457,9 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .pf-diagnostic-book{background:transparent!important;filter:none!important}
 .theme-futurista .pf-diagnostic-page{overflow:hidden!important;background:#fff7df!important;color:#21180f!important;border:1px solid #8d7456!important;box-shadow:none!important;padding:28px 18px!important;font:700 24px Georgia,serif!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:16px!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important}
 .theme-futurista .pf-diagnostic-page span{font:600 11px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;letter-spacing:.14em!important}
+
+/* STAGE 2 DIAGNOSTIC viewport correction — keep the isolated book fully visible above the fixed dock on mobile. */
+.theme-futurista .stage:has(.pf-diagnostic-wrap){height:58dvh!important;min-height:430px!important;align-items:flex-start!important;overflow:visible!important}
+.theme-futurista .pf-diagnostic-wrap{width:88%!important;height:52dvh!important;min-height:390px!important;max-height:520px!important;margin:8px auto 0!important;align-self:flex-start!important}
+.theme-futurista .pf-diagnostic-book{width:100%!important;height:100%!important;margin:0 auto!important}
+@media(max-width:430px){.theme-futurista .stage:has(.pf-diagnostic-wrap){height:55dvh!important;min-height:400px!important}.theme-futurista .pf-diagnostic-wrap{height:49dvh!important;min-height:370px!important;margin-top:4px!important}}
