@@ -1476,3 +1476,12 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .pf-diagnostic-wrap{width:340px!important;height:330px!important;min-height:0!important;max-height:none!important;margin:0 auto!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:visible!important}
 .theme-futurista .pf-diagnostic-book{width:320px!important;height:320px!important;min-width:320px!important;max-width:320px!important;min-height:320px!important;max-height:320px!important;flex:none!important}
 .theme-futurista .pf-diagnostic-page{width:160px!important;height:320px!important;min-width:160px!important;max-width:160px!important;min-height:320px!important;max-height:320px!important;box-sizing:border-box!important;padding:12px 6px!important;font-size:18px!important}
+
+/* STAGE 2 LAYER 1 — real menu text only on the proven clean PageFlip engine. */
+.theme-futurista .pf-layer1-page{width:160px!important;height:320px!important;min-width:160px!important;max-width:160px!important;min-height:320px!important;max-height:320px!important;box-sizing:border-box!important;overflow:hidden!important;background:#fff7df!important;color:#2a2118!important;border:1px solid #a98e68!important;box-shadow:none!important;padding:14px 10px 18px!important;display:flex!important;flex-direction:column!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important}
+.theme-futurista .pf-layer1-page::before,.theme-futurista .pf-layer1-page::after{content:none!important;display:none!important}
+.theme-futurista .pf-layer1-page h2{margin:0!important;font:700 14px Georgia,serif!important;color:#2a2118!important;text-shadow:none!important;text-align:center!important}
+.theme-futurista .pf-layer1-sub{margin:3px 0 8px!important;font:600 6px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;letter-spacing:.13em!important;text-align:center!important;color:#76624b!important}
+.theme-futurista .pf-layer1-list{display:flex!important;flex-direction:column!important;flex:1!important;min-height:0!important}
+.theme-futurista .pf-layer1-row{flex:1!important;min-height:0!important;display:flex!important;align-items:center!important;border-bottom:1px solid #9b815b44!important;font:600 7.5px Georgia,serif!important;line-height:1!important;color:#30251a!important}
+.theme-futurista .pf-layer1-num{text-align:center!important;font-size:6px!important;color:#80694d!important;padding-top:4px!important}
