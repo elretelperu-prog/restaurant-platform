@@ -1328,11 +1328,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  inset:-3px -3px -5px!important;border-width:2px!important;border-radius:6px!important;
  box-shadow:0 1px 0 #f1e1c4,0 3px 0 #bda27e,0 5px 0 #ead9ba,0 7px 0 #806343,0 10px 12px #0008!important;
 }
-.theme-futurista .physical-book-pages-left,.theme-futurista .physical-book-pages-right{
- top:2px!important;bottom:2px!important;
- background:repeating-linear-gradient(180deg,#fdf2db 0 1px,#e4d0ad 1px 2px,#f7ead1 2px 4px,#c7ad89 4px 4.5px,#f9ecd5 4.5px 7px)!important;
- box-shadow:0 1px 0 #e7d4b4,0 2px 0 #bda37d,0 3px 0 #f9ebd2,0 4px 0 #d7bd96!important;
-}
 .theme-futurista .bookWrap{filter:drop-shadow(0 8px 9px #0007)!important}
 .theme-futurista .page:nth-child(odd){
  background:radial-gradient(ellipse at 54% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#bfa17f 0%,#ddc7a6 1.2%,#f1dfc2 4%,#fff7e4 11%,#fff9ea 38%,#f7e9ce 82%,#ead7b9 96%,#c3a17b 100%)!important;
