@@ -112,6 +112,9 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 
 - User supplied video `IMG_1543.mp4`: observed failure is not merely swipe recognition; during the turn the destination spread is not progressively revealed and instead appears abruptly at completion. Root cause identified in V41 Safari isolation CSS: inactive logical pages were forced to `visibility:hidden`, `opacity:0`, `content-visibility:hidden`, `contain:strict`, preventing PageFlip from painting the reverse/destination sheet during the fold. Stage 2 repair commit `c11793b07dfac7acad98cd2e03325aa7e7d6bb39` keeps all PageFlip sheets paintable during animation while inactive pages remain non-interactive. Await physical verification; Stage 3 remains blocked.
 
+
+- User screenshot after `4203f18` exposed all four logical pages simultaneously during a partial turn (duplicated/overlapping menu text). Diagnosis: V41's custom `v41-visible-page` controller is fundamentally incompatible with PageFlip's temporary page re-parenting/stacking during a physical turn. Making its hidden pages visible fixed the abrupt reveal but exposed all logical faces. Stage 2 corrective commits: `7d3c698d2e21c53bdf5cbf972dd4e50b96fbeaaf` removes the custom visibility controller/class from `MenuBook.jsx`; `480b84d05c3eee302e8b70b13c00be74991b5b93` removes the associated V41 scene-isolation CSS. PageFlip again exclusively owns which sheet is rendered/stacked during the turn. Await physical iPhone/Android verification; Stage 3 remains blocked.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
