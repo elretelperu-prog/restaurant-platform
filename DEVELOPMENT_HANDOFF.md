@@ -45,11 +45,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - User verified micro-cleanup 17 successfully in Vercel Preview.
 - **Micro-cleanup 18** completed: removed obsolete stronger contact-shadow rules for the legacy physical left/right page-stack layers, which are disabled later by the approved CSS.
 - Cleanup commit: `0fd2527189b69545eeef1920a02361402ba85e9c`
-- Expected effect: none; awaiting user verification before micro-cleanup 19.
+- User verified micro-cleanup 18 successfully in Vercel Preview.
+- **Micro-cleanup 19** completed: removed obsolete left/right positioning, border-radius and contact-shadow styling for the legacy physical page-stack layers, which are disabled later by approved CSS.
+- Cleanup commit: `9b1f3288ce8e54263b8f2930100f7b966b90097d`
+- Expected effect: none; awaiting user verification before micro-cleanup 20.
 
 ## Next action
 
-1. User verifies micro-cleanup 18 in Vercel Preview.
+1. User verifies micro-cleanup 19 in Vercel Preview.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
