@@ -1315,10 +1315,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 /* PageFlip lays out the left sheet first and the right sheet second. These
    gradients put the trough at their facing edges, fading into the paper. */
-.theme-futurista .page:nth-child(odd){
- background:radial-gradient(ellipse at 54% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#c2a581 0%,#ead9bd 3%,#fff7e4 11%,#fff9ea 38%,#f8ecd5 76%,#e9d6b7 90%,#d3b58e 96%,#9b7857 99%,#79573e 100%)!important;
- box-shadow:inset -18px 0 20px -14px #53351d8c,inset -5px 0 8px -6px #3d25165e,inset 7px 0 10px -10px #5138205c,inset 0 0 0 1px #fff9e6!important;
-}
 .theme-futurista .page:nth-child(even){
  background:radial-gradient(ellipse at 46% 12%,#fffdf0c9,transparent 58%),linear-gradient(90deg,#79573e 0%,#9b7857 1%,#d3b58e 4%,#e9d6b7 10%,#f8ecd5 24%,#fff9ea 62%,#fff7e4 89%,#ead9bd 97%,#c2a581 100%)!important;
  box-shadow:inset 18px 0 20px -14px #53351d8c,inset 5px 0 8px -6px #3d25165e,inset -7px 0 10px -10px #5138205c,inset 0 0 0 1px #fff9e6!important;
