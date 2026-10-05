@@ -88,11 +88,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - User proceeded after reviewing micro-cleanups 33 + 34.
 - **Micro-cleanup 35** completed: removed a superseded `bookWrap` width/shadow block; later final rules set the approved width and shadow. Cleanup commit: `44641a9ee5eafc86132ee7e3407f7a3cfcc9d60d`.
 - **Micro-cleanup 36** completed: removed an older superseded `bookWrap` height/alignment/shadow override; later approved layout rules replace all three properties. Cleanup commit: `eb7d08029691a599ad2ec0b7bf527f883059bee1`.
-- Expected effect: none; awaiting one user verification before micro-cleanups 37 + 38.
+- User proceeded after reviewing micro-cleanups 35 + 36.
+- **Micro-cleanup 37** completed: removed a superseded `bookWrap` layout/perspective/shadow block; the later final approved block replaces its width, height, margin, alignment, perspective and shadow. Cleanup commit: `c99e6e6e152f15017f2689646a6bfee7cc2711d0`.
+- **Micro-cleanup 38** completed: removed a superseded `bookWrap` 92% width / mobile sizing override; the later final approved sizing is 89% with its current height/margin. Cleanup commit: `14ec9702fb95dd23f0a3f418875c60c881643b01`.
+- Expected effect: none; awaiting one user verification before micro-cleanups 39 + 40.
 
 ## Next action
 
-1. User verifies micro-cleanups 35 + 36 in Vercel Preview.
+1. User verifies micro-cleanups 37 + 38 in Vercel Preview.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
