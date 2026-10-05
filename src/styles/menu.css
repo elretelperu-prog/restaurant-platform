@@ -1400,8 +1400,6 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 
 
 
-.theme-futurista .physical-book-pages-left,
-.theme-futurista .physical-book-pages-right{display:none!important}
 .theme-futurista .physical-book-cover{
  background:linear-gradient(90deg,#4b3424 0%,#6c4d35 2%,#513824 48%,#342116 50%,#513824 52%,#6c4d35 98%,#4b3424 100%)!important;
  border:2px solid #715139!important;
