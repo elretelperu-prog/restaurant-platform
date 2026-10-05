@@ -60,11 +60,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - User proceeded after reviewing micro-cleanup 22.
 - **Micro-cleanup 23** completed: removed an earlier duplicate `display:none!important` rule for the legacy physical page-stack layers; the later approved V40 hide rule remains in place.
 - Cleanup commit: `affe366f07a5f828c86a2dbbf1c5cadad8b3b10a`
-- Expected effect: none; awaiting user verification before micro-cleanup 24.
+- User proceeded after reviewing micro-cleanup 23.
+- **Micro-cleanup 24** completed: removed an earlier duplicate `display:none!important` rule for the legacy spine/spine-light layers; the later approved combined V40 hide rule remains intact.
+- Cleanup commit: `910c39c5dc2dd910365ebe1db82022387f9eef3d`
+- Expected effect: none; awaiting user verification before micro-cleanup 25.
 
 ## Next action
 
-1. User verifies micro-cleanup 23 in Vercel Preview.
+1. User verifies micro-cleanup 24 in Vercel Preview.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
