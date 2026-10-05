@@ -132,6 +132,8 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 
 - Diagnostic viewport correction: commit `c58ccfe2d246356d3ee63d19343d4d41ac59b242` moves/sizes only the `?pfdiag=1` isolated scene so PAGE 1–4 stay fully visible above the fixed bottom dock on mobile. Normal app unchanged. Await slow physical turn test.
 
+- Diagnostic usability update: commits `cddfaec00fd94334a36ee46bbff3b74c3355281f` and `633a95ba154f93af9d4b0e3796a8aa4f8dff67fc` expose the isolated scene at clean path `/pageflip-test` (query `?pfdiag=1` still works) and give its host landscape/two-page geometry. Await physical verification that PAGE 1 | PAGE 2 render side by side and native curl behavior.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
