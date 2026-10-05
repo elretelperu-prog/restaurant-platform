@@ -42,11 +42,14 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - User proceeded after micro-cleanup 16 review.
 - **Micro-cleanup 17** completed: removed an obsolete `box-shadow` override for `physical-book-pages-left/right`; those legacy page-stack layers are disabled by later approved V40 CSS.
 - Cleanup commit: `c0b4c7b4e1109f439f83f1664b65ed0afe5ab5e3`
-- Expected effect: none; awaiting user verification before micro-cleanup 18.
+- User verified micro-cleanup 17 successfully in Vercel Preview.
+- **Micro-cleanup 18** completed: removed obsolete stronger contact-shadow rules for the legacy physical left/right page-stack layers, which are disabled later by the approved CSS.
+- Cleanup commit: `0fd2527189b69545eeef1920a02361402ba85e9c`
+- Expected effect: none; awaiting user verification before micro-cleanup 19.
 
 ## Next action
 
-1. User verifies micro-cleanup 17 in Vercel Preview.
+1. User verifies micro-cleanup 18 in Vercel Preview.
 2. Continue incremental code cleanup from the confirmed V56 lineage.
 2. Preserve all approved visual appearance and behaviour.
 3. Each cleanup must be small and isolated.
