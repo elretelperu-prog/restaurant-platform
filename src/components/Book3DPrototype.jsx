@@ -43,8 +43,8 @@ export default function Book3DPrototype(){
  const start=e=>{e.stopPropagation();};
  const move=e=>{e.stopPropagation();};
  const end=e=>{e.stopPropagation();};
- return <div style={{height:'74vh',minHeight:560,background:'radial-gradient(circle at 50% 40%,#34291f,#0e0b09 72%)',touchAction:'none',borderRadius:18,overflow:'hidden'}}>
-  <Canvas camera={{position:[0,0,6.05],fov:42}} dpr={[1,1.7]}>
+ return <div style={{height:'72vh',minHeight:540,background:'radial-gradient(circle at 50% 40%,#34291f,#0e0b09 72%)',touchAction:'none',borderRadius:18,overflow:'hidden'}}>
+  <Canvas camera={{position:[0,0,7.35],fov:42}} dpr={[1,1.7]}>
    <ambientLight intensity={1.5}/><directionalLight position={[2,4,5]} intensity={2.1}/>
    <mesh position={[-1.175,0,0]}><planeGeometry args={[2.35,3.55,1,1]}/><meshStandardMaterial color="#fff7df" roughness={.9}/></mesh>
    <CurlPage progress={progress} dragY={dragY} texture={tex}/>
