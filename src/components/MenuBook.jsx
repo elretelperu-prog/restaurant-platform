@@ -138,7 +138,7 @@ export default function MenuBook({onDish,popupOpen=false}){
 
  const selectDish=d=>onDish(d);
  return <section className={'stage '+(zoomed?'isZoomed':'')} ref={viewportRef}>
-  <div className={'bookWrap '+(cleanEngine?'pf-diagnostic-wrap':'')} ref={wrapRef}>
+  <div className={'bookWrap '+(cleanEngine?'pf-diagnostic-wrap ':'')+(layer4?'pf-layer4-wrap':'')} ref={wrapRef}>
    {!diagnostic&&<div className="physical-book-cover" aria-hidden="true"><span className="physical-book-pages-left"/><span className="physical-book-pages-right"/></div>}\n   {!diagnostic&&<svg className="physical-book-surface-svg" viewBox="0 0 1000 1500" preserveAspectRatio="none" aria-hidden="true">
     <defs>
      <linearGradient id="paperLeft" x1="0" x2="1"><stop offset="0" stopColor="#ead8b9"/><stop offset=".18" stopColor="#fff9e9"/><stop offset=".76" stopColor="#fffbed"/><stop offset="1" stopColor="#8b6042"/></linearGradient>
