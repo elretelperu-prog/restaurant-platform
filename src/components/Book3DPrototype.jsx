@@ -23,14 +23,13 @@ function CurlPage({progress,dragY=0,texture}){
   for(let i=0;i<p.count;i++){
    const bx=base[i*3],by=base[i*3+1],u=bx/W,v=by/H+.5;
    const wave=Math.sin(Math.PI*u);
-   const edge=Math.pow(u,1.7);
-   const theta=progress*Math.PI*edge;
-   const hinge=Math.max(0,1-u);
+   const edge=Math.pow(u,2.15);
+   const theta=progress*Math.PI*.82*edge;
    const turnedX=bx*Math.cos(theta);
-   const z=bx*Math.sin(theta)*(.42+.30*u)+wave*progress*.07;
+   const z=bx*Math.sin(theta)*(.30+.20*u)+wave*progress*.045;
    arr[i*3]=bx+(turnedX-bx)*progress;
-   arr[i*3+1]=by+dragY*.12*edge*progress;
-   arr[i*3+2]=Math.max(.008,z+hinge*.008);
+   arr[i*3+1]=by+dragY*.07*edge*progress;
+   arr[i*3+2]=Math.max(.008,z);
   }
   p.needsUpdate=true;geometry.computeVertexNormals();
  });
@@ -44,8 +43,8 @@ export default function Book3DPrototype(){
  const start=e=>{e.stopPropagation();drag.current={id:e.pointerId,x:e.clientX,y:e.clientY,p:progress};e.target.setPointerCapture?.(e.pointerId)};
  const move=e=>{if(!drag.current||drag.current.id!==e.pointerId)return;e.stopPropagation();const dx=drag.current.x-e.clientX,dy=e.clientY-drag.current.y;setProgress(Math.max(0,Math.min(1,drag.current.p+dx/340)));setDragY(Math.max(-1,Math.min(1,dy/280)))};
  const end=e=>{if(!drag.current||drag.current.id!==e.pointerId)return;drag.current=null;setProgress(v=>v>.5?1:0);setDragY(0)};
- return <div style={{height:'72vh',minHeight:520,background:'radial-gradient(circle at 50% 40%,#34291f,#0e0b09 72%)',touchAction:'none',borderRadius:18,overflow:'hidden'}}>
-  <Canvas camera={{position:[0,0,6.4],fov:42}} dpr={[1,1.7]}>
+ return <div style={{height:'78vh',minHeight:590,background:'radial-gradient(circle at 50% 40%,#34291f,#0e0b09 72%)',touchAction:'none',borderRadius:18,overflow:'hidden'}}>
+  <Canvas camera={{position:[0,0,5.25],fov:42}} dpr={[1,1.7]}>
    <ambientLight intensity={1.5}/><directionalLight position={[2,4,5]} intensity={2.1}/>
    <mesh position={[-1.175,0,0]}><planeGeometry args={[2.35,3.55,1,1]}/><meshStandardMaterial color="#fff7df" roughness={.9}/></mesh>
    <CurlPage progress={progress} dragY={dragY} texture={tex}/>
