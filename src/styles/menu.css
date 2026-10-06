@@ -1506,3 +1506,10 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .pf-layer4-right{border-right:1px solid #a88960!important;border-left:0!important;border-radius:0 12px 18px 4px / 0 9px 34px 24px!important;clip-path:polygon(0 3%,97% 1%,99% 24%,99% 76%,97% 97%,88% 99%,71% 97%,52% 96%,34% 97%,16% 96%,0 97%)!important;background:linear-gradient(90deg,#c9a982 0%,#fffbed 21%,#fff9e9 87%,#e5d0ad 100%)!important}
 .theme-futurista .pf-layer4-page::after{content:""!important;display:block!important;position:absolute!important;inset:0!important;pointer-events:none!important;background-image:radial-gradient(#6b583414 .55px,transparent .7px)!important;background-size:5px 5px!important;opacity:.22!important;z-index:0!important}
 .theme-futurista .pf-layer4-page>*{position:relative!important;z-index:1!important}
+
+/* STAGE 2 LAYER 4 HOTFIX — keep PageFlip's rectangular layout box intact.
+   The previous clip-path changed the renderer's visible sheet geometry and displaced the right page.
+   Curved-book appearance must be painted inside the sheet, never by clipping its engine-owned box. */
+.theme-futurista .pf-layer4-left,.theme-futurista .pf-layer4-right{clip-path:none!important;border-radius:0!important}
+.theme-futurista .pf-layer4-left{border-left:1px solid #a88960!important;border-right:0!important;background:linear-gradient(90deg,#e5d0ad 0%,#fff9e9 13%,#fffbed 79%,#c9a982 100%)!important}
+.theme-futurista .pf-layer4-right{border-right:1px solid #a88960!important;border-left:0!important;background:linear-gradient(90deg,#c9a982 0%,#fffbed 21%,#fff9e9 87%,#e5d0ad 100%)!important}
