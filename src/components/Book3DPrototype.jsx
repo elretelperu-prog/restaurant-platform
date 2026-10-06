@@ -46,9 +46,9 @@ function CurlPage({progress,dragY=0,texture}){
 export default function Book3DPrototype(){
  const [progress,setProgress]=useState(0),[dragY,setDragY]=useState(0),drag=useRef(null);
  const tex=useMemo(()=>makePageTexture('Platos principales','PROTOTIPO 3D · PÁGINA DERECHA'),[]);
- const start=e=>{e.stopPropagation();};
- const move=e=>{e.stopPropagation();};
- const end=e=>{e.stopPropagation();};
+ const start=e=>{e.stopPropagation();e.target.setPointerCapture?.(e.pointerId);drag.current={x:e.clientX,y:e.clientY,p:progress};};
+ const move=e=>{if(!drag.current)return;e.stopPropagation();const dx=e.clientX-drag.current.x,dy=e.clientY-drag.current.y;const next=THREE.MathUtils.clamp(drag.current.p-dx/(window.innerWidth*.72),0,1);setProgress(next);setDragY(THREE.MathUtils.clamp(-dy/(window.innerHeight*.30),-.8,.8));};
+ const end=e=>{if(!drag.current)return;e.stopPropagation();e.target.releasePointerCapture?.(e.pointerId);const finish=progress>.5?1:0;setProgress(finish);setDragY(0);drag.current=null;};
  return <div style={{height:'100dvh',width:'100vw',display:'flex',alignItems:'center',justifyContent:'center',background:'radial-gradient(circle at 50% 40%,#34291f,#0e0b09 72%)',touchAction:'none',overflow:'hidden'}}>
   <div style={{width:'88vw',height:'100dvh',maxWidth:760,position:'relative'}}>
   <Canvas orthographic camera={{position:[0,0,10],zoom:1}} dpr={[1,1.7]} onCreated={({camera,size})=>{const aspect=size.width/size.height;const halfH=DISPLAY_H/2;camera.top=halfH;camera.bottom=-halfH;camera.left=-halfH*aspect;camera.right=halfH*aspect;camera.zoom=1;camera.position.y=PAGE_Y;camera.updateProjectionMatrix();}}>
