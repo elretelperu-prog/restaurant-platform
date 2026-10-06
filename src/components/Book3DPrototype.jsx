@@ -45,7 +45,7 @@ export default function Book3DPrototype(){
  const end=e=>{e.stopPropagation();};
  return <div style={{height:'100dvh',width:'100vw',display:'flex',alignItems:'center',justifyContent:'center',background:'radial-gradient(circle at 50% 40%,#34291f,#0e0b09 72%)',touchAction:'none',overflow:'hidden'}}>
   <div style={{width:'88vw',height:'82dvh',maxWidth:760,position:'relative'}}>
-  <Canvas orthographic camera={{position:[0,0,10],zoom:1}} dpr={[1,1.7]} onCreated={({camera,size})=>{camera.left=-2.75;camera.right=2.75;camera.top=1.483;camera.bottom=-1.483;camera.updateProjectionMatrix();}}>
+  <Canvas orthographic camera={{position:[0,0,10],zoom:1}} dpr={[1,1.7]} onCreated={({camera,size})=>{camera.left=-2.75;camera.right=2.75;camera.top=1.141;camera.bottom=-1.141;camera.updateProjectionMatrix();}}>
    <ambientLight intensity={1.5}/><directionalLight position={[2,4,5]} intensity={2.1}/>
    <mesh position={[-1.175,0,0]}><planeGeometry args={[2.35,3.55,1,1]}/><meshStandardMaterial color="#fff7df" roughness={.9}/></mesh>
    <CurlPage progress={progress} dragY={dragY} texture={tex}/>
