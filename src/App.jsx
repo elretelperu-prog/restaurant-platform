@@ -1,5 +1,6 @@
-import React,{useRef,useState} from 'react'; import OrderOrbit from './components/OrderOrbit.jsx'; import MenuBook from './components/MenuBook.jsx'; import BottomNavigation from './components/BottomNavigation.jsx';
+import React,{useRef,useState} from 'react'; import Book3DPrototype from './components/Book3DPrototype.jsx'; import OrderOrbit from './components/OrderOrbit.jsx'; import MenuBook from './components/MenuBook.jsx'; import BottomNavigation from './components/BottomNavigation.jsx';
 export default function App(){
+ if(window.location.pathname==='/book3d-prototype')return <Book3DPrototype/>;
  const [theme,setTheme]=useState(()=>new URLSearchParams(window.location.search).get('tema')==='minimalista'?'minimalista':'futurista');
  const switchTheme=next=>{if(next===theme)return;setTheme(next);const url=new URL(window.location.href);url.searchParams.set('tema',next);window.history.replaceState(null,'',url.pathname+url.search+url.hash)};
  const [selected,setSelected]=useState(null),[qty,setQty]=useState(1),[items,setItems]=useState([]),[closing,setClosing]=useState(false);
