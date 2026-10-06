@@ -1643,3 +1643,24 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 }
 .theme-futurista .pf-layer4-wrap .pf-layer4-paper::before,
 .theme-futurista .pf-layer4-wrap .pf-layer4-paper::after{content:none!important;display:none!important}
+
+/* STAGE 2 LAYER 4K — actual fix: no nested paper element exists in JSX.
+   Shape is applied directly to the four DOM nodes handed to PageFlip. */
+.theme-futurista .pf-layer4-wrap .page.pf-layer4-sheet-left,
+.theme-futurista .pf-layer4-wrap .page.pf-layer4-sheet-right{
+ position:relative!important;overflow:hidden!important;color:#2a2118!important;
+ padding:12px 8px 16px!important;box-sizing:border-box!important;
+ border-top:1px solid #b79a70!important;border-bottom:1px solid #9b7a54!important;
+ box-shadow:inset 0 0 9px #6b4b2420!important;
+ backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;
+}
+.theme-futurista .pf-layer4-wrap .page.pf-layer4-sheet-left{
+ background:linear-gradient(90deg,#e4cfad 0%,#fff9e9 10%,#fffbed 76%,#d1b58f 94%,#a88763 100%)!important;
+ border-left:1px solid #a88960!important;border-right:0!important;
+ clip-path:polygon(0 1.1%,12% .7%,25% .45%,40% .28%,58% .18%,76% .08%,100% 0,100% 100%,82% 99.55%,64% 99.15%,46% 98.85%,28% 98.75%,12% 99.05%,0 99.55%)!important;
+}
+.theme-futurista .pf-layer4-wrap .page.pf-layer4-sheet-right{
+ background:linear-gradient(90deg,#a88763 0%,#d1b58f 6%,#fffbed 24%,#fff9e9 90%,#e4cfad 100%)!important;
+ border-right:1px solid #a88960!important;border-left:0!important;
+ clip-path:polygon(0 0,24% .08%,42% .18%,60% .28%,75% .45%,88% .7%,100% 1.1%,100% 99.55%,88% 99.05%,72% 98.75%,54% 98.85%,36% 99.15%,18% 99.55%,0 100%)!important;
+}
