@@ -173,3 +173,12 @@ Update this file whenever:
 - development is about to continue in a new ChatGPT conversation.
 
 The purpose is to make GitHub the durable source of truth instead of relying on a single ChatGPT conversation's length.
+
+## 3D page-turn architecture experiment — 2026-10-06
+
+- User approved starting an isolated Three.js / React Three Fiber prototype after the StPageFlip Layer 4 geometry dead-end.
+- TRUE protected baseline for this experiment: user-verified Layer 3 commit `b94e4866a1e7ebee809f19d09b4d33bdd1366074`.
+- Experimental branch: `preview-r3f-book-prototype`. **Never merge to or modify main without explicit user approval.**
+- Experimental route: `/book3d-prototype`.
+- First validation goal only: two-page 3D spread + curved/deforming page controlled continuously by finger drag; release completes or returns. Do not port the full menu, zoom/pan, idle fold, or production UI until physical iPhone/Android validation.
+- Added `three` + `@react-three/fiber`, `Book3DPrototype.jsx`, isolated route, and Vercel rewrite. Current route commit: `ad4e137f540a0245cc2d558bc9c662ada7cb3cae`.
