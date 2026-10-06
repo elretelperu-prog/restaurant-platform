@@ -1561,3 +1561,12 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .pf-layer4-paper-left::after,.theme-futurista .pf-layer4-paper-right::after{content:""!important;display:block!important;position:absolute!important;top:0!important;bottom:0!important;width:15px!important;pointer-events:none!important;z-index:0!important;background:linear-gradient(90deg,transparent,#5a3d2440)!important}
 .theme-futurista .pf-layer4-paper-left::after{right:0!important}
 .theme-futurista .pf-layer4-paper-right::after{left:0!important;transform:scaleX(-1)!important}
+
+/* STAGE 2 LAYER 4F — continuous open-book lower edge.
+   Remove the two independent crescent cut-outs from 4E. Keep engine geometry and all content untouched.
+   Shape depth with paper shading only; no background-colour masks. */
+.theme-futurista .pf-layer4-paper-left::before,.theme-futurista .pf-layer4-paper-right::before{content:none!important;display:none!important}
+.theme-futurista .pf-layer4-paper-left{border-radius:18px 0 22px 28px / 14px 0 7px 30px!important;background:linear-gradient(90deg,#e3ccaa 0%,#fff9e9 12%,#fffbed 80%,#c9aa82 100%)!important}
+.theme-futurista .pf-layer4-paper-right{border-radius:0 18px 28px 22px / 0 14px 30px 7px!important;background:linear-gradient(90deg,#c9aa82 0%,#fffbed 20%,#fff9e9 88%,#e3ccaa 100%)!important}
+.theme-futurista .pf-layer4-paper-left{border-bottom-right-radius:2px 14px!important}
+.theme-futurista .pf-layer4-paper-right{border-bottom-left-radius:2px 14px!important}
