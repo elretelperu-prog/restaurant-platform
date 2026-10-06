@@ -1530,3 +1530,10 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .pf-layer4-paper-right{border-right:1px solid #a88960!important;border-radius:0 10px 18px 3px / 0 8px 30px 18px!important;clip-path:polygon(0 2%,98% 1%,100% 25%,100% 75%,98% 97%,88% 99%,71% 97%,53% 96%,35% 97%,17% 96%,0 97%)!important;background:linear-gradient(90deg,#c9aa82 0%,#fffbed 20%,#fff9e9 88%,#e3ccaa 100%)!important}
 .theme-futurista .pf-layer4-paper::after{content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;background-image:radial-gradient(#6b583414 .55px,transparent .7px)!important;background-size:5px 5px!important;opacity:.18!important;z-index:0!important}
 .theme-futurista .pf-layer4-paper>*{position:relative!important;z-index:1!important}
+
+/* STAGE 2 LAYER 4C — remove the legacy stationary paper/shell behind the live PageFlip spread.
+   The turning child paper is now the only visible paper surface. */
+.theme-futurista .pf-layer4-wrap{filter:none!important;background:transparent!important;box-shadow:none!important}
+.theme-futurista .pf-layer4-wrap::before,.theme-futurista .pf-layer4-wrap::after{content:none!important;display:none!important;background:none!important;box-shadow:none!important}
+.theme-futurista .pf-layer4-wrap .book{background:transparent!important;box-shadow:none!important}
+.theme-futurista .pf-layer4-wrap .book::before,.theme-futurista .pf-layer4-wrap .book::after{content:none!important;display:none!important}
