@@ -8,7 +8,7 @@ function makePageTexture(title,subtitle){
  const g=x.createLinearGradient(0,0,c.width,0);g.addColorStop(0,'#ead9b8');g.addColorStop(.12,'#fffaf0');g.addColorStop(.88,'#fffaf0');g.addColorStop(1,'#e4cfaa');x.fillStyle=g;x.fillRect(0,0,c.width,c.height);
  x.fillStyle='#3a281d';x.textAlign='center';x.font='700 58px Georgia';x.fillText(title,384,150);x.font='26px Arial';x.fillText(subtitle,384,205);
  x.textAlign='left';x.font='32px Georgia';['Croquetas de jamón','Bruschetta mediterránea','Calamares crujientes','Ensalada burrata','Patatas bravas','Tartar de atún'].forEach((n,i)=>{const y=330+i*125;x.fillText(n,90,y);x.font='22px Arial';x.fillStyle='#795f49';x.fillText('Preparado al momento · receta de la casa',90,y+34);x.textAlign='right';x.fillStyle='#3a281d';x.font='700 25px Arial';x.fillText('S/ '+(10+i*3),680,y);x.textAlign='left';x.font='32px Georgia';});
- const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;t.flipY=false;return t;
+ const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=4;t.flipY=true;return t;
 }
 function CurlPage({progress,dragY=0,texture}){
  const geometry=useMemo(()=>{
@@ -23,13 +23,14 @@ function CurlPage({progress,dragY=0,texture}){
   for(let i=0;i<p.count;i++){
    const bx=base[i*3],by=base[i*3+1],u=bx/W,v=by/H+.5;
    const wave=Math.sin(Math.PI*u);
-   const theta=progress*Math.PI*u;
-   const flat=1-progress;
+   const edge=Math.pow(u,1.7);
+   const theta=progress*Math.PI*edge;
+   const hinge=Math.max(0,1-u);
    const turnedX=bx*Math.cos(theta);
-   const z=bx*Math.sin(theta)*(.72+.28*u)+wave*progress*.10*(1-v*.22);
-   arr[i*3]=turnedX*progress+bx*flat;
-   arr[i*3+1]=by+dragY*.09*wave*progress;
-   arr[i*3+2]=Math.max(.008,z);
+   const z=bx*Math.sin(theta)*(.42+.30*u)+wave*progress*.07;
+   arr[i*3]=bx+(turnedX-bx)*progress;
+   arr[i*3+1]=by+dragY*.12*edge*progress;
+   arr[i*3+2]=Math.max(.008,z+hinge*.008);
   }
   p.needsUpdate=true;geometry.computeVertexNormals();
  });
