@@ -192,3 +192,7 @@ The purpose is to make GitHub the durable source of truth instead of relying on 
 - `7d1f222`: independent front/back page surfaces.
 - Current Phase 1 checkpoint: `8ecc9c5`. Replaced cylindrical formula with hinged 3D turn plus progressive curl, added readable reverse texture, left/right underpages, center gutter and dynamic lighting/shadows.
 - Next action: physical iPhone/Android validation of this checkpoint before further tuning. Do not merge to main.
+
+- Closed-loop continuation after user rejection of 8ecc9c5: screenshots showed whole-sheet wall/rotation, not a localized paper fold.
+- 55a5df6/4483676 introduced moving fold-line geometry and preserved shared front/back geometry.
+- Current checkpoint candidate: da4a4b3 (geometry core 3b84d78). Uses a 64x40 subdivided sheet, bottom-corner-led diagonal fold line, localized curl band, stable flat remainder, spine lift, separate front/back surfaces, and slower finger mapping. Await physical iPhone validation before declaring Phase 1 complete.
