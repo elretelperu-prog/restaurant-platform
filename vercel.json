@@ -11,6 +11,10 @@
     {
       "source": "/pageflip-layer2",
       "destination": "/"
+    },
+    {
+      "source": "/pageflip-layer3",
+      "destination": "/"
     }
   ]
 }
