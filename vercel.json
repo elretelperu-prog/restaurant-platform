@@ -15,6 +15,10 @@
     {
       "source": "/pageflip-layer3",
       "destination": "/"
+    },
+    {
+      "source": "/book3d-prototype",
+      "destination": "/"
     }
   ]
 }
