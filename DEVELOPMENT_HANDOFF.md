@@ -145,6 +145,11 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - **Layer 3 candidate:** `0c4b2b7`, `a4bfa69`, `bc6442a` add real dish photos and prices to the clean engine at `/pageflip-layer3`, still excluding futuristic SVG/connectors, physical skin, idle corner fold and zoom/pan. Await physical verification.
 - **Preview usability requirement:** user does not want to copy changing deployment URLs. Prefer the stable branch alias for `preview-v57-number-test` once confirmed in Vercel; do not invent it. Per-deployment URLs remain fallback only.
 
+- **Physical verification:** user approved Layer 3 on iPhone: photos + names + descriptions + prices remain glued to the sheet throughout the turn. Stable rollback point: `b94e486`.
+- **Stable Preview alias confirmed:** `https://restaurant-platform-git-preview-v57-number-test-elretel.vercel.app/` follows branch `preview-v57-number-test`; use this instead of per-deployment URLs.
+- **Layer 4 candidate:** commits `0632349`, `917ea74`, `802d5f7` move the curved physical-paper silhouette onto the actual PageFlip sheets at `/pageflip-layer4`, instead of relying on a decorative paper layer behind the printed content. Await physical verification before adding futuristic connectors/circles, bottom-corner idle fold, or zoom/pan.
+- **Fold decision:** user changed the persistent/idle fold cue from upper corner to lower corner for mobile thumb ergonomics. Implement only after the physical-sheet layer is verified.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
