@@ -139,6 +139,8 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 
 - **Physical verification:** user approved Layer 1 on iPhone: real headings + 10 dish names remain glued to the curling sheet during slow turns. Layer 1 is now a stable rollback checkpoint at `c41e8f8`.
 
+- **Layer 2 candidate:** `f41d50a`, `f31d412`, `b40bad7` add isolated row hierarchy, item numbering and real descriptions on the exact clean PageFlip geometry at `/pageflip-layer2`. Still intentionally excludes photos, prices/connectors, physical book skin, idle corner fold and zoom/pan. Await physical slow-turn verification before Layer 3.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
