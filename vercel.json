@@ -7,6 +7,10 @@
     {
       "source": "/pageflip-layer1",
       "destination": "/"
+    },
+    {
+      "source": "/pageflip-layer2",
+      "destination": "/"
     }
   ]
 }
