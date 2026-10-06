@@ -50,10 +50,10 @@ function CurlPage({progress,dragY=0,frontTexture,backTexture}){
   }
   p.needsUpdate=true;geometry.computeVertexNormals();
  });
- return <mesh geometry={geometry} position={[0,0,.035]} castShadow>
-  <meshStandardMaterial map={frontTexture} side={THREE.FrontSide} roughness={.9}/>
-  <mesh geometry={geometry} position={[0,0,-.002]}><meshStandardMaterial map={backTexture} side={THREE.BackSide} roughness={.92}/></mesh>
- </mesh>;
+ return <group position={[0,0,.035]}>
+  <mesh geometry={geometry} castShadow><meshStandardMaterial map={frontTexture} side={THREE.FrontSide} roughness={.9}/></mesh>
+  <mesh geometry={geometry} position={[0,0,-.002]} castShadow><meshStandardMaterial map={backTexture} side={THREE.BackSide} roughness={.92}/></mesh>
+ </group>;
 }
 export default function Book3DPrototype(){
  const [progress,setProgress]=useState(0),[dragY,setDragY]=useState(0),drag=useRef(null);
