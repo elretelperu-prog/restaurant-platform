@@ -1520,3 +1520,13 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .pf-layer4-page{position:relative!important;overflow:hidden!important;background:#fff7df!important;color:#2a2118!important;border:1px solid #a98e68!important;box-shadow:none!important;padding:12px 8px 16px!important;display:flex!important;flex-direction:column!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;clip-path:none!important;border-radius:0!important}
 .theme-futurista .pf-layer4-left,.theme-futurista .pf-layer4-right{background:#fff7df!important;border:1px solid #a98e68!important;clip-path:none!important;border-radius:0!important}
 .theme-futurista .pf-layer4-page::after{content:none!important;display:none!important}
+
+/* STAGE 2 LAYER 4B — SAFE INTERNAL PAPER.
+   Root .page geometry remains the approved Layer 3 rectangle owned by PageFlip.
+   Only this child paints/clips the visible curved sheet and carries all content. */
+.theme-futurista .pf-layer3-page:has(>.pf-layer4-paper){background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important;overflow:hidden!important}
+.theme-futurista .pf-layer4-paper{position:absolute!important;inset:0!important;box-sizing:border-box!important;padding:12px 8px 16px!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;color:#2a2118!important;border-top:1px solid #b79a70!important;border-bottom:1px solid #9b7a54!important;box-shadow:inset 0 0 9px #6b4b2420!important}
+.theme-futurista .pf-layer4-paper-left{border-left:1px solid #a88960!important;border-radius:10px 0 3px 18px / 8px 0 18px 30px!important;clip-path:polygon(2% 1%,100% 2%,100% 97%,83% 96%,65% 97%,47% 96%,29% 97%,12% 99%,2% 97%,0 75%,0 25%)!important;background:linear-gradient(90deg,#e3ccaa 0%,#fff9e9 12%,#fffbed 80%,#c9aa82 100%)!important}
+.theme-futurista .pf-layer4-paper-right{border-right:1px solid #a88960!important;border-radius:0 10px 18px 3px / 0 8px 30px 18px!important;clip-path:polygon(0 2%,98% 1%,100% 25%,100% 75%,98% 97%,88% 99%,71% 97%,53% 96%,35% 97%,17% 96%,0 97%)!important;background:linear-gradient(90deg,#c9aa82 0%,#fffbed 20%,#fff9e9 88%,#e3ccaa 100%)!important}
+.theme-futurista .pf-layer4-paper::after{content:""!important;position:absolute!important;inset:0!important;pointer-events:none!important;background-image:radial-gradient(#6b583414 .55px,transparent .7px)!important;background-size:5px 5px!important;opacity:.18!important;z-index:0!important}
+.theme-futurista .pf-layer4-paper>*{position:relative!important;z-index:1!important}
