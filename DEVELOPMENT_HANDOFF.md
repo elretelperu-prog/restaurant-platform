@@ -150,6 +150,9 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - **Layer 4 candidate:** commits `0632349`, `917ea74`, `802d5f7` move the curved physical-paper silhouette onto the actual PageFlip sheets at `/pageflip-layer4`, instead of relying on a decorative paper layer behind the printed content. Await physical verification before adding futuristic connectors/circles, bottom-corner idle fold, or zoom/pan.
 - **Fold decision:** user changed the persistent/idle fold cue from upper corner to lower corner for mobile thumb ergonomics. Implement only after the physical-sheet layer is verified.
 
+- **Layer 4 failure isolated:** clipping/styling the root PageFlip `.page` displaced sheets. Full class rollback `621dab9` restored the approved Layer 3 turning behavior.
+- **Layer 4B safe candidate:** `cb977e2` + `20af5d9` keep PageFlip root geometry untouched and add a child `.pf-layer4-paper` that alone owns curved silhouette, paper texture and all menu content. Test `/pageflip-layer4` physically before any further layer.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
