@@ -1513,3 +1513,10 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .pf-layer4-left,.theme-futurista .pf-layer4-right{clip-path:none!important;border-radius:0!important}
 .theme-futurista .pf-layer4-left{border-left:1px solid #a88960!important;border-right:0!important;background:linear-gradient(90deg,#e5d0ad 0%,#fff9e9 13%,#fffbed 79%,#c9a982 100%)!important}
 .theme-futurista .pf-layer4-right{border-right:1px solid #a88960!important;border-left:0!important;background:linear-gradient(90deg,#c9a982 0%,#fffbed 21%,#fff9e9 87%,#e5d0ad 100%)!important}
+
+/* STAGE 2 LAYER 4 ROLLBACK — failed physical-sheet experiment.
+   Restore the exact Layer 3 visual contract while preserving the Layer 4 route for retest.
+   Do not alter PageFlip-owned sheet geometry. */
+.theme-futurista .pf-layer4-page{position:relative!important;overflow:hidden!important;background:#fff7df!important;color:#2a2118!important;border:1px solid #a98e68!important;box-shadow:none!important;padding:12px 8px 16px!important;display:flex!important;flex-direction:column!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;clip-path:none!important;border-radius:0!important}
+.theme-futurista .pf-layer4-left,.theme-futurista .pf-layer4-right{background:#fff7df!important;border:1px solid #a98e68!important;clip-path:none!important;border-radius:0!important}
+.theme-futurista .pf-layer4-page::after{content:none!important;display:none!important}
