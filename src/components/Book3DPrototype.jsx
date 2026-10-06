@@ -30,12 +30,13 @@ function CurlPage({progress,dragY=0,texture}){
    const bx=base[i*3],by=base[i*3+1],u=bx/W;
    const wave=Math.sin(Math.PI*u);
    const edge=Math.pow(u,2.15);
-   const theta=progress*Math.PI*.82*edge;
-   const turnedX=bx*Math.cos(theta);
-   const z=bx*Math.sin(theta)*(.30+.20*u)+wave*progress*.045;
+   const theta=progress*Math.PI*edge;
+   const radius=W/Math.PI;
+   const turnedX=radius*Math.sin(theta);
+   const z=radius*(1-Math.cos(theta))+wave*progress*.045;
    arr[i*3]=bx+(turnedX-bx)*progress;
    arr[i*3+1]=by+dragY*.07*edge*progress;
-   arr[i*3+2]=Math.max(.008,z);
+   arr[i*3+2]=.008+z;
   }
   p.needsUpdate=true;geometry.computeVertexNormals();
  });
