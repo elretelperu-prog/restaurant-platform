@@ -137,6 +137,8 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - **Proven clean-engine backup:** `aea0246aa54e0178b3e0c777c17ac16d43b86f30` is the first valid isolated PageFlip baseline physically verified by user video: PAGE 1–4 curl as coherent sheets on Android. Preserve as rollback checkpoint.
 - **Layer 1:** commits `1ba7ec1`, `80d0402`, `cd92636` add only real restaurant headings + 10 dish names + page number to the same fixed clean engine at `/pageflip-layer1`. No photos, prices, futuristic row SVG, stationary physical-book skin, idle fold, zoom/pan, or dish interactions yet. Test sheet coherence before Layer 2.
 
+- **Physical verification:** user approved Layer 1 on iPhone: real headings + 10 dish names remain glued to the curling sheet during slow turns. Layer 1 is now a stable rollback checkpoint at `c41e8f8`.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
