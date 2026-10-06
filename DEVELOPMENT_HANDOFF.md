@@ -153,6 +153,8 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 - **Layer 4 failure isolated:** clipping/styling the root PageFlip `.page` displaced sheets. Full class rollback `621dab9` restored the approved Layer 3 turning behavior.
 - **Layer 4B safe candidate:** `cb977e2` + `20af5d9` keep PageFlip root geometry untouched and add a child `.pf-layer4-paper` that alone owns curved silhouette, paper texture and all menu content. Test `/pageflip-layer4` physically before any further layer.
 
+- **Root cause of visible double-book finally located:** JSX still rendered `physical-book-cover`, `physical-book-surface-svg`, and `physical-book-spine` for every non-diagnostic clean layer because their guard was `!diagnostic`, not `!cleanEngine`. CSS attempts could not reliably remove the actual SVG/cover nodes. Commit `32d0ec7` changes those three guards to `!cleanEngine`, so Layer 1–4 clean-engine tests no longer render the legacy stationary book surfaces. Layer 4 now has only its live internal paper surfaces. Verify `/pageflip-layer4` before proceeding.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
