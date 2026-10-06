@@ -44,7 +44,7 @@ export default function Book3DPrototype(){
  const move=e=>{e.stopPropagation();};
  const end=e=>{e.stopPropagation();};
  return <div style={{height:'100dvh',width:'100vw',display:'flex',alignItems:'center',justifyContent:'center',background:'radial-gradient(circle at 50% 40%,#34291f,#0e0b09 72%)',touchAction:'none',overflow:'hidden'}}>
-  <div style={{width:'88vw',height:'96dvh',maxWidth:760,position:'relative'}}>
+  <div style={{width:'88vw',height:'100dvh',maxWidth:760,position:'relative'}}>
   <Canvas orthographic camera={{position:[0,0,10],zoom:1}} dpr={[1,1.7]} onCreated={({camera,size})=>{const aspect=size.width/size.height;const halfH=3.55/2;camera.top=halfH;camera.bottom=-halfH;camera.left=-halfH*aspect;camera.right=halfH*aspect;camera.zoom=1;camera.updateProjectionMatrix();}}>
    <ambientLight intensity={1.5}/><directionalLight position={[2,4,5]} intensity={2.1}/>
    <mesh position={[-1.175,0,0]}><planeGeometry args={[2.35,3.55,1,1]}/><meshStandardMaterial color="#fff7df" roughness={.9}/></mesh>
