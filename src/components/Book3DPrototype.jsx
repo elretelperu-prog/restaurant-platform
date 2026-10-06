@@ -2,6 +2,12 @@ import React,{useMemo,useRef,useState} from 'react';
 import {Canvas,useFrame} from '@react-three/fiber';
 import * as THREE from 'three';
 
+const PAGE_W=2.35;
+const PAGE_H=3.55;
+const TOP_EXTENSION=.24;
+const DISPLAY_H=PAGE_H+TOP_EXTENSION;
+const PAGE_Y=TOP_EXTENSION/2;
+
 function makePageTexture(title,subtitle){
  const c=document.createElement('canvas');c.width=768;c.height=1200;
  const x=c.getContext('2d');x.fillStyle='#fff7df';x.fillRect(0,0,c.width,c.height);
@@ -12,16 +18,16 @@ function makePageTexture(title,subtitle){
 }
 function CurlPage({progress,dragY=0,texture}){
  const geometry=useMemo(()=>{
-  const g=new THREE.PlaneGeometry(2.35,3.55,56,36);
-  g.translate(1.175,0,0);
+  const g=new THREE.PlaneGeometry(PAGE_W,DISPLAY_H,56,36);
+  g.translate(PAGE_W/2,0,0);
   g.userData.base=Float32Array.from(g.attributes.position.array);
   return g;
  },[]);
  useFrame(()=>{
   const p=geometry.attributes.position,arr=p.array,base=geometry.userData.base;
-  const W=2.35,H=3.55;
+  const W=PAGE_W,H=DISPLAY_H;
   for(let i=0;i<p.count;i++){
-   const bx=base[i*3],by=base[i*3+1],u=bx/W,v=by/H+.5;
+   const bx=base[i*3],by=base[i*3+1],u=bx/W;
    const wave=Math.sin(Math.PI*u);
    const edge=Math.pow(u,2.15);
    const theta=progress*Math.PI*.82*edge;
@@ -33,7 +39,7 @@ function CurlPage({progress,dragY=0,texture}){
   }
   p.needsUpdate=true;geometry.computeVertexNormals();
  });
- return <mesh geometry={geometry} position={[0,0,.035]}>
+ return <mesh geometry={geometry} position={[0,PAGE_Y,.035]}>
   <meshStandardMaterial map={texture} side={THREE.DoubleSide} roughness={.9}/>
  </mesh>;
 }
@@ -45,12 +51,12 @@ export default function Book3DPrototype(){
  const end=e=>{e.stopPropagation();};
  return <div style={{height:'100dvh',width:'100vw',display:'flex',alignItems:'center',justifyContent:'center',background:'radial-gradient(circle at 50% 40%,#34291f,#0e0b09 72%)',touchAction:'none',overflow:'hidden'}}>
   <div style={{width:'88vw',height:'100dvh',maxWidth:760,position:'relative'}}>
-  <Canvas style={{transform:'translateY(-4dvh)'}} orthographic camera={{position:[0,0,10],zoom:1}} dpr={[1,1.7]} onCreated={({camera,size})=>{const aspect=size.width/size.height;const halfH=3.55/2;camera.top=halfH;camera.bottom=-halfH;camera.left=-halfH*aspect;camera.right=halfH*aspect;camera.zoom=1;camera.updateProjectionMatrix();}}>
+  <Canvas orthographic camera={{position:[0,0,10],zoom:1}} dpr={[1,1.7]} onCreated={({camera,size})=>{const aspect=size.width/size.height;const halfH=DISPLAY_H/2;camera.top=halfH;camera.bottom=-halfH;camera.left=-halfH*aspect;camera.right=halfH*aspect;camera.zoom=1;camera.position.y=PAGE_Y;camera.updateProjectionMatrix();}}>
    <ambientLight intensity={1.5}/><directionalLight position={[2,4,5]} intensity={2.1}/>
-   <mesh position={[-1.175,0,0]}><planeGeometry args={[2.35,3.55,1,1]}/><meshStandardMaterial color="#fff7df" roughness={.9}/></mesh>
+   <mesh position={[-PAGE_W/2,PAGE_Y,0]}><planeGeometry args={[PAGE_W,DISPLAY_H,1,1]}/><meshStandardMaterial color="#fff7df" roughness={.9}/></mesh>
    <CurlPage progress={progress} dragY={dragY} texture={tex}/>
-   <mesh position={[0,0,.18]} onPointerDown={start} onPointerMove={move} onPointerUp={end} onPointerCancel={end}>
-    <planeGeometry args={[4.9,3.8]}/><meshBasicMaterial transparent opacity={0} depthWrite={false}/>
+   <mesh position={[0,PAGE_Y,.18]} onPointerDown={start} onPointerMove={move} onPointerUp={end} onPointerCancel={end}>
+    <planeGeometry args={[4.9,DISPLAY_H]}/><meshBasicMaterial transparent opacity={0} depthWrite={false}/>
    </mesh>
   </Canvas>
   <div style={{position:'absolute',left:-9999}}>Drag progress {progress}</div>
