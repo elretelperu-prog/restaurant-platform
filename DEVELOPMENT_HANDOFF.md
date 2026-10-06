@@ -155,6 +155,9 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 
 - **Root cause of visible double-book finally located:** JSX still rendered `physical-book-cover`, `physical-book-surface-svg`, and `physical-book-spine` for every non-diagnostic clean layer because their guard was `!diagnostic`, not `!cleanEngine`. CSS attempts could not reliably remove the actual SVG/cover nodes. Commit `32d0ec7` changes those three guards to `!cleanEngine`, so Layer 1–4 clean-engine tests no longer render the legacy stationary book surfaces. Layer 4 now has only its live internal paper surfaces. Verify `/pageflip-layer4` before proceeding.
 
+- **Layer 4 stable checkpoint before silhouette:** user visually confirmed `26710e7`: no duplicate stationary book, no polygon spikes, no stray `\\n`; both pages aligned and PageFlip turn remains good. Treat this as rollback point.
+- **Layer 4E silhouette candidate:** `45b9683` changes only `.pf-layer4-paper` child styling to read as an open bound book (outer rounded corners, centre-gutter shading, curved lower paper edge painted internally). PageFlip root geometry remains untouched. Await physical verification.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
