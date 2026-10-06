@@ -4,7 +4,7 @@ import * as THREE from 'three';
 
 const PAGE_W=2.35;
 const PAGE_H=3.55;
-const TOP_EXTENSION=.24;
+const TOP_EXTENSION=.52;
 const DISPLAY_H=PAGE_H+TOP_EXTENSION;
 const PAGE_Y=TOP_EXTENSION/2;
 
