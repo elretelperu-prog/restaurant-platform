@@ -1485,3 +1485,11 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .pf-layer1-list{display:flex!important;flex-direction:column!important;flex:1!important;min-height:0!important}
 .theme-futurista .pf-layer1-row{flex:1!important;min-height:0!important;display:flex!important;align-items:center!important;border-bottom:1px solid #9b815b44!important;font:600 7.5px Georgia,serif!important;line-height:1!important;color:#30251a!important}
 .theme-futurista .pf-layer1-num{text-align:center!important;font-size:6px!important;color:#80694d!important;padding-top:4px!important}
+
+/* STAGE 2 LAYER 2 — row hierarchy + descriptions; still no media, price connector, book skin, idle fold or zoom. */
+.theme-futurista .pf-layer2-page{padding:12px 8px 16px!important}
+.theme-futurista .pf-layer2-row{gap:4px!important;padding:2px 0!important;align-items:center!important}
+.theme-futurista .pf-layer2-index{width:14px!important;flex:0 0 14px!important;font:600 5.5px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;color:#8a7254!important;letter-spacing:.04em!important}
+.theme-futurista .pf-layer2-copy{display:flex!important;flex-direction:column!important;min-width:0!important;line-height:1!important}
+.theme-futurista .pf-layer2-name{font:700 7px Georgia,serif!important;color:#30251a!important;white-space:normal!important}
+.theme-futurista .pf-layer2-desc{margin-top:1px!important;font:400 4.5px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;line-height:1.05!important;color:#76624b!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
