@@ -141,6 +141,10 @@ A temporary visual test was added to confirm that ChatGPT can modify the correct
 
 - **Layer 2 candidate:** `f41d50a`, `f31d412`, `b40bad7` add isolated row hierarchy, item numbering and real descriptions on the exact clean PageFlip geometry at `/pageflip-layer2`. Still intentionally excludes photos, prices/connectors, physical book skin, idle corner fold and zoom/pan. Await physical slow-turn verification before Layer 3.
 
+- **Physical verification:** user approved Layer 2 on iPhone; row hierarchy + names + descriptions remain coherent during page turn. Stable rollback point before Layer 3: `1e85510`.
+- **Layer 3 candidate:** `0c4b2b7`, `a4bfa69`, `bc6442a` add real dish photos and prices to the clean engine at `/pageflip-layer3`, still excluding futuristic SVG/connectors, physical skin, idle corner fold and zoom/pan. Await physical verification.
+- **Preview usability requirement:** user does not want to copy changing deployment URLs. Prefer the stable branch alias for `preview-v57-number-test` once confirmed in Vercel; do not invent it. Per-deployment URLs remain fallback only.
+
 ## Next action
 
 1. Cleanup audit is complete; do not continue mechanical CSS deletion.
