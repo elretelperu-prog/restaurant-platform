@@ -32,9 +32,12 @@ function CurlPage({progress,dragY=0,texture}){
    const edge=Math.pow(u,2.15);
    const theta=progress*Math.PI*edge;
    const radius=W/Math.PI;
-   const turnedX=radius*Math.sin(theta);
-   const z=radius*(1-Math.cos(theta))+wave*progress*.045;
-   arr[i*3]=bx+(turnedX-bx)*progress;
+   const curledX=radius*Math.sin(theta);
+   const targetX=-bx;
+   const curlMix=Math.sin(Math.PI*progress);
+   const turnedX=THREE.MathUtils.lerp(targetX,curledX,curlMix);
+   const z=radius*(1-Math.cos(theta))*curlMix+wave*progress*(1-progress)*.18;
+   arr[i*3]=THREE.MathUtils.lerp(bx,turnedX,progress);
    arr[i*3+1]=by+dragY*.07*edge*progress;
    arr[i*3+2]=.008+z;
   }
