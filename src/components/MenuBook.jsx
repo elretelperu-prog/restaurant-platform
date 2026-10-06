@@ -1,13 +1,14 @@
 import React,{useEffect,useRef,useState} from 'react';
 import {PageFlip} from 'page-flip';
 import MenuPage from './MenuPage.jsx';
-import {pages} from '../data/la-terraza.js';
+import {pages,price,dishImages} from '../data/la-terraza.js';
 
 export default function MenuBook({onDish,popupOpen=false}){
  const diagnostic=new URLSearchParams(window.location.search).get('pfdiag')==='1'||window.location.pathname==='/pageflip-test';
  const layer1=window.location.pathname==='/pageflip-layer1';
  const layer2=window.location.pathname==='/pageflip-layer2';
- const cleanEngine=diagnostic||layer1||layer2;
+ const layer3=window.location.pathname==='/pageflip-layer3';
+ const cleanEngine=diagnostic||layer1||layer2||layer3;
  const bookRef=useRef(null),wrapRef=useRef(null),viewportRef=useRef(null),restoreFoldRef=useRef(null),hadPopupRef=useRef(false);
  const [zoomed,setZoomed]=useState(false);
 
@@ -149,8 +150,8 @@ export default function MenuBook({onDish,popupOpen=false}){
    </svg>}
    <div ref={bookRef} className={'book '+(cleanEngine?'pf-diagnostic-book':'')}>{diagnostic
     ?[0,1,2,3].map(i=><div className="page pf-diagnostic-page" key={i}><strong>PAGE {i+1}</strong><span>{i<2?'FRONT SPREAD':'BACK SPREAD'}</span></div>)
-    :(layer1||layer2)
-     ?pages.map((p,i)=><div className={'page pf-layer1-page '+(layer2?'pf-layer2-page':'')} key={i}><h2>{p[0]}</h2><div className="pf-layer1-sub">{p[1]}</div><div className="pf-layer1-list">{p[2].map((name,j)=><div className={'pf-layer1-row '+(layer2?'pf-layer2-row':'')} key={name}>{layer2?<><span className="pf-layer2-index">{String(j+1).padStart(2,'0')}</span><span className="pf-layer2-copy"><span className="pf-layer2-name">{name}</span><span className="pf-layer2-desc">{['Cremoso, fresco y preparado al momento','Con hierbas, aceite de oliva y toque de limón','Crujiente por fuera y suave por dentro','Receta de la casa con ingredientes de temporada'][(i+j)%4]}</span></span></>:name}</div>)}</div><div className="pf-layer1-num">{i+1} / 4</div></div>)
+     :(layer1||layer2||layer3)
+     ?pages.map((p,i)=><div className={'page pf-layer1-page '+((layer2||layer3)?'pf-layer2-page ':'')+(layer3?'pf-layer3-page':'')} key={i}><h2>{p[0]}</h2><div className="pf-layer1-sub">{p[1]}</div><div className="pf-layer1-list">{p[2].map((name,j)=><div className={'pf-layer1-row '+((layer2||layer3)?'pf-layer2-row ':'')+(layer3?'pf-layer3-row':'')} key={name}>{(layer2||layer3)?<>{layer3?<span className="pf-layer3-thumb" style={{backgroundImage:`url("${dishImages[name]}")`}}/>:<span className="pf-layer2-index">{String(j+1).padStart(2,'0')}</span>}<span className="pf-layer2-copy"><span className="pf-layer2-name">{name}</span><span className="pf-layer2-desc">{['Cremoso, fresco y preparado al momento','Con hierbas, aceite de oliva y toque de limón','Crujiente por fuera y suave por dentro','Receta de la casa con ingredientes de temporada'][(i+j)%4]}</span></span>{layer3&&<span className="pf-layer3-price">S/ {price(i,j)}</span>}</>:name}</div>)}</div><div className="pf-layer1-num">{i+1} / 4</div></div>)
      :pages.map((p,i)=><MenuPage key={i} page={p} pageIndex={i} onDish={selectDish}/>)}</div>
    {!diagnostic&&<div className="physical-book-spine" aria-hidden="true"><span className="physical-book-spine-light"/></div>}
   </div>
