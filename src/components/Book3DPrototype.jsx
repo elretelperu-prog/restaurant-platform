@@ -19,7 +19,6 @@ function CurlPage({progress,dragY=0,texture}){
    const baseX=geometry.parameters.width*((i%(geometry.parameters.widthSegments+1))/geometry.parameters.widthSegments-.5);
    const row=Math.floor(i/(geometry.parameters.widthSegments+1));
    const baseY=geometry.parameters.height*(row/geometry.parameters.heightSegments-.5);
-   const u=(baseX/geometry.parameters.width+.5);
    const local=baseX+1.175;
    const u=Math.max(0,Math.min(1,local/2.35));
    const v=(baseY/3.55)+.5;
