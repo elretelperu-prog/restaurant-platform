@@ -20,35 +20,20 @@ function CurlPage({progress,dragY=0,texture}){
  useFrame(()=>{
   const p=geometry.attributes.position,arr=p.array,base=geometry.userData.base;
   const W=2.35,H=3.55;
-  const px=W*(1-progress), py=-H*.5+dragY*.65;
-  const vx=px-W, vy=py+H*.5;
-  const len=Math.max(.001,Math.hypot(vx,vy));
-  const nx=vx/len, ny=vy/len;
-  const mx=(W+px)*.5, my=(-H*.5+py)*.5;
-  const R=.22;
   for(let i=0;i<p.count;i++){
-   const bx=base[i*3],by=base[i*3+1];
-   const signed=(bx-mx)*nx+(by-my)*ny;
-   let x=bx,y=by,z=.008;
-   if(signed>0){
-    const near=Math.min(signed,R);
-    const far=Math.max(0,signed-R);
-    const theta=(near/R)*Math.PI;
-    const tx=bx-signed*nx, ty=by-signed*ny;
-    const reflectedNear=-R*Math.sin(theta)/Math.PI;
-    x=tx+(reflectedNear-far)*nx;
-    y=ty+(reflectedNear-far)*ny;
-    z=.018+R*(1-Math.cos(theta))/Math.PI;
-   } else if(signed>-R){
-    const q=(signed+R)/R;
-    z=.008+.025*Math.sin(Math.PI*q)*progress;
-   }
-   const spine=Math.max(0,1-bx/.18);
-   arr[i*3]=x; arr[i*3+1]=y; arr[i*3+2]=z+spine*.012;
+   const bx=base[i*3],by=base[i*3+1],u=bx/W,v=by/H+.5;
+   const wave=Math.sin(Math.PI*u);
+   const theta=progress*Math.PI*u;
+   const flat=1-progress;
+   const turnedX=bx*Math.cos(theta);
+   const z=bx*Math.sin(theta)*(.72+.28*u)+wave*progress*.10*(1-v*.22);
+   arr[i*3]=turnedX*progress+bx*flat;
+   arr[i*3+1]=by+dragY*.09*wave*progress;
+   arr[i*3+2]=Math.max(.008,z);
   }
   p.needsUpdate=true;geometry.computeVertexNormals();
  });
- return <mesh geometry={geometry} position={[0,0,.035]} castShadow>
+ return <mesh geometry={geometry} position={[0,0,.035]}>
   <meshStandardMaterial map={texture} side={THREE.DoubleSide} roughness={.9}/>
  </mesh>;
 }
