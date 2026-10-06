@@ -1537,3 +1537,14 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .pf-layer4-wrap::before,.theme-futurista .pf-layer4-wrap::after{content:none!important;display:none!important;background:none!important;box-shadow:none!important}
 .theme-futurista .pf-layer4-wrap .book{background:transparent!important;box-shadow:none!important}
 .theme-futurista .pf-layer4-wrap .book::before,.theme-futurista .pf-layer4-wrap .book::after{content:none!important;display:none!important}
+
+/* STAGE 2 LAYER 4D — smooth the live paper itself after removing the legacy shell.
+   Keep PageFlip root geometry untouched; remove polygon notches from the child paper only. */
+.theme-futurista .pf-layer4-paper-left{
+ clip-path:none!important;
+ border-radius:14px 0 4px 24px / 10px 0 8px 34px!important;
+}
+.theme-futurista .pf-layer4-paper-right{
+ clip-path:none!important;
+ border-radius:0 14px 24px 4px / 0 10px 34px 8px!important;
+}
