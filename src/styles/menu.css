@@ -1664,3 +1664,17 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
  border-right:1px solid #a88960!important;border-left:0!important;
  clip-path:polygon(0 0,24% .08%,42% .18%,60% .28%,75% .45%,88% .7%,100% 1.1%,100% 99.55%,88% 99.05%,72% 98.75%,54% 98.85%,36% 99.15%,18% 99.55%,0 100%)!important;
 }
+
+/* STAGE 2 LAYER 4L — restore proven PageFlip geometry after 4K regression.
+   IMPORTANT: PageFlip pages stay full rectangular 160x320 surfaces. No clip-path,
+   border-radius, transform, inset or geometry-changing paint on the engine DOM node.
+   Book curvature will be added later without touching these nodes. */
+.theme-futurista .pf-layer4-wrap .page.pf-layer4-sheet-left,
+.theme-futurista .pf-layer4-wrap .page.pf-layer4-sheet-right{
+ width:160px!important;height:320px!important;min-width:160px!important;max-width:160px!important;
+ min-height:320px!important;max-height:320px!important;box-sizing:border-box!important;
+ position:relative!important;overflow:hidden!important;padding:12px 8px 16px!important;
+ clip-path:none!important;border-radius:0!important;transform:none!important;
+ background:#fff7df!important;color:#2a2118!important;border:1px solid #a98e68!important;
+ box-shadow:none!important;backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;
+}
