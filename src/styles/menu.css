@@ -1498,3 +1498,11 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 .theme-futurista .pf-layer3-row{grid-template-columns:24px minmax(0,1fr) auto!important;display:grid!important;gap:4px!important}
 .theme-futurista .pf-layer3-thumb{width:23px!important;height:23px!important;border-radius:6px!important;background-size:cover!important;background-position:center!important;border:1px solid #b59b72!important;box-shadow:none!important}
 .theme-futurista .pf-layer3-price{font:700 5.5px Georgia,serif!important;white-space:nowrap!important;color:#5e4b34!important;padding-left:2px!important}
+
+/* STAGE 2 LAYER 4 — the PageFlip sheet itself owns the approved book silhouette.
+   No decorative paper surface is layered behind the printed content. */
+.theme-futurista .pf-layer4-page{position:relative!important;overflow:hidden!important;background:linear-gradient(90deg,#ead8b9 0%,#fff9e9 14%,#fffbed 78%,#e2cda9 100%)!important;border-top:1px solid #b79a70!important;border-bottom:1px solid #9b7a54!important;box-shadow:inset 0 0 10px #6b4b2420!important}
+.theme-futurista .pf-layer4-left{border-left:1px solid #a88960!important;border-right:0!important;border-radius:12px 0 4px 18px / 9px 0 24px 34px!important;clip-path:polygon(3% 1%,100% 3%,100% 97%,84% 96%,66% 97%,48% 96%,29% 97%,12% 99%,3% 97%,1% 76%,1% 24%)!important;background:linear-gradient(90deg,#e5d0ad 0%,#fff9e9 13%,#fffbed 79%,#c9a982 100%)!important}
+.theme-futurista .pf-layer4-right{border-right:1px solid #a88960!important;border-left:0!important;border-radius:0 12px 18px 4px / 0 9px 34px 24px!important;clip-path:polygon(0 3%,97% 1%,99% 24%,99% 76%,97% 97%,88% 99%,71% 97%,52% 96%,34% 97%,16% 96%,0 97%)!important;background:linear-gradient(90deg,#c9a982 0%,#fffbed 21%,#fff9e9 87%,#e5d0ad 100%)!important}
+.theme-futurista .pf-layer4-page::after{content:""!important;display:block!important;position:absolute!important;inset:0!important;pointer-events:none!important;background-image:radial-gradient(#6b583414 .55px,transparent .7px)!important;background-size:5px 5px!important;opacity:.22!important;z-index:0!important}
+.theme-futurista .pf-layer4-page>*{position:relative!important;z-index:1!important}
