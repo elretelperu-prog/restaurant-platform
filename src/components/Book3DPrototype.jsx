@@ -48,7 +48,7 @@ function CurlPage({progress,dragY=0,frontTexture,backTexture}){
  });
  return <group position={[0,0,.035]}>
   <mesh ref={front} geometry={geometry} castShadow><meshStandardMaterial map={frontTexture} side={THREE.FrontSide} roughness={.9}/></mesh>
-  <mesh ref={back} geometry={geometry} castShadow scale={[-1,1,1]} position={[0,0,-.002]}><meshStandardMaterial map={backTexture} side={THREE.BackSide} roughness={.92}/></mesh>
+  <mesh ref={back} geometry={geometry} castShadow position={[0,0,-.002]}><meshStandardMaterial map={backTexture} side={THREE.BackSide} roughness={.92}/></mesh>
  </group>;
 }
 export default function Book3DPrototype(){
