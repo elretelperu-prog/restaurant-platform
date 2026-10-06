@@ -1603,3 +1603,15 @@ html,body,#root{height:100%;min-height:100%;overflow:hidden}
 /* stronger gutter depth belongs to the live sheets, not to a separate book background */
 .theme-futurista .pf-layer4-paper-left{background:linear-gradient(90deg,#e4cfad 0%,#fff9e9 10%,#fffbed 76%,#d1b58f 94%,#a88763 100%)!important}
 .theme-futurista .pf-layer4-paper-right{background:linear-gradient(90deg,#a88763 0%,#d1b58f 6%,#fffbed 24%,#fff9e9 90%,#e4cfad 100%)!important}
+
+/* STAGE 2 LAYER 4I — eliminate idle-only ghost sheet. Root PageFlip sheet stays visually empty; only internal paper paints. */
+.theme-futurista .pf-layer4-wrap .page,
+.theme-futurista .pf-layer4-wrap .page:nth-child(odd),
+.theme-futurista .pf-layer4-wrap .page:nth-child(even),
+.theme-futurista .pf-layer4-wrap .stf__item .page,
+.theme-futurista .pf-layer4-wrap .stf__item .page:nth-child(odd),
+.theme-futurista .pf-layer4-wrap .stf__item .page:nth-child(even){background:transparent!important;background-color:transparent!important;background-image:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;outline:0!important}
+.theme-futurista .pf-layer4-wrap .page::before,
+.theme-futurista .pf-layer4-wrap .page::after,
+.theme-futurista .pf-layer4-wrap .stf__item .page::before,
+.theme-futurista .pf-layer4-wrap .stf__item .page::after{content:none!important;display:none!important;background:none!important;box-shadow:none!important}
