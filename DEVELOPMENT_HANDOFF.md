@@ -182,3 +182,13 @@ The purpose is to make GitHub the durable source of truth instead of relying on 
 - Experimental route: `/book3d-prototype`.
 - First validation goal only: two-page 3D spread + curved/deforming page controlled continuously by finger drag; release completes or returns. Do not port the full menu, zoom/pan, idle fold, or production UI until physical iPhone/Android validation.
 - Added `three` + `@react-three/fiber`, `Book3DPrototype.jsx`, isolated route, and Vercel rewrite. Current route commit: `ad4e137f540a0245cc2d558bc9c662ada7cb3cae`.
+
+
+## 3D prototype checkpoint — 2026-10-06
+- Branch: `preview-r3f-book-prototype`; production/main remains untouched.
+- Fixed preview route: `/book3d-prototype`.
+- iPhone verification at `98dffd1`: spread aligns at spine; finger deforms real subdivided mesh and menu content stays attached.
+- `0e8d9a7` initially failed build due duplicate `u`; fixed by `635fd74`.
+- `7d1f222`: independent front/back page surfaces.
+- Current Phase 1 checkpoint: `8ecc9c5`. Replaced cylindrical formula with hinged 3D turn plus progressive curl, added readable reverse texture, left/right underpages, center gutter and dynamic lighting/shadows.
+- Next action: physical iPhone/Android validation of this checkpoint before further tuning. Do not merge to main.
